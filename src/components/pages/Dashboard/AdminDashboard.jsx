@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
+import AdminSideBar from "../../SideBar/AdminSideBar";
 import { Link } from "react-router-dom";
 import {
   avatar01,
@@ -215,7 +216,8 @@ const AdminDashboard = () => {
         <Header />
 
         {/* Sidebar */}
-        <SideBar />
+        {/* <SideBar /> */}
+        <AdminSideBar />
 
         {/* Page Wrapper */}
         <div className="page-wrapper">

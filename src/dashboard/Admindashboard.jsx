@@ -2,7 +2,7 @@ import React , {components, useState} from 'react';
 import { Link } from 'react-router-dom'
 import Chart from 'react-apexcharts'
 import Header from "../header";
-import Sidebar from '../sidebar';
+import AdminSideBar from '../components/SideBar/AdminSideBar';
 
 
 
@@ -79,7 +79,8 @@ const Dashboard = () => {
 
 		<div className="main-wrapper">
 			<Header />
-			<Sidebar />
+			{/* <Sidebar /> */}
+			<AdminSideBar />
 
 			{/* <!-- Page Wrapper --> */}
 			<div className="page-wrapper">

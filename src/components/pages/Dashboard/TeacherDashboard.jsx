@@ -514,7 +514,7 @@ const TeacherDashboard = () => {
             </div>
             {/* Footer */}
             <footer>
-              <p>Copyright © 2022 Dreamguys.</p>
+              <p>EduCare Team</p>
             </footer>
             {/* /Footer */}
           </div>

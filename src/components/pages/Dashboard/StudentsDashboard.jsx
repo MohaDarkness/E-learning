@@ -6,7 +6,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import FeatherIcon from "feather-icons-react";
 import Header from '../../Header/Header'
-import SideBar from '../../SideBar/SideBar'
+
+import StudentSideBar from '../../SideBar/StudentSideBar';
 import { lessonicon01, lessonicon02, lessonicon03, lessonicon04, lessonicon05, lessonicon06, studenticon01, studenticon02, teachericon01, teachericon02 } from '../../imagepath'
 
 const StudentsDashboard = () => {
@@ -56,7 +57,7 @@ const StudentsDashboard = () => {
                 <Header />
 
                 {/* Sidebar */}
-                <SideBar />
+                <StudentSideBar />
 
                 {/* Page Wrapper */}
                 <div className="page-wrapper">
@@ -66,7 +67,7 @@ const StudentsDashboard = () => {
                             <div className="row">
                                 <div className="col-sm-12">
                                     <div className="page-sub-header">
-                                        <h3 className="page-title">Welcome Bruklin!</h3>
+                                        <h3 className="page-title">!Hey Student</h3>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item">
                                                 <Link to="/admindashboard">Home</Link>
@@ -513,7 +514,7 @@ const StudentsDashboard = () => {
                     </div>
                     {/* Footer */}
                     <footer>
-                        <p>Copyright © 2022 Dreamguys.</p>
+                        <p>EduCare Team</p>
                     </footer>
                     {/* /Footer */}
                 </div>

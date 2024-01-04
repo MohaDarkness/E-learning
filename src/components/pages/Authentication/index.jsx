@@ -9,10 +9,53 @@ import { Eye, EyeOff } from "react-feather/dist";
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  /* Authintication */
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await fetch("http://localhost:8080/authenticate", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ userName, password }),
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.text();
+
+  //       // Assuming the backend returns "A", "T", or "S"
+  //       if (result === "A") {
+  //         // Redirect to admin dashboard
+  //         window.location.href = "/admindashboard";
+  //       } else if (result === "T") {
+  //         // Redirect to teacher dashboard
+  //         window.location.href = "/teacherdashboard";
+  //       } else if (result === "S") {
+  //         // Redirect to student dashboard
+  //         window.location.href = "/studentdashboard";
+  //       } else {
+  //         // Handle other cases or show an error message
+  //         console.error("Invalid response from server");
+  //       }
+  //     } else {
+  //       // Handle errors from the server
+  //       console.error("Server error:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during fetch:", error);
+  //   }
+  // };
+
+  /* End Authintication */
 
   return (
     <>
@@ -25,18 +68,20 @@ const Login = () => {
               </div>
               <div className="login-right">
                 <div className="login-right-wrap">
-                  <h1>Welcome to Preskool</h1>
+                  <h1>Welcome to EduCare</h1>
                   <p className="account-subtitle">
                     Need an account? <Link to="/register">Sign Up</Link>
                   </p>
                   <h2>Sign in</h2>
                   {/* Form */}
                   <form action="./admindashboard">
+                  {/* <form onSubmit={handleSubmit}> */}
                     <div className="form-group">
                       <label>
                         Username <span className="login-danger">*</span>
                       </label>
-                      <input className="form-control" type="text" />
+                      <input className="form-control" type="text" value={userName}
+                        onChange={(e) => setUserName(e.target.value)} />
                       <span className="profile-views">
                         <i className="fas fa-user-circle" />
                       </span>
@@ -72,7 +117,7 @@ const Login = () => {
                           <span className="checkmark" />
                         </label>
                       </div>
-                      <Link to="/forgotpassword">Forgot Password?</Link>
+                      <Link to="/forgotpassword">Forgot Password</Link>
                     </div>
                     <div className="form-group">
                       <button
@@ -83,26 +128,6 @@ const Login = () => {
                       </button>
                     </div>
                   </form>
-                  {/* /Form */}
-                  <div className="login-or">
-                    <span className="or-line" />
-                    <span className="span-or">or</span>
-                  </div>
-                  {/* Social Login */}
-                  <div className="social-login">
-                    <Link to="#">
-                      <i className="fab fa-google-plus-g" />
-                    </Link>
-                    <Link to="#">
-                      <i className="fab fa-facebook-f" />
-                    </Link>
-                    <Link to="#">
-                      <i className="fab fa-twitter" />
-                    </Link>
-                    <Link to="#">
-                      <i className="fab fa-linkedin-in" />
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>

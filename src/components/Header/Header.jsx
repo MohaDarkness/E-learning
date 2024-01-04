@@ -53,20 +53,6 @@ const Header = () => {
             <i className="fas fa-bars" />
           </Link>
         </div>
-        {/* Search Bar */}
-        <div className="top-nav-search">
-          <form>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search here"
-            />
-            <button className="btn" type="submit">
-              <i className="fas fa-search" />
-            </button>
-          </form>
-        </div>
-        {/* /Search Bar */}
         {/* Mobile Menu Toggle */}
         <Link to="#" className="mobile_btn" id="mobile_btn" onClick={() => handlesidebarmobilemenu()}>
           <i className="fas fa-bars" />
@@ -252,10 +238,10 @@ const Header = () => {
                   className="rounded-circle"
                   src={avatar01}
                   width={31}
-                  alt="Ryan Taylor"
+                  alt="User"
                 />
                 <div className="user-text">
-                  <h6>Ryan Taylor</h6>
+                  <h6>User</h6>
                   <p className="text-muted mb-0">Administrator</p>
                 </div>
               </span>
@@ -270,7 +256,7 @@ const Header = () => {
                   />
                 </div>
                 <div className="user-text">
-                  <h6>Ryan Taylor</h6>
+                  <h6>User</h6>
                   <p className="text-muted mb-0">Administrator</p>
                 </div>
               </div>
