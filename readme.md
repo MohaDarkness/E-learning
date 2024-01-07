@@ -3,23 +3,29 @@
 
 ## Back-End
 ### Database:
- - [ ] [BD1-Student Database ](#bd1)
- - [ ] [BD2-Teacher Database](#bd2)
- - [ ] [BD3-Courses Database](#bd3)
+ - [ ] [BD1 Student Database ](#bd1)
+ - [ ] [BD2 Teacher Database](#bd2)
+ - [ ] [BD3 Courses Database](#bd3)
 
 ### End-Points
-- [ ] [BE1-`~/GetStudent?StudentID=<StdId>`](#be1)
-- [ ] [BE2-`~/GetTeacher?TeacherID=<TchId>`](#be2)
-- [ ] [BE3-`~/GetCourse?CourseID=<CsId>`](#be3)
-- [ ] [BE4-`~/StudentsList?ViewerID=<ID>`](#be4)
-- [ ] [BE5-`~/TeachersList?viwerId=<ID>`](#be5)
-- [ ] [BE6-`~/SignUpStudent?<all the data but not courses>`](#be6)
-- [ ] [BE7-`~/SignUpTeacher?<all the data but not courses>`](#be7)
-- [ ] [BE8-`~/AddStudentToCourse?CourseId=<csId>&ClassId<id>&StudnetId=<stdId>`](#be8)
-- [ ] [BE9-`~/AssignTeacherToCourse?CourseId=<csId>&ClassId<id>&TeacherId=<stdId>`](#be9)
-- [ ] [BE10-`~/UploadFileToCourse?CourseId=<id>&ClassId=<id>&File=<File?!>`](#be10)
+- [ ] [BE1 `~/GetStudent?StudentID=<StdId>`](#be1)
+- [ ] [BE2 `~/GetTeacher?TeacherID=<TchId>`](#be2)
+- [ ] [BE3 `~/GetCourse?CourseID=<CsId>`](#be3)
+- [ ] [BE4 `~/StudentsList?ViewerID=<ID>`](#b4)
+- [ ] [BE5 `~/TeachersList?viwerId=<ID>`](#b5)
+- [ ] [BE6 `~/SignUpStudent?<all the data but not courses>`](#b6)
+- [ ] [BE7 `~/SignUpTeacher?<all the data but not courses>`](#be7)
+- [ ] [BE8 `~/AddStudentToCourse?CourseId=<csId>&ClassId<id>&StudnetId=<stdId>`](#be8)
+- [ ] [BE9 `~/AssignTeacherToCourse?CourseId=<csId>&ClassId<id>&TeacherId=<stdId>`](#be9)
+- [ ] [BE10 `~/UploadFileToCourse?CourseId=<id>&ClassId=<id>&File=<File?!>`](#be10)
 
-
+## Front-End
+### Pages
+- [ ] [FP1 Student SignUp from Admin](#fp1)
+- [ ] [FP2 Teacher SignUp from Admin](#fp2)
+- [ ] [FP3 Course Creation by Admin](#fp3)
+- [ ] [FP4 Assign Teacher to Course by Admin](#fp4)
+- [ ] [FP5 Assign Students to a class](#fp5)
 
 ## Functionalities Details
 ### BD1 
@@ -92,4 +98,23 @@ If the ID indicates a
 ##### `~/UploadFileToCourse?CourseId=<id>&ClassId=<id>&File=<File?!>`
 - only the teacher of this course & this class can do this
 
-### Welcome here
+
+### FP1
+##### Student SignUp from Admin
+Students cannot SignUp by their own, the admin must register them into the school with a new UserName and default password
+
+### FP2
+##### Teacher SignUp from Admin
+Teachers cannot SignUp by their own, the admin must register them into the school with a new UserName and default password
+
+### FP3
+##### Course Creation by Admin
+Admin is gonna create the new courses and classes
+
+### FP4
+##### Assign Teacher to Course by Admin
+Admin gonna assign a specific teacher to teach the class
+
+### FP5
+##### Assign Students to a class
+Admin gonna assign students into their classes in the elearning
