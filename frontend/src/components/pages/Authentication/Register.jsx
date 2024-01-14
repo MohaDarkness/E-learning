@@ -1,6 +1,7 @@
 import React,{useRef} from 'react'
 import { login } from '../../imagepath'
 import { Link } from "react-router-dom";
+import { useState } from 'react';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 
 const Register = () => {
@@ -60,7 +61,7 @@ const Register = () => {
                                             className="toggle-password"
                                             onClick={togglePasswordVisibility}
                                           >
-                                            {passwordVisible ? <EyeOff className="react-feather-custom" /> : <Eye className="react-feather-custom" />}
+                                            
                                           </span>
                                            
                                         </div>
