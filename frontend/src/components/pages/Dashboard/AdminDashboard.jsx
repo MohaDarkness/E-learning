@@ -247,7 +247,7 @@ const AdminDashboard = () => {
                     <div className="db-widgets d-flex justify-content-between align-items-center">
                       <div className="db-info">
                         <h6>Students</h6>
-                        <h3>50055</h3>
+                        <h3>5621</h3>
                       </div>
                       <div className="db-icon">
                         <img src={dashicon01} alt="Dashboard Icon" />
@@ -256,6 +256,8 @@ const AdminDashboard = () => {
                   </div>
                 </div>
               </div>
+              {/* 
+              // The award card removed
               <div className="col-xl-3 col-sm-6 col-12 d-flex">
                 <div className="card bg-comman w-100">
                   <div className="card-body">
@@ -270,22 +272,24 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-xl-3 col-sm-6 col-12 d-flex">
                 <div className="card bg-comman w-100">
                   <div className="card-body">
                     <div className="db-widgets d-flex justify-content-between align-items-center">
                       <div className="db-info">
-                        <h6>Department</h6>
-                        <h3>30+</h3>
+                        <h6>Teachers</h6>
+                        <h3>83</h3>
                       </div>
                       <div className="db-icon">
-                        <img src={dashicon03} alt="Dashboard Icon" />
+                        <img src={dashicon01} alt="Dashboard Icon" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              {/* 
+              // The revenue card removed
               <div className="col-xl-3 col-sm-6 col-12 d-flex">
                 <div className="card bg-comman w-100">
                   <div className="card-body">
@@ -300,7 +304,7 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* /Overview Section */}
             <div className="row">
@@ -589,54 +593,6 @@ const AdminDashboard = () => {
                 {/* /Feed Activity */}
               </div>
             </div>
-            {/* Socail Media Follows */}
-            <div className="row">
-              <div className="col-xl-3 col-sm-6 col-12">
-                <div className="card flex-fill fb sm-box">
-                  <div className="social-likes">
-                    <p>Like us on facebook</p>
-                    <h6>50,095</h6>
-                  </div>
-                  <div className="social-boxs">
-                    <img src={socialicon01} alt="Social Icon" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-3 col-sm-6 col-12">
-                <div className="card flex-fill twitter sm-box">
-                  <div className="social-likes">
-                    <p>Follow us on twitter</p>
-                    <h6>48,596</h6>
-                  </div>
-                  <div className="social-boxs">
-                    <img src={socialicon02} alt="Social Icon" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-3 col-sm-6 col-12">
-                <div className="card flex-fill insta sm-box">
-                  <div className="social-likes">
-                    <p>Follow us on instagram</p>
-                    <h6>52,085</h6>
-                  </div>
-                  <div className="social-boxs">
-                    <img src={socialicon03} alt="Social Icon" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-3 col-sm-6 col-12">
-                <div className="card flex-fill linkedin sm-box">
-                  <div className="social-likes">
-                    <p>Follow us on linkedin</p>
-                    <h6>69,050</h6>
-                  </div>
-                  <div className="social-boxs">
-                    <img src={socialicon04} alt="Social Icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* /Socail Media Follows */}
           </div>
           {/* Footer */}
           <Footer />
