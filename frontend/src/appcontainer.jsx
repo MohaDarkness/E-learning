@@ -33,6 +33,7 @@ import StudentsDashboard from "./components/pages/Dashboard/StudentsDashboard";
 import TeacherDashboard from "./components/pages/Dashboard/TeacherDashboard";
 import StudentsView from "./components/pages/Students/StudentsView";
 import AddStudent from "./components/pages/Students/AddStudent";
+import RegisterStudent from "./components/pages/Students/RegisterStudent";
 import EditStudent from "./components/pages/Students/EditStudent";
 import StudentGrid from "./components/pages/Students/StudentGrid";
 import InvoicePaid from "./components/pages/Invoice/InvoicePaid";
@@ -189,6 +190,7 @@ const appcontainer = (props) => {
         <Route path="/studentsview" component={StudentsView} />
         <Route path="/addstudent" component={AddStudent} />
         <Route path="/editstudent" component={EditStudent} />
+        <Route path="/registerstudent" component={RegisterStudent} />
         <Route path="/studentgrid" component={StudentGrid} />
 
         <Route path="/invoicegrid" component={InvoiceGrid} />

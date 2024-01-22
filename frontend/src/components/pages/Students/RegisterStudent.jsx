@@ -7,7 +7,7 @@ import SideBar from "../../SideBar/SideBar";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 
-const EditStudent = () => {
+const RegisterStudent = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
@@ -17,9 +17,8 @@ const EditStudent = () => {
 
   const options1 = [
     { value: 1, label: "Select Gender" },
-    { value: 2, label: "Female" },
-    { value: 3, label: "Male" },
-    { value: 4, label: "Others" },
+    { value: 2, label: "Male" },
+    { value: 3, label: "Female" }
   ];
 
   const options2 = [
@@ -38,9 +37,9 @@ const EditStudent = () => {
 
   const options4 = [
     { value: 1, label: "Please Select Class" },
-    { value: 2, label: "12" },
-    { value: 3, label: "11" },
-    { value: 4, label: "10" },
+    { value: 2, label: "Computer Science" },
+    { value: 3, label: "Software Engineer" },
+    { value: 4, label: "Computer Graphics" },
   ];
 
   const options5 = [
@@ -84,12 +83,12 @@ const EditStudent = () => {
               <div className="row align-items-center">
                 <div className="col-sm-12">
                   <div className="page-sub-header">
-                    <h3 className="page-title"> Edit Student</h3>
+                    <h3 className="page-title">Register New Students</h3>
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
                         <Link to="/students">Student</Link>
                       </li>
-                      <li className="breadcrumb-item active">Edit Students</li>
+                      <li className="breadcrumb-item active">Register New Students</li>
                     </ul>
                   </div>
                 </div>
@@ -250,4 +249,4 @@ const EditStudent = () => {
   );
 };
 
-export default EditStudent;
+export default RegisterStudent;

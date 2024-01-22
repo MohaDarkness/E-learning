@@ -1,0 +1,9 @@
+side note:
+-update the studnet database to have Gender column
+-add new table "Activites" that only the admin will insert into it, students and teachers READ ONLY 
+-In Admin: "Student edit" to "Add Stuednt"
+-In Admin: add "remove student"
+-In Admin: add "upload file" when adding students or teacher that accepts CSV files
+-In Admin: add "courses navigation" that: add, remove, assign teacher, and assign students, remove teacher or students from/ to a course (make sure that the admin can add students to a course using CSV files)
+-Think about the story of faculty!!
+

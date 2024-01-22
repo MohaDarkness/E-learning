@@ -156,6 +156,16 @@ const AdminSidebar = (props) => {
                           Student Edit
                         </Link>
                       </li>
+                      <li>
+                        <Link
+                          to="/registerstudent"
+                          className={`${
+                            "/registerstudent" === pathName ? "active" : ""
+                          }`}
+                        >
+                          Register New Student
+                        </Link>
+                      </li>
                     </ul>
                   ) : (
                     ""
