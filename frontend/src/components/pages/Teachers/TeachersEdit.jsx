@@ -88,11 +88,6 @@ const TeachersEdit = () => {
                             <label>
                               Gender <span className="login-danger">*</span>
                             </label>
-                            {/* <select className="form-control select">
-                                                            <option>Male</option>
-                                                            <option>Female</option>
-                                                            <option>Others</option>
-                                                        </select> */}
                             <Select
                               className="w-100 local-forms  select"
                               value={selectedOption}
@@ -233,18 +228,6 @@ const TeachersEdit = () => {
                           <h5 className="form-title">
                             <span>Address</span>
                           </h5>
-                        </div>
-                        <div className="col-12 ">
-                          <div className="form-group local-forms">
-                            <label>
-                              Address <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              defaultValue="3979 Ashwood Drive"
-                            />
-                          </div>
                         </div>
                         <div className="col-12 col-sm-4">
                           <div className="form-group local-forms">

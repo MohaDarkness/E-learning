@@ -32,7 +32,6 @@ import Compose from "./components/Header/Compose";
 import StudentsDashboard from "./components/pages/Dashboard/StudentsDashboard";
 import TeacherDashboard from "./components/pages/Dashboard/TeacherDashboard";
 import StudentsView from "./components/pages/Students/StudentsView";
-import AddStudent from "./components/pages/Students/AddStudent";
 import RegisterStudent from "./components/pages/Students/RegisterStudent";
 import EditStudent from "./components/pages/Students/EditStudent";
 import StudentGrid from "./components/pages/Students/StudentGrid";
@@ -43,7 +42,8 @@ import InvoiceRecurring from "./components/pages/Invoice/InvoiceRecurring";
 import InvoiceCancelled from "./components/pages/Invoice/InvoiceCancelled";
 import TeachersList from "./components/pages/Teachers/TeachersList";
 import TeachersProfile from "./components/pages/Teachers/TeachersProfile";
-import TeachersAdd from "./components/pages/Teachers/TeachersAdd";
+// import TeachersAdd from "./components/pages/Teachers/TeachersAdd";
+import RegisterTeacher from "./components/pages/Teachers/TeachersAdd";
 import TeachersEdit from "./components/pages/Teachers/TeachersEdit";
 import TeachersGrid from "./components/pages/Teachers/TeachersGrid";
 import DepartmentList from "./components/pages/Department/DepartmentList";
@@ -188,7 +188,6 @@ const appcontainer = (props) => {
 
         <Route path="/students" component={Students} />
         <Route path="/studentsview" component={StudentsView} />
-        <Route path="/addstudent" component={AddStudent} />
         <Route path="/editstudent" component={EditStudent} />
         <Route path="/registerstudent" component={RegisterStudent} />
         <Route path="/studentgrid" component={StudentGrid} />
@@ -226,8 +225,8 @@ const appcontainer = (props) => {
 
         <Route path="/teacherslist" component={TeachersList} />
         <Route path="/teachersprofile" component={TeachersProfile} />
-        <Route path="/addteacher" component={TeachersAdd} />
         <Route path="/editteacher" component={TeachersEdit} />
+        <Route path="/registerteacher" component={RegisterTeacher} />
         <Route path="/teachersgrid" component={TeachersGrid} />
 
         <Route path="/department" component={DepartmentList} />

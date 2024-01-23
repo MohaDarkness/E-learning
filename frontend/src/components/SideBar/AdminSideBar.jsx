@@ -216,6 +216,15 @@ const AdminSidebar = (props) => {
                         >
                           Teacher Edit
                         </Link>
+                        <li>
+                        <Link
+                          to="/registerteacher"
+                          className={`${
+                            "/registerteacher" === pathName ? "active" : ""
+                          }`}
+                        >
+                          Register New Teacher                        </Link>
+                      </li>
                       </li>
                     </ul>
                   ) : (

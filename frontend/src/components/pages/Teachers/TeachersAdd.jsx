@@ -6,15 +6,14 @@ import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import Select from "react-select";
 
-const TeachersAdd = () => {
+const RegisterTeacher = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [startDate1, setStartDate1] = useState(new Date());
   const [selectedOption, setSelectedOption] = useState(null);
 
   const options = [
     { value: 1, label: "Male" },
-    { value: 2, label: "Female" },
-    { value: 3, label: "Others" },
+    { value: 2, label: "Female" }
   ];
 
   const handleOptionChange = (selectedOption) => {
@@ -36,12 +35,12 @@ const TeachersAdd = () => {
             <div className="page-header">
               <div className="row align-items-center">
                 <div className="col">
-                  <h3 className="page-title">Add Teachers</h3>
+                  <h3 className="page-title">Register New Teacher</h3>
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
                       <Link to="/teacherslist">Teachers</Link>
                     </li>
-                    <li className="breadcrumb-item active">Add Teachers</li>
+                    <li className="breadcrumb-item active">Register New Teacher</li>
                   </ul>
                 </div>
               </div>
@@ -93,7 +92,7 @@ const TeachersAdd = () => {
                                                             <option>Others</option>
                                                         </select> */}
                             <Select
-                              className="w-100 form-group local-forms form-control select"
+                              className="w-100 local-forms  select"
                               value={selectedOption}
                               onChange={handleOptionChange}
                               options={options}
@@ -313,4 +312,4 @@ const TeachersAdd = () => {
   );
 };
 
-export default TeachersAdd;
+export default RegisterTeacher;
