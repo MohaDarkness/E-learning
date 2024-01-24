@@ -70,11 +70,7 @@ const Login = () => {
               </div>
               <div className="login-right">
                 <div className="login-right-wrap">
-                  <h1>Welcome to EduCare</h1>
-                  <p className="account-subtitle">
-                    Need an account? <Link to="/register">Sign Up</Link>
-                  </p>
-                  <h2>Sign in</h2>
+                  <h1 style={{marginBottom:'40px', textAlign: 'center'}}>Welcome to EduCare</h1>
                   {/* Form */}
                   {/* <form action="./admindashboard"> */}
                   <form onSubmit={handleSubmit}>

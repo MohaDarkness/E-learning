@@ -248,7 +248,7 @@ const AdminSidebar = (props) => {
                       toggleSidebar(isSideMenu == "Subjects" ? "" : "Subjects")
                     }
                   >
-                    <i className="fas fa-book-reader" /> <span> Subjects</span>{" "}
+                    <i className="fas fa-book-reader" /> <span> Courses</span>{" "}
                     <span className="menu-arrow" />
                   </Link>
                   {isSideMenu == "Subjects" ? (
@@ -264,7 +264,7 @@ const AdminSidebar = (props) => {
                             "/subject" === pathName ? "active" : ""
                           }`}
                         >
-                          Subject List
+                          List
                         </Link>
                       </li>
                       <li>
@@ -274,7 +274,7 @@ const AdminSidebar = (props) => {
                             "/addsubject" === pathName ? "active" : ""
                           }`}
                         >
-                          Subject Add
+                          Create Course
                         </Link>
                       </li>
                       <li>
@@ -284,7 +284,7 @@ const AdminSidebar = (props) => {
                             "/editsubject" === pathName ? "active" : ""
                           }`}
                         >
-                          Subject Edit
+                          Edit Course
                         </Link>
                       </li>
                     </ul>

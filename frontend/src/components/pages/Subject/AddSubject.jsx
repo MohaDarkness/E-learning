@@ -21,12 +21,12 @@ const AddSubject = () => {
                         <div className="page-header">
                             <div className="row align-items-center">
                                 <div className="col">
-                                    <h3 className="page-title">Add Subject</h3>
+                                    <h3 className="page-title">Add Course</h3>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item">
-                                            <Link to="/subject">Subject</Link>
+                                            <Link to="/addsubject">Add Course</Link>
                                         </li>
-                                        <li className="breadcrumb-item active">Add Subject</li>
+                                        <li className="breadcrumb-item active">Courses</li>
                                     </ul>
                                 </div>
                             </div>
@@ -40,13 +40,13 @@ const AddSubject = () => {
                                             <div className="row">
                                                 <div className="col-12">
                                                     <h5 className="form-title">
-                                                        <span>Subject Information</span>
+                                                        <span>Course Information</span>
                                                     </h5>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Subject ID <span className="login-danger">*</span>
+                                                            Course ID <span className="login-danger">*</span>
                                                         </label>
                                                         <input type="text" className="form-control" />
                                                     </div>
@@ -54,7 +54,7 @@ const AddSubject = () => {
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Subject Name <span className="login-danger">*</span>
+                                                            Course Name <span className="login-danger">*</span>
                                                         </label>
                                                         <input type="text" className="form-control" />
                                                     </div>
@@ -62,7 +62,15 @@ const AddSubject = () => {
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Class <span className="login-danger">*</span>
+                                                            Department<span className="login-danger">*</span>
+                                                        </label>
+                                                        <input type="text" className="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 col-sm-4">
+                                                    <div className="form-group local-forms">
+                                                        <label>
+                                                            Creidt Hours<span className="login-danger">*</span>
                                                         </label>
                                                         <input type="text" className="form-control" />
                                                     </div>
