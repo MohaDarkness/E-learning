@@ -6,6 +6,12 @@
  - [ ] [BD1 Student Database ](#bd1)
  - [ ] [BD2 Teacher Database](#bd2)
  - [ ] [BD3 Courses Database](#bd3)
+ - [ ] [BD3 Classes Database](#bd4)
+ - [ ] [BD3 ClassFiles Database](#bd5)
+ - [ ] [BD3 ClassStudent Database](#bd6)
+ - [ ] [BD3 Departments Database](#bd7)
+ - [ ] [BD3 News Database](#bd8)
+ - [ ] [BD3 Holidays Database](#bd9)
 
 ### End-Points
 - [ ] [BE1 `~/GetStudent?StudentID=<StdId>`](#be1)
@@ -55,12 +61,53 @@ Teacher must have:
 ##### Courses
 A course must have:
 - CourseId
+- DepartmentId
 - CourseName
+- CourseSupervisor
+- CreditHours
 - CourseClass
-- CourseFiles
-- TeacherID (To each class)
 - StudentsIDs
 - quizzes (To each class) ((NO ACTUAL QUIZ JUST A NUMBER))
+### BD4
+##### Classes
+A Class must have:
+- ClassId
+- CourseId
+- TeacherId 
+### BD5
+##### ClassFiles
+A ClassFile must have:
+- FileId
+- FileType //PDF, PPTS, IMG, or even Post with no actual file.
+- ClassId
+- Data
+- DisplayRank
+- UploadBy
+### BD6
+##### ClassStudent
+A classStudent must have (no PK):
+- ClassId
+- StudentId
+### BD7
+##### Departments
+A department must have:
+- DepartmentID
+- DepartmentName
+- DepartmentSupervisor
+### BD8
+##### News
+A one News must have:
+- NewsId
+- Title
+- Body
+- Date
+### BD9
+##### Holidays
+A holiday must have:
+- holidayId
+- holidayName
+- holidayStartDate
+- holidayEndDate
 ### BE1 
 ##### `~/GetStudent?StudentID=<StdId>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns JSON with all the student details
