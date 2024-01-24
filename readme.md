@@ -6,12 +6,12 @@
  - [ ] [BD1 Student Database ](#bd1)
  - [ ] [BD2 Teacher Database](#bd2)
  - [ ] [BD3 Courses Database](#bd3)
- - [ ] [BD3 Classes Database](#bd4)
- - [ ] [BD3 ClassFiles Database](#bd5)
- - [ ] [BD3 ClassStudent Database](#bd6)
- - [ ] [BD3 Departments Database](#bd7)
- - [ ] [BD3 News Database](#bd8)
- - [ ] [BD3 Holidays Database](#bd9)
+ - [ ] [BD4 Classes Database](#bd4)
+ - [ ] [BD5 ClassFiles Database](#bd5)
+ - [ ] [BD6 ClassStudent Database](#bd6)
+ - [ ] [BD7 Departments Database](#bd7)
+ - [ ] [BD8 News Database](#bd8)
+ - [ ] [BD9 Holidays Database](#bd9)
 
 ### End-Points
 - [ ] [BE1 `~/GetStudent?StudentID=<StdId>`](#be1)
