@@ -23,7 +23,7 @@
 ### Pages
 - [X] [FP1 Student SignUp from Admin](#fp1)
 - [X] [FP2 Teacher SignUp from Admin](#fp2)
-- [ ] [FP3 Course Creation by Admin](#fp3)
+- [X] [FP3 Course Creation by Admin](#fp3)
 - [ ] [FP4 Assign Teacher to Course by Admin](#fp4)
 - [ ] [FP5 Assign Students to a class](#fp5)
 
