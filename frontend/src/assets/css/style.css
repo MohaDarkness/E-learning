@@ -1536,7 +1536,7 @@ button.bg-danger:hover {
 	color:#283447 !important;
 }
 .bg-success-light:hover {
-	color: #fff;
+	color: #ee0101;
 }
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 	margin: 15px 0 0;
@@ -7849,6 +7849,11 @@ a.comment-btn:hover {
 }
 .twitter-bs-wizard-pager-link {
 	display: inline-block;
+}
+
+a.trash:hover{
+	background-color: #b42e2e !important;
+	color: #fff !important;
 }
 
 /*-----------------

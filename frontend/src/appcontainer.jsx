@@ -49,9 +49,9 @@ import TeachersGrid from "./components/pages/Teachers/TeachersGrid";
 import DepartmentList from "./components/pages/Department/DepartmentList";
 import AddDepartment from "./components/pages/Department/AddDepartment";
 import EditDepartment from "./components/pages/Department/EditDepartment";
-import SubjectList from "./components/pages/Subject/SubjectList";
-import AddSubject from "./components/pages/Subject/AddSubject";
-import EditSubject from "./components/pages/Subject/EditSubject";
+import SubjectList from "./components/pages/Course/CoursesList";
+import AddSubject from "./components/pages/Course/AddCourse";
+import EditSubject from "./components/pages/Course/EditCourse";
 // Settings
 import GendralSettings from "./components/pages/Settings/GendralSettings";
 import Localization from "./components/pages/Settings/Localization";

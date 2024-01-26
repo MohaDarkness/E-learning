@@ -86,16 +86,18 @@ const SubjectList = () => {
             dataIndex: "Action",
             render: (text, record) => (
                 <>
-                    <Link to="#" className="btn btn-sm bg-success-light me-2 ">
-                        <i className="departmenteye feather-eye">
-                            <FeatherIcon icon="eye" />
-                        </i>
-                    </Link>
-                    <Link to="/editsubject" className="btn btn-sm bg-danger-light ">
-                        <i className="departmentedit feather-edit">
-                            <FeatherIcon icon="edit" />
-                        </i>
-                    </Link>
+                    <div className="actions">
+                        <Link to="/editsubject" className="btn btn-sm bg-danger-light">
+                            <i className="feather-edit">
+                                <FeatherIcon icon="edit" className="list-edit"/>
+                            </i>
+                        </Link>
+                        <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
+                            <i className="feather-trash-2">
+                                <FeatherIcon icon="trash-2"/>
+                            </i>
+                        </Link>
+                    </div>
                 </>
             )
         },
@@ -175,12 +177,9 @@ const SubjectList = () => {
                                         <div className="page-header">
                                             <div className="row align-items-center">
                                                 <div className="col">
-                                                    <h3 className="page-title">Subjects</h3>
+                                                    <h3 className="page-title">Courses</h3>
                                                 </div>
-                                                <div className="col-auto text-end float-end ms-auto download-grp">
-                                                    <Link to="#" className="btn btn-outline-primary me-2">
-                                                        <i className="fas fa-download" /> Download
-                                                    </Link>
+                                                <div className="col-auto text-end float-end ms-auto">
                                                     <Link to="/addsubject" className="btn btn-primary">
                                                         <i className="fas fa-plus" />
                                                     </Link>

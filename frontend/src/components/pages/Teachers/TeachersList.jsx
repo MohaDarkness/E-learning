@@ -220,14 +220,14 @@ const column = [
         render: (text, record) => (
             <>
                 <div className="actions">
-                    <Link to="#" className="btn btn-sm bg-success-light me-2">
-                        <i className="feather-eye">
-                            <FeatherIcon icon="eye" />
-                        </i>
-                    </Link>
                     <Link to="/editteacher" className="btn btn-sm bg-danger-light">
                         <i className="feather-edit">
                             <FeatherIcon icon="edit" className="list-edit"/>
+                        </i>
+                    </Link>
+                    <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
+                        <i className="feather-trash-2">
+                            <FeatherIcon icon="trash-2"/>
                         </i>
                     </Link>
                 </div>
@@ -314,27 +314,8 @@ const column = [
                                                 <div className="col">
                                                     <h3 className="page-title">Teachers</h3>
                                                 </div>
-                                                <div className="col-auto text-end float-end ms-auto download-grp">
-                                                    <Link
-                                                        to="/teacherslist"
-                                                        className="btn btn-outline-gray me-2 active"
-                                                    >
-                                                        <i className="feather-list">
-                                                            <FeatherIcon icon="list" />
-                                                        </i>
-                                                    </Link>
-                                                    <Link
-                                                        to="/teachersgrid"
-                                                        className="btn btn-outline-gray me-2"
-                                                    >
-                                                        <i className="feather-grid">
-                                                            <FeatherIcon icon="grid" />
-                                                        </i>
-                                                    </Link>
-                                                    <Link to="#" className="btn btn-outline-primary me-2">
-                                                        <i className="fas fa-download" /> Download
-                                                    </Link>
-                                                    <Link to="/addteacher" className="btn btn-primary">
+                                                <div className="col-auto text-end float-end ms-auto">
+                                                    <Link to="/registerteacher" className="btn btn-primary">
                                                         <i className="fas fa-plus" />
                                                     </Link>
                                                 </div>

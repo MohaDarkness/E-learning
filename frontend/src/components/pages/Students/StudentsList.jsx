@@ -180,7 +180,6 @@ const Students = () => {
                         </Link>
                         <Link className='text-dark' to="/studentsview">{record.Name}</Link>
                     </h2>
-
                 </>
             )
         },
@@ -215,19 +214,17 @@ const Students = () => {
             render: (text, record) => (
                 <>
                     <div className="actions">
-                        <Link to="#" className="btn btn-sm bg-success-light me-2">
-                            <i className="feather-eye">
-                                <FeatherIcon icon="eye" />
-                            </i>
-                        </Link>
-                        <Link to="/editstudent" className="btn btn-sm bg-danger-light">
+                        <Link to="/editsubject" className="btn btn-sm bg-danger-light">
                             <i className="feather-edit">
                                 <FeatherIcon icon="edit" className="list-edit"/>
                             </i>
                         </Link>
+                        <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
+                            <i className="feather-trash-2">
+                                <FeatherIcon icon="trash-2"/>
+                            </i>
+                        </Link>
                     </div>
-    
-    
                 </>
             )
         },
@@ -307,22 +304,7 @@ const Students = () => {
                                                     <h3 className="page-title">Students</h3>
                                                 </div>
                                                 <div className="col-auto text-end float-end ms-auto download-grp">
-                                                    <Link
-                                                        to="/students"
-                                                        className="btn btn-outline-gray me-2 active"
-                                                    >
-                                                        <FeatherIcon className="feather-list" icon="list"/>
-                                                    </Link>
-                                                    <Link
-                                                        to="/studentgrid"
-                                                        className="btn btn-outline-gray me-2"
-                                                    >
-                                                        <FeatherIcon className="feather-grid" icon="grid" />
-                                                    </Link>
-                                                    <Link to="#" className="btn btn-outline-primary me-2">
-                                                        <i className="fas fa-download" /> Download
-                                                    </Link>
-                                                    <Link to="/addstudent" className="btn btn-primary">
+                                                    <Link to="/registerstudent" className="btn btn-primary">
                                                         <i className="fas fa-plus" />
                                                     </Link>
                                                 </div>
