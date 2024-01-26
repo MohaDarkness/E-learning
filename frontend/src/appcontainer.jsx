@@ -52,6 +52,9 @@ import EditDepartment from "./components/pages/Department/EditDepartment";
 import SubjectList from "./components/pages/Course/CoursesList";
 import AddSubject from "./components/pages/Course/AddCourse";
 import EditSubject from "./components/pages/Course/EditCourse";
+import AddSection from "./components/pages/CourseSection/AddSection";
+import SectionsList from "./components/pages/CourseSection/SectionsList";
+import EditSection from "./components/pages/CourseSection/EditSection";
 // Settings
 import GendralSettings from "./components/pages/Settings/GendralSettings";
 import Localization from "./components/pages/Settings/Localization";
@@ -236,6 +239,10 @@ const appcontainer = (props) => {
         <Route path="/subject" component={SubjectList} />
         <Route path="/addsubject" component={AddSubject} />
         <Route path="/editsubject" component={EditSubject} />
+
+        <Route path="/sections" component={SectionsList} />
+        <Route path="/addsection" component={AddSection} />
+        <Route path="/editSection" component={EditSection} />
 
         <Route path="/feescollection" component={FeesCollection} />
         <Route path="/addfeescollection" component={AddFeesCollection} />
