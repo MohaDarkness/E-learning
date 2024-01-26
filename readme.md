@@ -30,8 +30,9 @@
 - [X] [FP1 Student SignUp from Admin](#fp1)
 - [X] [FP2 Teacher SignUp from Admin](#fp2)
 - [X] [FP3 Course Creation by Admin](#fp3)
-- [ ] [FP4 Assign Teacher to Course by Admin](#fp4)
-- [ ] [FP5 Assign Students to a class](#fp5)
+- [ ] [FP4 Classes List of a course](#fp4)
+- [ ] [FP5 Assign Teacher to Course by Admin](#fp5)
+- [ ] [FP6 Assign Students to a class](#fp6)
 
 ## Functionalities Details
 ### BD1 
@@ -159,9 +160,13 @@ Teachers cannot SignUp by their own, the admin must register them into the schoo
 Admin is gonna create the new courses and classes
 
 ### FP4
+##### Classes List of a course
+When the user click on a course, user will be taked to a page showing all classes of that course
+
+### FP5
 ##### Assign Teacher to Course by Admin
 Admin gonna assign a specific teacher to teach the class
 
-### FP5
+### FP6
 ##### Assign Students to a class
 Admin gonna assign students into their classes in the elearning
