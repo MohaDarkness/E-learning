@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import Chart from 'react-apexcharts'
 import Header from "../header";
 import AdminSideBar from '../components/SideBar/AdminSideBar';
+import FullSideBar from '../components/SideBar/FullSideBar';
+import MySideBar from '../components/SideBar/SideBar';
 
 
 
@@ -80,7 +82,11 @@ const Dashboard = () => {
 		<div className="main-wrapper">
 			<Header />
 			{/* <Sidebar /> */}
-			<AdminSideBar />
+			{/* <AdminSideBar /> */}
+			{/* <FullSideBar /> */}
+			<MySideBar/>
+
+		
 
 			{/* <!-- Page Wrapper --> */}
 			<div className="page-wrapper">
