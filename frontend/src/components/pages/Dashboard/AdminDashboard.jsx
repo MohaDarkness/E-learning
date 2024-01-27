@@ -216,8 +216,8 @@ const AdminDashboard = () => {
         <Header />
 
         {/* Sidebar */}
-        {/* <SideBar /> */}
-        <AdminSideBar />
+        <SideBar />
+        {/* <AdminSideBar /> */}
 
         {/* Page Wrapper */}
         <div className="page-wrapper">
