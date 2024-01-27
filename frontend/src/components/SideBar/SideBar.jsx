@@ -3,16 +3,18 @@ import { useState } from 'react';
 import AdminSideBar from './AdminSideBar';
 import TeacherSideBar from './TeacherSideBar';
 import StudentSideBar from './StudentSideBar';
+import FullSideBar from './FullSideBar';
 
 
 
 const MySideBar = () => {
   const jsonRole = localStorage.getItem('role');
   const role = jsonRole ? JSON.parse(jsonRole) : null;
-  console.log(role);
+
   switch (role) {
     case 'A':
       return <AdminSideBar />;
+      // return <FullSideBar/>
     case 'T':
       return <TeacherSideBar />;
     case 'S':
