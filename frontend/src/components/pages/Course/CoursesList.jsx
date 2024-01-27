@@ -26,42 +26,42 @@ const SubjectList = () => {
                 id: "1",
                 SubjectID: "PRE2209",
                 Name: "Mathematics",
-                Class: 5,
+                NumOfSections: 2,
                 Action: ""
             },
             {
                 id: "2",
                 SubjectID: "PRE2213",
                 Name: "History",
-                Class: 6,
+                NumOfSections: 1,
                 Action: ""
             },
             {
                 id: "3",
                 SubjectID: "PRE2143",
                 Name: "Science",
-                Class: 3,
+                NumOfSections: 3,
                 Action: ""
             },
             {
                 id: "4",
                 SubjectID: "PRE2431",
                 Name: "Geography",
-                Class: 8,
+                NumOfSections: 3,
                 Action: ""
             },
             {
                 id: "5",
                 SubjectID: "PRE1534",
                 Name: "Botony",
-                Class: 9,
+                NumOfSections: 4,
                 Action: ""
             },
             {
                 id: "6",
                 SubjectID: "PRE2153",
                 Name: "English",
-                Class: 4,
+                NumOfSections: 1,
                 Action: ""
             }
         ]
@@ -77,9 +77,19 @@ const SubjectList = () => {
             sorter: (a, b) => a.Name.length - b.Name.length
         },
         {
-            title: "Class",
-            dataIndex: "Class",
-            sorter: (a, b) => a.Class.length - b.Class.length
+            title: "# Sections",
+            dataIndex: "NumOfSections",
+            sorter: (a, b) => a.NumOfSections - b.NumOfSections,
+            render: (text, record) => (
+                <>
+                    <h2 className="table-avatar">
+                        <Link to="/sections" className="avatar avatar-sm me-2 ">
+                            {record.NumOfSections}
+                        </Link>
+                        {/* <Link className='text-dark' to="/studentsview">{record.Name}</Link> */}
+                    </h2>
+                </>
+            )
         },
         {
             title: "Action",
@@ -200,7 +210,6 @@ const SubjectList = () => {
                                                 columns={column}
                                                 dataSource={datasource}
 
-                                                rowSelection={rowSelection}
                                                 rowKey={(record) => record.id}
                                             />
                                         </div>
