@@ -157,7 +157,6 @@ const Students = () => {
           Action: ""
         }
        ]
-    console.log(datasource);
     const column = [
         {
             title: "ID",
