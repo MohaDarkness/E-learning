@@ -1,18 +1,17 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
+@ToString
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name="Courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -24,7 +24,7 @@ public class CourseService {
             case "ROLE_STUDENT":
                 return courseRepository.findByUsers_Username(username);
             case "ROLE_TEACHER":
-                User teacher = userRepository.findByUsername(username).orElse(null);
+                User teacher = userRepository.findByUsername(username);
                 if (teacher != null) {
                     return courseRepository.findByUsers_Username(username);
                 }

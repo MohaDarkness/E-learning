@@ -6,18 +6,19 @@ import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-
-
     public void save(User user) {
         user.setPassword(user.getPassword());
         userRepository.save(user);
     }
 
-    // Additional methods can be added here for other user-related operations
+    public User getUsers(String username) {
+      return userRepository.getAllByUsername(username) ;
+    }
 }

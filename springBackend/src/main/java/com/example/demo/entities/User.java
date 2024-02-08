@@ -2,24 +2,33 @@ package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @ToString
-@Entity
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "`user`")
+@Entity
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
+
+    public Role getRole() {
+        return role;
+    }
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
     @ManyToMany
     @JoinTable(
@@ -28,7 +37,4 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> courses;
-
-    public User(String username, String password, String role) {
-    }
 }

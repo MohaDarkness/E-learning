@@ -1,72 +1,59 @@
 package com.example.demo.configurations;
-import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private final UserService userDetailsService;
-
     @Autowired
-    public SecurityConfig(UserService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .requestMatchers("/teacher/**").hasRole("TEACHER")
-//                        .requestMatchers("/student/**").hasRole("STUDENT")
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin((form) -> form
-//                        .successHandler(customSuccessHandler())
-//                )
-//                .logout(LogoutConfigurer::permitAll);
-//
-//        return http.build();
-//    }
+    JwtAuthFilter jwtAuthFilter;
 
     @Bean
-    public AuthenticationSuccessHandler customSuccessHandler() {
-        return (request, response, authentication) -> {
-            String redirectURL = null;
-            var authorities = authentication.getAuthorities();
-            if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_STUDENT"))) {
-                redirectURL = "/student/dashboard";
-            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_TEACHER"))) {
-                redirectURL = "/teacher/dashboard";
-            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                redirectURL = "/admin/dashboard";
-            }
-            if (redirectURL != null) {
-                response.sendRedirect(redirectURL);
-            }
-        };
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(
+                auth -> auth.requestMatchers("/api/v1/login").permitAll()
+                ).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 
     }
-//    @Bean
-//    public AuthenticationSuccessHandler customSuccessHandler() {
-//        return new CustomSuccessHandler();
-//    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }
