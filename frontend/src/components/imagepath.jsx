@@ -1,5 +1,5 @@
 export { default as favicon} from '../assets/img/favicon.png'
-export { default as login } from "../assets/img/login.png";
+export { default as login } from "../assets/img/universityLibrary.jpg";
 
 export {default as logo} from '../assets/img/logo.png';
 export {default as logosmall} from '../assets/img/logo-small.png';
