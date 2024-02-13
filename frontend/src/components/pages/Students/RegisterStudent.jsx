@@ -36,7 +36,7 @@ const RegisterStudent = () => {
         }
       }
       else{
-        setTypeError('Please select only excel file types');
+        setTypeError('Please you can only select excel file');
         setExcelFile(null);
       }
     }
@@ -45,6 +45,7 @@ const RegisterStudent = () => {
     }
   }
   
+  const requiredKeys = ["StudentId", "Name","UserName", "Password", "Major", "YearOfBirth", "MobileNumber", "Gender", "Img"];
   // submit event
   const handleFileSubmit=(e)=>{
     e.preventDefault();
@@ -55,6 +56,17 @@ const RegisterStudent = () => {
       const data = XLSX.utils.sheet_to_json(worksheet);
       // setExcelData(data.slice(0,10));
       console.log(data)
+      console.log(data[0]);
+      for (const key of requiredKeys) {
+        if (!data[0].hasOwnProperty(key)) {
+          console.log(key)
+          setTypeError('Some Data is missing, Fields/Columns must be added to the sheet!!');
+          setExcelFile(null);
+          return
+        }
+      }
+      console.log("all good hehe");
+      
     }
   }
 
@@ -142,18 +154,11 @@ const RegisterStudent = () => {
               <div className="col-sm-12">
                 <div className="card comman-shadow">
                   <div className="card-body">
-                    <form onSubmit={handleFileSubmit}>
+                    <form>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title student-info">
-                            Student Information{" "}
-                            <span>
-                              <Link to="#">
-                                <i className="feather-more-vertical">
-                                  <FeatherIcon icon="more-vertical" />
-                                </i>
-                              </Link>
-                            </span>
+                            Register One Student{" "}
                           </h5>
                         </div>
                         <div className="col-12 col-sm-4">
@@ -271,12 +276,6 @@ const RegisterStudent = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="form-group row">
-                          <label className="col-form-label col-md-3">Register Multiple Students</label>
-                          <div className="col-md-9">
-                              <input className="form-control" type="file" placeholder="" onChange={handleFile}/>
-                          </div>
-										    </div>
                         <div className="col-12">
                           <div className="student-submit">
                             <button type="submit" className="btn btn-primary" on>
@@ -285,6 +284,36 @@ const RegisterStudent = () => {
                           </div>
                         </div>
                       </div>
+                    </form>
+                  </div>
+
+                  {/* Multiple Students Excel File */}
+                  
+                  <div className="card-body">
+                  <form onSubmit={handleFileSubmit}>
+                    <div className="row">
+                        <div className="col-12">
+                          <h5 className="form-title student-info">
+                            Register Multiple Students{" "}
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="form-group row">
+                          <label className="col-form-label col-md-3">Register Multiple Students</label>
+                          <div className="col-md-9">
+                              <input className="form-control" type="file" placeholder="" onChange={handleFile}/>
+                          </div>
+										    </div>
+                        {typeError&&(
+                          <div className="alert alert-danger" role="alert">{typeError}</div>
+                        )}
+                        <div className="col-12">
+                          <div className="student-submit">
+                            <button type="submit" className="btn btn-primary" on>
+                              Submit
+                            </button>
+                          </div>
+                        </div>
                     </form>
                   </div>
                 </div>
