@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
-import AdminSideBar from "../../SideBar/AdminSideBar";
 import { Link } from "react-router-dom";
 import {
   avatar01,
@@ -25,7 +24,11 @@ import {
 } from "../../imagepath";
 import Footer from "../../Footer/Footer";
 
+import studentsData from "../../../data/studentsData.json";
+import teachersData from "../../../data/teachersData.json";
+
 const AdminDashboard = () => {
+  console.log(studentsData.filter(student => student.Gender === 'Male').length);
   const [data, setObject] = useState({
     chart: {
       height: 350,
@@ -45,7 +48,7 @@ const AdminDashboard = () => {
       curve: "smooth",
     },
     colors: ["#3D5EE1", "#70C4CF"],
-    borderWidth: 3,
+    borderWidth: 9,
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
   });
   const [series, setSeries] = useState([
@@ -65,8 +68,8 @@ const AdminDashboard = () => {
     colors: ["#3D5EE1", "#70C4CF"],
     chart: {
 			type: 'bar',
-			height: 350,
-			width: '100%',
+			height: 'auto',
+			width: '50%',
 			stacked: false,
 			toolbar: {
 				show: false
@@ -85,62 +88,26 @@ const AdminDashboard = () => {
 		},
 		stroke: {
 			show: true,
-			width: 2,
+			width: 1,
 			colors: ['transparent']
 		},
-		series: [{
-			name: "Boys",
-			color: '#70C4CF',
-			data: [420, 532, 516, 575, 519, 517, 454, 392, 262, 383, 446, 551],
-		}, {
-			name: "Girls",
-			color: '#3D5EE1',
-			data: [336, 612, 344, 647, 345, 563, 256, 344, 323, 300, 455, 456],
-		}],
-		// labels: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
-		// xaxis: {
-		// 	labels: {
-		// 		show: false
-		// 	},
-		// 	axisBorder: {
-		// 		show: false
-		// 	},
-		// 	axisTicks: {
-		// 		show: false
-		// 	},
-		// },
-		// yaxis: {
-		// 	axisBorder: {
-		// 		show: false
-		// 	},
-		// 	axisTicks: {
-		// 		show: false
-		// 	},
-		// 	labels: {
-		// 		style: {
-		// 			colors: '#777'
-		// 		}
-		// 	}
-		// },
-		// title: {
-		// 	text: '',
-		// 	align: 'left',
-		// 	style: {
-		// 		fontSize: '18px'
-		// 	}
-		// },
-
+		
 
     options: {
       chart: {
         type: 'bar',
-        height: 350
+        height: 350,
+        toolbar: {
+          show: false
+        }
       },
+      
       plotOptions: {
         bar: {
           horizontal: false,
           columnWidth: '55%',
-          endingShape: 'rounded'
+          endingShape: 'rounded',
+          barHeight: 100
         },
       },
       dataLabels: {
@@ -161,6 +128,7 @@ const AdminDashboard = () => {
         axisTicks: {
           show: false
         },
+        categories: ['Boys', 'Girsls', 'test', 'test', 'test']
       },
       yaxis: {
         axisBorder: {
@@ -188,24 +156,19 @@ const AdminDashboard = () => {
 
     
   });
+  
 
 
   const [studentchart] = useState([
     {
       name: "Boys",
       type: "column",
-      data: [
-        420, 532, 516, 575, 519, 517, 454, 392, 262, 383, 446, 551, 563, 421,
-        563, 254, 452,
-      ],
+      data: [0, studentsData.filter(student => student.Gender === 'Male').length, 0]
     },
     {
       name: "Girls",
       type: "column",
-      data: [
-        336, 612, 344, 647, 345, 563, 256, 344, 323, 300, 455, 456, 526, 652,
-        325, 425, 436,
-      ],
+      data: [0, studentsData.filter(student => student.Gender === 'Female').length, 0],
     },
   ]);
 
@@ -227,7 +190,7 @@ const AdminDashboard = () => {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="page-sub-header">
-                    <h3 className="page-title">!Welcome Admin</h3>
+                    <h3 className="page-title">Welcome Admin!</h3>
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
                         <Link to="/admindashboard">Home</Link>
@@ -247,7 +210,7 @@ const AdminDashboard = () => {
                     <div className="db-widgets d-flex justify-content-between align-items-center">
                       <div className="db-info">
                         <h6>Students</h6>
-                        <h3>5621</h3>
+                        <h3>{studentsData.length}</h3>
                       </div>
                       <div className="db-icon">
                         <img src={dashicon01} alt="Dashboard Icon" />
@@ -279,7 +242,7 @@ const AdminDashboard = () => {
                     <div className="db-widgets d-flex justify-content-between align-items-center">
                       <div className="db-info">
                         <h6>Teachers</h6>
-                        <h3>83</h3>
+                        <h3>{teachersData.length}</h3>
                       </div>
                       <div className="db-icon">
                         <img src={dashicon01} alt="Dashboard Icon" />

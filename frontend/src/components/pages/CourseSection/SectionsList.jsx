@@ -8,7 +8,7 @@ import Header from '../../Header/Header'
 import SideBar from '../../SideBar/SideBar'
 import Footer from '../../Footer/Footer';
 
-const SectionsList = () => {
+const SectionsList = () => { //courseID
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const onSelectChange = (newSelectedRowKeys) => {
@@ -21,7 +21,7 @@ const SectionsList = () => {
         onChange: onSelectChange,
     };
 
-    const CourseId = 100245;
+    const CourseId = 100245; // to request from the back-end
     const CourseName = "Data Structures and Algorithms"
 
     const datasource =

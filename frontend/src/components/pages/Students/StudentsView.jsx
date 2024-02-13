@@ -1,14 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../../Header/Header'
-import SideBar from '../../SideBar/SideBar'
-import Footer from '../../Footer/Footer'
+import { Link } from 'react-router-dom';
+import Header from '../../Header/Header';
+import SideBar from '../../SideBar/SideBar';
+import Footer from '../../Footer/Footer';
 import { bulidingicon, profilebg, profileuser } from '../../imagepath'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
+import { useLocation } from 'react-router-dom';
 
-const StudentsView = () => {
+const StudentsView = (props) => {
+    console.log(props);
+
+    const {state} = props.location;
+    console.log(state);
+
+    console.log("Mohannad is here");
+
+
+
+    // console.log(student);
+
     return (
         <>
+            console.log(studentInfo.name);
             <div className="main-wrapper">
                 {/* Header */}
                 <Header />

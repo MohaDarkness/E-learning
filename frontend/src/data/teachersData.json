@@ -1,0 +1,58 @@
+[
+  {
+    "TeacherID": "Tch10001",
+    "Name": "Ahmed Mahmoud Ali",
+    "Picture": "MalePicture",
+    "MobileNumber": "0791122334",
+    "Gender": "Male"
+  },
+  {
+    "TeacherID": "Tch10002",
+    "Name": "Fatima Ahmed Hassan",
+    "Picture": "FemalePicture",
+    "MobileNumber": "0792233445",
+    "Gender": "Female"
+  },
+  {
+    "TeacherID": "Tch10003",
+    "Name": "Omar Khalid Ibrahim",
+    "Picture": "MalePicture",
+    "MobileNumber": "0793344556",
+    "Gender": "Male"
+  },
+  {
+    "TeacherID": "Tch10004",
+    "Name": "Layla Mohammed Ali",
+    "Picture": "FemalePicture",
+    "MobileNumber": "0794455667",
+    "Gender": "Female"
+  },
+  {
+    "TeacherID": "Tch10005",
+    "Name": "Yousef Ahmed Saleh",
+    "Picture": "MalePicture",
+    "MobileNumber": "0795566778",
+    "Gender": "Male"
+  },
+  {
+    "TeacherID": "Tch10006",
+    "Name": "Nour Khalid Hassan",
+    "Picture": "FemalePicture",
+    "MobileNumber": "0796677889",
+    "Gender": "Female"
+  },
+  {
+    "TeacherID": "Tch10007",
+    "Name": "Mohammed Ali Ibrahim",
+    "Picture": "MalePicture",
+    "MobileNumber": "0797788990",
+    "Gender": "Male"
+  },
+  {
+    "TeacherID": "Tch10008",
+    "Name": "Aisha Fatima Mahmoud",
+    "Picture": "FemalePicture",
+    "MobileNumber": "0798899001",
+    "Gender": "Female"
+  }
+]

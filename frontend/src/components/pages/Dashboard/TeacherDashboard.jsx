@@ -63,7 +63,7 @@ const TeacherDashboard = () => {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="page-sub-header">
-                      <h3 className="page-title">!Welcome Teacher</h3>
+                      <h3 className="page-title">Welcome Teacher!</h3>
                       <ul className="breadcrumb">
                         <li className="breadcrumb-item">
                           <Link to="/admindashboard">Home</Link>

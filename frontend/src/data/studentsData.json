@@ -1,0 +1,222 @@
+[
+  {
+    "StudentId": "std20240001",
+    "Name": "Ali Mohammed Ahmed",
+    "UserName": "Alistd20240001",
+    "Password": "randompassword1",
+    "Major": "Computer Science",
+    "YearOfBirth": 2001,
+    "MobileNumber": "0791234567",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240002",
+    "Name": "Mohannad Ahmed Mahmoud",
+    "UserName": "Fatstd20240002",
+    "Password": "randompassword2",
+    "Major": "Computer Science",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0792345678",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240003",
+    "Name": "Omar Khalid Ibrahim",
+    "UserName": "Omastd20240003",
+    "Password": "randompassword3",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0793456789",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240004",
+    "Name": "Layla Mohammed Ali",
+    "UserName": "Laystd20240004",
+    "Password": "randompassword4",
+    "Major": "Computer Science",
+    "YearOfBirth": 2003,
+    "MobileNumber": "0794567890",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240005",
+    "Name": "Ahmed Mustafa Mahmoud",
+    "UserName": "Ahmstd20240005",
+    "Password": "randompassword5",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2001,
+    "MobileNumber": "0795678901",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240006",
+    "Name": "Nour Khalid Hassan",
+    "UserName": "Noustd20240006",
+    "Password": "randompassword6",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2002,
+    "MobileNumber": "0796789012",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240007",
+    "Name": "Mohammed Ahmed Saleh",
+    "UserName": "Mohstd20240007",
+    "Password": "randompassword7",
+    "Major": "Computer Science",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0797890123",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240008",
+    "Name": "Aisha Fatima Ali",
+    "UserName": "Aisstd20240008",
+    "Password": "randompassword8",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2003,
+    "MobileNumber": "0798901234",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240009",
+    "Name": "Khaled Omar Hassan",
+    "UserName": "Khalstd20240009",
+    "Password": "randompassword9",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2001,
+    "MobileNumber": "0799012345",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240010",
+    "Name": "Mariam Layla Mahmoud",
+    "UserName": "Marstd20240010",
+    "Password": "randompassword10",
+    "Major": "Computer Science",
+    "YearOfBirth": 2002,
+    "MobileNumber": "0790123456",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240011",
+    "Name": "Yousef Ahmed Saleh",
+    "UserName": "Youstd20240011",
+    "Password": "randompassword11",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0791234567",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240012",
+    "Name": "Amira Mohammed Ali",
+    "UserName": "Amirstd20240012",
+    "Password": "randompassword12",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2003,
+    "MobileNumber": "0792345678",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240013",
+    "Name": "Hassan Khaled Ibrahim",
+    "UserName": "Hasstd20240013",
+    "Password": "randompassword13",
+    "Major": "Computer Science",
+    "YearOfBirth": 2001,
+    "MobileNumber": "0793456789",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240014",
+    "Name": "Sara Mustafa Mahmoud",
+    "UserName": "Sarstd20240014",
+    "Password": "randompassword14",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2002,
+    "MobileNumber": "0794567890",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240015",
+    "Name": "Ali Omar Hassan",
+    "UserName": "Alisstd20240015",
+    "Password": "randompassword15",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0795678901",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240016",
+    "Name": "Hala Nour Khalid",
+    "UserName": "Halstd20240016",
+    "Password": "randompassword16",
+    "Major": "Computer Science",
+    "YearOfBirth": 2003,
+    "MobileNumber": "0796789012",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240017",
+    "Name": "Ahmad Mohammed Ahmed",
+    "UserName": "Ahmstd20240017",
+    "Password": "randompassword17",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2001,
+    "MobileNumber": "0797890123",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240018",
+    "Name": "Nada Fatima Mahmoud",
+    "UserName": "Nadstd20240018",
+    "Password": "randompassword18",
+    "Major": "Computer Graphics",
+    "YearOfBirth": 2002,
+    "MobileNumber": "0798901234",
+    "Gender": "Female",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240019",
+    "Name": "Khalid Ali Hassan",
+    "UserName": "Khalstd20240019",
+    "Password": "randompassword19",
+    "Major": "Computer Science",
+    "YearOfBirth": 2000,
+    "MobileNumber": "0799012345",
+    "Gender": "Male",
+    "Img": "img10"
+  },
+  {
+    "StudentId": "std20240020",
+    "Name": "Lina Mariam Mahmoud",
+    "UserName": "Linstd20240020",
+    "Password": "randompassword20",
+    "Major": "Software Engineer",
+    "YearOfBirth": 2003,
+    "MobileNumber": "0790123456",
+    "Gender": "Female",
+    "Img": "img10"
+  }
+]

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import AdminSideBar from './AdminSideBar';
 import TeacherSideBar from './TeacherSideBar';
 import StudentSideBar from './StudentSideBar';
-import FullSideBar from './FullSideBar';
 
 
 
