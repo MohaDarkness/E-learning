@@ -8,10 +8,14 @@ const userSchema = new mongoose.Schema({
     unique: [true, "the username is taken"],
     lowercase: true,
   },
+  name:{
+    type:String,
+    required:true
+  },
   password: {
     type: String,
     required: true,
-    minlength: [6, "the length is less than 6 charechters"],
+    minlength: [6, "the length is less than 6 characters"],
   },
   email:{
     type: String,
@@ -19,7 +23,30 @@ const userSchema = new mongoose.Schema({
     lowercase:true,
     validate:[isEmail ,'please enter a valid email']
   },
+  role:{
+    type:String,
+    required: true,
+    enum:['admin', 'teacher', 'student']
+  },
+  gender:{
+    type: String, 
+    required: [true,"is empty"],
+    enum:['male', 'female']
+  },
 
+  major:{
+    type: String
+  },
+  address:{
+    type: String
+  },
+  courses: { 
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Course'
+    }],
+    default: []
+  }
 
 });
 userSchema.post('save', function(doc, next){
@@ -30,12 +57,13 @@ userSchema.pre('save',async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
-  });;
+  });
 
 userSchema.statics.login = async function(username, password) { 
     const user = await this.findOne({username});
     if(user){
        const auth = await bcrypt.compare(password, user.password);
+       console.log("hohohohohoh")
        if(auth){
         return user;
        }

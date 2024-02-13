@@ -34,19 +34,11 @@ const createToken = (id) => {
     expiresIn: tokenDuration
   });
 };
-
-module.exports.signup_get = (req, res) => {
-    
-}
-  
-module.exports.login_get = (req, res) => {
-  }
-  
-module.exports.signup_post = async (req, res) => {
-    const { username, password, email } = req.body;
+module.exports.signup = async (req, res) => {
+    const { username, email, password, role, gender, major, subjects, address } = req.body;
 
     try {
-        const user = await User.create({ username, password, email });
+        const user = await User.create({ username, email, password, role, gender, major, subjects, address });
         const token  = createToken(user._id);
         res.cookie('jwt',token, { maxAge:tokenDuration});
         console.log("here's what I have created: " + token);
@@ -58,16 +50,20 @@ module.exports.signup_post = async (req, res) => {
     }
   }
   
-module.exports.login_post = async (req, res) => {
+module.exports.login= async (req, res) => {
     const {username, password} = req.body;
     try{
-        const user = User.login(username,password);
+        const user = await User.login(username,password);
+        console.log(user)
         const token = createToken(user._id);
-        res.cookie('jwt',token, {httpOnly: true, maxAge:tokenDuration});
-        res.status(200).json({user:user.id});
+        res.cookie('jwt',token, {/*httpOnly: true,*/ maxAge:tokenDuration});
+        res.status(200).json({id:user._id, role:user.role});
 
     }catch(err){
-        console.log(); 
         res.status(400).json({});
     }
+  }
+
+  module.exports.logout = (req, res) =>{
+    res.cookie('jwt', '', {maxAge: 1}); 
   }
