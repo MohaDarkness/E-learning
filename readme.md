@@ -11,7 +11,8 @@
 - [ ] [FP7 Create sections content page]
 
 ### Local Data
-- [ ] [FD1 Pass data from StudentsList to StudentsView] 
+- [X] [FD1 Pass data from StudentsList to StudentsView] 
+- [ ] [FD2 Pass data from TeachersList to TeachersProfile]
 
 
 # Backend functionalities and database tables have been removed due to inconsistencies with our workflow and role-based access system :).

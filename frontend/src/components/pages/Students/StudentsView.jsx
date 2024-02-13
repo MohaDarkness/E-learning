@@ -5,19 +5,15 @@ import SideBar from '../../SideBar/SideBar';
 import Footer from '../../Footer/Footer';
 import { bulidingicon, profilebg, profileuser } from '../../imagepath'
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon'
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-const StudentsView = (props) => {
-    console.log(props);
+import studentsData from "../../../data/studentsData.json";
 
-    const {state} = props.location;
-    console.log(state);
-
-    console.log("Mohannad is here");
-
-
-
-    // console.log(student);
+const StudentsView = () => {
+    const {studentId} = useParams();
+    
+    // Must have end point sending student ID and recieving his/her data... now its just a bullshit
+    const student = studentsData.filter((student)=> {return student['StudentId'] == studentId})[0];
 
     return (
         <>
@@ -64,11 +60,9 @@ const StudentsView = (props) => {
                                             </h4>
                                         </div>
                                         <div className="student-profile-head">
-                                            <div className="profile-bg-img">
-                                                <img src={profilebg} alt="Profile" />
-                                            </div>
+                                            
                                             <div className="row">
-                                                <div className="col-lg-4 col-md-4">
+                                                <div className="col-lg-6 col-md-6">
                                                     <div className="profile-user-box">
                                                         <div className="profile-user-img">
                                                             <img src={profileuser} alt="Profile" />
@@ -84,32 +78,14 @@ const StudentsView = (props) => {
                                                             </div>
                                                         </div>
                                                         <div className="names-profiles">
-                                                            <h4>Bruce Willis</h4>
-                                                            <h5>Computer Science</h5>
+                                                            <h4>{student.Name}</h4>
+                                                            <h5>{student.Major}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-lg-4 col-md-4 d-flex align-items-center">
-                                                    <div className="follow-group">
-                                                        <div className="students-follows">
-                                                            <h5>Followers</h5>
-                                                            <h4>2850</h4>
-                                                        </div>
-                                                        <div className="students-follows">
-                                                            <h5>Followers</h5>
-                                                            <h4>2850</h4>
-                                                        </div>
-                                                        <div className="students-follows">
-                                                            <h5>Followers</h5>
-                                                            <h4>2850</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-4 col-md-4 d-flex align-items-center">
+                                                
+                                                <div className="col-lg-6 col-md-6 d-flex align-items-center">
                                                     <div className="follow-btn-group">
-                                                        <button type="submit" className="btn btn-info follow-btns">
-                                                            Follow
-                                                        </button>
                                                         <button type="submit" className="btn btn-info message-btns">
                                                             Message
                                                         </button>
@@ -135,7 +111,7 @@ const StudentsView = (props) => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Name</h4>
-                                                            <h5>Bruce Willis</h5>
+                                                            <h5>{student.Name}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -143,8 +119,8 @@ const StudentsView = (props) => {
                                                             <img src={bulidingicon} alt="" />
                                                         </div>
                                                         <div className="views-personal">
-                                                            <h4>Department </h4>
-                                                            <h5>Computer Science</h5>
+                                                            <h4>Major </h4>
+                                                            <h5>{student.Major}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -155,7 +131,7 @@ const StudentsView = (props) => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Mobile</h4>
-                                                            <h5>+91 89657 48512</h5>
+                                                            <h5>{student.MobileNumber}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -166,7 +142,7 @@ const StudentsView = (props) => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Email</h4>
-                                                            <h5>daisy@gmail.com</h5>
+                                                            <h5>{`${student.Name.split(' ')[0]}@gmail.com`}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -177,7 +153,7 @@ const StudentsView = (props) => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Gender</h4>
-                                                            <h5>Male</h5>
+                                                            <h5>{student.Gender}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -187,94 +163,14 @@ const StudentsView = (props) => {
                                                             </i>
                                                         </div>
                                                         <div className="views-personal">
-                                                            <h4>Date of Birth</h4>
-                                                            <h5>22 Apr 1995</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div className="personal-activity">
-                                                        <div className="personal-icons">
-                                                            <i className="feather-italic">
-                                                                <FeatherIcon icon="italic" />
-                                                            </i>
-                                                        </div>
-                                                        <div className="views-personal">
-                                                            <h4>Language</h4>
-                                                            <h5>English, French, Bangla</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div className="personal-activity mb-0">
-                                                        <div className="personal-icons">
-                                                            <i className="feather-map-pin">
-                                                                <FeatherIcon icon="map-pin" />
-                                                            </i>
-                                                        </div>
-                                                        <div className="views-personal">
-                                                            <h4>Address</h4>
-                                                            <h5>480, Estern Avenue, New York</h5>
+                                                            <h4>Year Of Birth</h4>
+                                                            <h5>{student.YearOfBirth}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="student-personals-grp">
-                                            <div className="card mb-0">
-                                                <div className="card-body">
-                                                    <div className="heading-detail">
-                                                        <h4>Skills:</h4>
-                                                    </div>
-                                                    <div className="skill-blk">
-                                                        <div className="skill-statistics">
-                                                            <div className="skills-head">
-                                                                <h5>Photoshop</h5>
-                                                                <p>90%</p>
-                                                            </div>
-                                                            <div className="progress mb-0">
-                                                                <div
-                                                                    className="progress-bar bg-photoshop"
-                                                                    role="progressbar"
-                                                                    style={{ width: "90%" }}
-                                                                    aria-valuenow={90}
-                                                                    aria-valuemin={0}
-                                                                    aria-valuemax={100}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="skill-statistics">
-                                                            <div className="skills-head">
-                                                                <h5>Code editor</h5>
-                                                                <p>75%</p>
-                                                            </div>
-                                                            <div className="progress mb-0">
-                                                                <div
-                                                                    className="progress-bar bg-editor"
-                                                                    role="progressbar"
-                                                                    style={{ width: "75%" }}
-                                                                    aria-valuenow={75}
-                                                                    aria-valuemin={0}
-                                                                    aria-valuemax={100}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="skill-statistics mb-0">
-                                                            <div className="skills-head">
-                                                                <h5>Illustrator</h5>
-                                                                <p>95%</p>
-                                                            </div>
-                                                            <div className="progress mb-0">
-                                                                <div
-                                                                    className="progress-bar bg-illustrator"
-                                                                    role="progressbar"
-                                                                    style={{ width: "95%" }}
-                                                                    aria-valuenow={95}
-                                                                    aria-valuemin={0}
-                                                                    aria-valuemax={100}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div className="col-lg-8">
                                         <div className="student-personals-grp">
@@ -284,7 +180,7 @@ const StudentsView = (props) => {
                                                         <h4>About Me</h4>
                                                     </div>
                                                     <div className="hello-park">
-                                                        <h5>Hello I am Daisy Parks</h5>
+                                                        <h5>Hello I am {student.Name}</h5>
                                                         <p>
                                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                                             sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -294,44 +190,8 @@ const StudentsView = (props) => {
                                                             cillum dolore eu fugiat nulla pariatur. Excepteur officia
                                                             deserunt mollit anim id est laborum.
                                                         </p>
-                                                        <p>
-                                                            Sed ut perspiciatis unde omnis iste natus error sit
-                                                            voluptatem accusantium doloremque laudantium, totam
-                                                            inventore veritatis et quasi architecto beatae vitae dicta
-                                                            sunt explicabo.{" "}
-                                                        </p>
                                                     </div>
-                                                    <div className="hello-park">
-                                                        <h5>Education</h5>
-                                                        <div className="educate-year">
-                                                            <h6>2008 - 2009</h6>
-                                                            <p>
-                                                                Secondary Schooling at xyz school of secondary
-                                                                education, Mumbai.
-                                                            </p>
-                                                        </div>
-                                                        <div className="educate-year">
-                                                            <h6>2011 - 2012</h6>
-                                                            <p>
-                                                                Higher Secondary Schooling at xyz school of higher
-                                                                secondary education, Mumbai.
-                                                            </p>
-                                                        </div>
-                                                        <div className="educate-year">
-                                                            <h6>2012 - 2015</h6>
-                                                            <p>
-                                                                Bachelor of Science at Abc College of Art and Science,
-                                                                Chennai.
-                                                            </p>
-                                                        </div>
-                                                        <div className="educate-year">
-                                                            <h6>2015 - 2017</h6>
-                                                            <p className="mb-0">
-                                                                Master of Science at Cdm College of Engineering and
-                                                                Technology, Pune.
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

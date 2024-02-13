@@ -190,7 +190,7 @@ const appcontainer = (props) => {
         <Route path="/datatable" component={DataTable} />
 
         <Route path="/students" component={Students} />
-        <Route path="/studentsview" component={StudentsView} />
+        <Route path="/studentsview/:studentId" component={StudentsView} />
         <Route path="/editstudent" component={EditStudent} />
         <Route path="/registerstudent" component={RegisterStudent} />
         <Route path="/studentgrid" component={StudentGrid} />
