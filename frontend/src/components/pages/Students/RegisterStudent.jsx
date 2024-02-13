@@ -6,6 +6,7 @@ import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
+import * as XLSX from 'xlsx';
 
 const RegisterStudent = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -14,6 +15,48 @@ const RegisterStudent = () => {
   const [selectedOption3, setSelectedOption3] = useState(null);
   const [selectedOption4, setSelectedOption4] = useState(null);
   const [selectedOption5, setSelectedOption5] = useState(null);
+  // onchange states
+  const [excelFile, setExcelFile] = useState(null);
+  const [typeError, setTypeError] = useState(null);
+
+  // submit state
+  const [excelData, setExcelData] = useState(null);
+
+  // onchange event
+  const handleFile=(e)=>{
+    let fileTypes = ['application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','text/csv'];
+    let selectedFile = e.target.files[0];
+    if(selectedFile){
+      if(selectedFile&&fileTypes.includes(selectedFile.type)){
+        setTypeError(null);
+        let reader = new FileReader();
+        reader.readAsArrayBuffer(selectedFile);
+        reader.onload=(e)=>{
+          setExcelFile(e.target.result);
+        }
+      }
+      else{
+        setTypeError('Please select only excel file types');
+        setExcelFile(null);
+      }
+    }
+    else{
+      console.log('Please select your file');
+    }
+  }
+  
+  // submit event
+  const handleFileSubmit=(e)=>{
+    e.preventDefault();
+    if(excelFile!==null){
+      const workbook = XLSX.read(excelFile,{type: 'buffer'});
+      const worksheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[worksheetName];
+      const data = XLSX.utils.sheet_to_json(worksheet);
+      // setExcelData(data.slice(0,10));
+      console.log(data)
+    }
+  }
 
   const options1 = [
     { value: 1, label: "Select Gender" },
@@ -99,7 +142,7 @@ const RegisterStudent = () => {
               <div className="col-sm-12">
                 <div className="card comman-shadow">
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={handleFileSubmit}>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title student-info">
@@ -228,9 +271,15 @@ const RegisterStudent = () => {
                             </div>
                           </div>
                         </div>
+                        <div className="form-group row">
+                          <label className="col-form-label col-md-3">Register Multiple Students</label>
+                          <div className="col-md-9">
+                              <input className="form-control" type="file" placeholder="" onChange={handleFile}/>
+                          </div>
+										    </div>
                         <div className="col-12">
                           <div className="student-submit">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-primary" on>
                               Submit
                             </button>
                           </div>
