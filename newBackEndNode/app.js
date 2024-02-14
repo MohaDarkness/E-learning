@@ -4,13 +4,23 @@ const authRoutes = require('./routes/authRoutes')
 const studentRoutes = require('./routes/studentRoutes')
 const courseRoutes = require('./routes/courseRoutes')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 const { verifyTokenAuth } = require('./middleware/auth')
 const User = require('./models/User')
 const app = express()
 
+
+
 // middleware
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors(
+  {
+    origin: 'http://localhost:3001',
+    credentials:true
+  }
+));
+
 app.set('view engine', 'ejs')
 // database connection
 const dbURI = 'mongodb+srv://baha:1234@cluster0.buphdwp.mongodb.net/EduCare';

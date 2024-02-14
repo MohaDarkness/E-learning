@@ -5,11 +5,15 @@ import { login } from "../../imagepath";
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
 import { Eye, EyeOff } from "react-feather/dist";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [token, setToken] = useState("");
+  
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -17,45 +21,82 @@ const Login = () => {
 
   /* Authintication */
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await fetch("http://localhost:8080/authenticate", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ userName, password }),
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.text();
+  //       // Assuming the backend returns "A", "T", or "S"
+  //       if (result === "A") {
+  //         localStorage.setItem('role', JSON.stringify('A'));
+  //         // Redirect to admin dashboard
+  //         window.location.href = "/admindashboard";
+  //       } else if (result === "T") {
+  //         localStorage.setItem('role', JSON.stringify('T'));
+  //         // Redirect to teacher dashboard
+  //         window.location.href = "/teacherdashboard";
+  //       } else if (result === "S") {
+  //         localStorage.setItem('role', JSON.stringify('S'));
+  //         // Redirect to student dashboard
+  //         window.location.href = "/studentdashboard";
+  //       } else {
+  //         // Handle other cases or show an error message
+  //         console.error("Invalid response from server");
+  //       }
+  //     } else {
+  //       // Handle errors from the server
+  //       console.error("Server error:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during fetch:", error);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
+      console.log(userName)
+      console.log(password)
+      
+        try {
+          console.log('heheheheheh');
+          const response = await axios.post('http://localhost:3000/login', { 'username':userName, 'password':password}, {withCredentials:true});
+          const { id, role, jwt} = response.data;
+          setToken(jwt)
+          
+          console.log(response)
+          console.log(jwt)
 
-    try {
-      const response = await fetch("http://localhost:8080/authenticate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, password }),
-      });
-
-      if (response.ok) {
-        const result = await response.text();
-        // Assuming the backend returns "A", "T", or "S"
-        if (result === "A") {
-          localStorage.setItem('role', JSON.stringify('A'));
-          // Redirect to admin dashboard
-          window.location.href = "/admindashboard";
-        } else if (result === "T") {
-          localStorage.setItem('role', JSON.stringify('T'));
-          // Redirect to teacher dashboard
-          window.location.href = "/teacherdashboard";
-        } else if (result === "S") {
-          localStorage.setItem('role', JSON.stringify('S'));
-          // Redirect to student dashboard
-          window.location.href = "/studentdashboard";
-        } else {
-          // Handle other cases or show an error message
-          console.error("Invalid response from server");
-        }
-      } else {
-        // Handle errors from the server
-        console.error("Server error:", response.statusText);
+          const result = response.data["role"];
+          if (result === "admin") {
+                    localStorage.setItem('role', JSON.stringify('A'));
+                    // Redirect to admin dashboard
+                    window.location.href = "/admindashboard";
+                  } else if (result === "teacher") {
+                    localStorage.setItem('role', JSON.stringify('T'));
+                    // Redirect to teacher dashboard
+                    window.locadmindashboard
+                  } else if (result === "student") {
+                    localStorage.setItem('role', JSON.stringify('S'));
+                    // Redirect to student dashboard
+                    window.location.href = "/studentdashboard";
+                  } else {
+                    // Handle other cases or show an error message
+                    console.error("Invalid response from server");
+                  }
+        } 
+        catch (error) {
+            console.log(error);
       }
-    } catch (error) {
-      console.error("Error during fetch:", error);
-    }
-  };
+  }
 
   /* End Authintication */
 

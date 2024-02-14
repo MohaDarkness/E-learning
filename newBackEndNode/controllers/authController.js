@@ -53,8 +53,8 @@ module.exports.login= async (req, res) => {
         const user = await User.login(username,password);
         console.log(user)
         const token = createToken(user._id);
-        res.cookie('jwt',token, {/*httpOnly: true,*/ maxAge:tokenDuration});
-        res.status(200).json({id:user._id, role:user.role});
+        res.cookie('jwt',token, {/*httpOnly: true,*/ maxAge:tokenDuration, sameSite:"none", secure:true});
+        res.status(200).json({id:user._id, role:user.role, jwt:token});
 
     }catch(err){
         res.status(400).json({});
