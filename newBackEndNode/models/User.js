@@ -40,10 +40,10 @@ const userSchema = new mongoose.Schema({
   address:{
     type: String
   },
-  courses: { 
+  sections: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Course'
+      ref: 'Section'
     }],
     default: []
   }

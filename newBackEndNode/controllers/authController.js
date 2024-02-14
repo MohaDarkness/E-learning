@@ -35,10 +35,10 @@ const createToken = (id) => {
   });
 };
 module.exports.signup = async (req, res) => {
-    const { username, email, password, role, gender, major, subjects, address } = req.body;
+    const { username, email, password, role, gender, major, address, name } = req.body;
 
     try {
-        const user = await User.create({ username, email, password, role, gender, major, subjects, address });
+        const user = await User.create({ username, email, password, role, gender, major, address, name });
         const token  = createToken(user._id);
         res.cookie('jwt',token, { maxAge:tokenDuration});
         console.log("here's what I have created: " + token);

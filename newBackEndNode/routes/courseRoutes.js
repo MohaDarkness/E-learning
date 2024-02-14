@@ -3,5 +3,6 @@ const studentController = require('../controllers/studentController')
 const { verifyTokenAuth } = require('../middleware/auth')
 const courseController = require("../controllers/courseController");
 const router = Router()
-router.post('/courses', courseController.createCourse)
+router.post('/section', courseController.createSection)
+router.post('/courses', courseController.createCourses)
 module.exports = router

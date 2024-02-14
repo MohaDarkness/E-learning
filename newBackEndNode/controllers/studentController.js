@@ -1,5 +1,5 @@
 const User = require("../models/User")
-const Course = require("../models/Course")
+const Course = require("../models/Section")
 module.exports.listStudents = async (req, res) => {
     const user  = await User.findById(req.user)
     let students = []
@@ -24,7 +24,7 @@ module.exports.listStudents = async (req, res) => {
         res.status(401).json({ message: 'Unauthorized' })
     }
 
-    if (!students.length) {
+    if (students.length) {
         console.log(JSON.stringify(students))
         res.status(200).json(students)
     } else {
