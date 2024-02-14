@@ -7,7 +7,7 @@
 - [X] [FP3 Course Creation by Admin]
 - [X] [FP4 Classes List of a course]
 - [X] [FP5 Assign Teacher to section by Admin]
-- [ ] [FP6 Assign Students to a class]
+- [X] [FP6 Assign Students to section]
 - [ ] [FP7 Create sections content page]
 
 ### Local Data

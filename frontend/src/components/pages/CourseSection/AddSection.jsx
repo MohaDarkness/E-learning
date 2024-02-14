@@ -92,7 +92,7 @@ const AddSection = () => {
                                                         <label>
                                                             Course ID <span className="login-danger">*</span>
                                                         </label>
-                                                        <input type="text" className="form-control" />
+                                                        <input type="text" className="form-control" required/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
@@ -100,7 +100,7 @@ const AddSection = () => {
                                                         <label>
                                                             Teacher ID <span className="login-danger">*</span>
                                                         </label>
-                                                        <input type="text" className="form-control" />
+                                                        <input type="text" className="form-control" required/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
@@ -114,6 +114,7 @@ const AddSection = () => {
                                                         onChange={handleTimeChange}
                                                         options={times}
                                                         placeholder="Chose Time"
+                                                        required
                                                         />
                                                     </div>
                                                 </div>

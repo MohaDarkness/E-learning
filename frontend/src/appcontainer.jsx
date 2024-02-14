@@ -55,6 +55,7 @@ import EditSubject from "./components/pages/Course/EditCourse";
 import AddSection from "./components/pages/CourseSection/AddSection";
 import SectionsList from "./components/pages/CourseSection/SectionsList";
 import EditSection from "./components/pages/CourseSection/EditSection";
+import AssignStudent from "./components/pages/CourseSection/AssignStudent";
 // Settings
 import GendralSettings from "./components/pages/Settings/GendralSettings";
 import Localization from "./components/pages/Settings/Localization";
@@ -165,6 +166,7 @@ import Dropdown from "./components/pages/Base UI/DropDown";
 import EditEvent from "./components/pages/Events/EditEvent";
 
 
+
 const appcontainer = (props) => {
   return (
     <Router basename={`${config.publicPath}`}>
@@ -243,6 +245,7 @@ const appcontainer = (props) => {
         <Route path="/sections" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />
         <Route path="/editSection" component={EditSection} />
+        <Route path="/assignStudent/:SectionId" component={AssignStudent} />
 
         <Route path="/feescollection" component={FeesCollection} />
         <Route path="/addfeescollection" component={AddFeesCollection} />
