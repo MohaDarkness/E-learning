@@ -28,7 +28,7 @@ const handleErrors = (err) => {
   return errors;
 }
 
-const tokenDuration =  5 * 60 * 60;
+const tokenDuration =  5 * 60 * 60 * 1000;
 const createToken = (id) => {
   return jwt.sign({ id }, 'EduCareSecret101', {
     expiresIn: tokenDuration
@@ -39,9 +39,6 @@ module.exports.signup = async (req, res) => {
 
     try {
         const user = await User.create({ username, email, password, role, gender, major, address, name });
-        const token  = createToken(user._id);
-        res.cookie('jwt',token, { maxAge:tokenDuration});
-        console.log("here's what I have created: " + token);
         res.status(201).json({user:user._id});
     }
     catch(err) {
