@@ -163,6 +163,7 @@ import DragDrop from "./components/pages/Elements/Drag&Drop";
 import Clipboard from "./components/pages/Elements/ClipBoard";
 import Dropdown from "./components/pages/Base UI/DropDown";
 import EditEvent from "./components/pages/Events/EditEvent";
+import courseInfo from "./components/pages/Course/CourseInfo";
 
 
 const appcontainer = (props) => {
@@ -239,6 +240,7 @@ const appcontainer = (props) => {
         <Route path="/subject" component={SubjectList} />
         <Route path="/addsubject" component={AddSubject} />
         <Route path="/editsubject" component={EditSubject} />
+        <Route path="/courseInfo" component={courseInfo} />
 
         <Route path="/sections" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />

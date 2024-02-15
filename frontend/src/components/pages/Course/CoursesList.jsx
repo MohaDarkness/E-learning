@@ -12,7 +12,6 @@ const SubjectList = () => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const onSelectChange = (newSelectedRowKeys) => {
-        console.log("selectedRowKeys changed: ", selectedRowKeys);
         setSelectedRowKeys(newSelectedRowKeys);
     };
 
@@ -20,6 +19,11 @@ const SubjectList = () => {
         selectedRowKeys,
         onChange: onSelectChange,
     };
+
+    const handleButtonClick = (id) => {
+        console.log(id)
+    };
+
     const datasource =
         [
             {
@@ -97,7 +101,14 @@ const SubjectList = () => {
             render: (text, record) => (
                 <>
                     <div className="actions">
-                        <Link to="/editsubject" className="btn btn-sm bg-danger-light">
+                        
+                      <Link to={`/courseInfo/${record.id}`} className="btn btn-sm bg-success-light me-2" onClick={() => handleButtonClick(record.id)}>
+                        <i className="list">
+                            <FeatherIcon icon="list"/>
+                        </i>
+                       </Link>
+                
+                        <Link to="/editsubject" className="btn btn-sm bg-danger-light me-2">
                             <i className="feather-edit">
                                 <FeatherIcon icon="edit" className="list-edit"/>
                             </i>
