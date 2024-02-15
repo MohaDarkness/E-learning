@@ -77,21 +77,22 @@ const Login = () => {
 
           const result = response.data["role"];
           if (result === "admin") {
-                    localStorage.setItem('role', JSON.stringify('A'));
-                    // Redirect to admin dashboard
-                    window.location.href = "/admindashboard";
-                  } else if (result === "teacher") {
-                    localStorage.setItem('role', JSON.stringify('T'));
-                    // Redirect to teacher dashboard
-                    window.locadmindashboard
-                  } else if (result === "student") {
-                    localStorage.setItem('role', JSON.stringify('S'));
-                    // Redirect to student dashboard
-                    window.location.href = "/studentdashboard";
-                  } else {
-                    // Handle other cases or show an error message
-                    console.error("Invalid response from server");
-                  }
+            localStorage.setItem('role', JSON.stringify('A'));
+            // Redirect to admin dashboard
+            window.location.href = "/admindashboard";
+          } else if (result === "teacher") {
+            localStorage.setItem('role', JSON.stringify('T'));
+            // Redirect to teacher dashboard
+            window.location.href = "/teacherdashboard";
+            window.locadmindashboard
+          } else if (result === "student") {
+            localStorage.setItem('role', JSON.stringify('S'));
+            // Redirect to student dashboard
+            window.location.href = "/studentdashboard";
+          } else {
+            // Handle other cases or show an error message
+            console.error("Invalid response from server");
+          }
         } 
         catch (error) {
             console.log(error);
