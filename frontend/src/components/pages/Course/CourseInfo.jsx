@@ -8,20 +8,21 @@ import SideBar from '../../SideBar/SideBar';
 import Footer from '../../Footer/Footer';
 
 const CourseInfo = () => {
+
   const syllabusFiles = [
-    { name: 'dummy.pdf', type: 'pdf' },
-    { name: 'Syllabus.xlsx', type: 'excel' },
+    { name: 'dummy.pdf', type: 'pdf' , section: 'syllabus'},
+    { name: 'Syllabus.xlsx', type: 'excel' ,section: 'syllabus'},
   ];
 
   const slideFiles = [
-    { name: 'Slide1.pdf', type: 'pdf' },
-    { name: 'Slide2.pdf', type: 'pdf' },
+    { name: 'Slide1.pdf', type: 'pdf', section: "slides"},
+    { name: 'Slide2.pdf', type: 'pdf' , section: "slides"},
   ];
 
   const otherFiles = [
-    { name: 'File1.jpg', type: 'image' },
-    { name: 'File2.jpg', type: 'image' },
-    { name: 'File3.docx', type: 'document' },
+    { name: 'File1.jpg', type: 'image', section:'otherFiles' },
+    { name: 'File2.jpg', type: 'image' ,section:'otherFiles'},
+    { name: 'File3.docx', type: 'document',section:'otherFiles' },
   ];
 
   const [showModal, setShowModal] = useState(false);

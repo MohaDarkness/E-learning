@@ -11,15 +11,12 @@ const AdminSidebar = (props) => {
   const [isSideMenuLevel2, setSideMenuLevel2] = useState("");
 
   const toggleSidebar = (value) => {
-    console.log(value);
     setSideMenu(value);
   };
   const toggleSidebar1 = (value) => {
-    console.log(value);
     setSideMenuLevel(value);
   };
   const toggleSidebar2 = (value) => {
-    console.log(value);
     setSideMenuLevel2(value);
   };
 
@@ -77,9 +74,6 @@ const AdminSidebar = (props) => {
   
 
   let pathName = props.location.pathname;
-
-  console.log("Working", pathName);
-
 
   return (
     <>

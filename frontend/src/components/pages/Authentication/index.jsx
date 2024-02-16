@@ -69,11 +69,12 @@ const Login = () => {
         try {
           console.log('heheheheheh');
           const response = await axios.post('http://localhost:3000/login', { 'username':userName, 'password':password}, {withCredentials:true});
-          const { id, role, jwt} = response.data;
-          setToken(jwt)
+          const { id, role, token} = response.data;
+          setToken(token)
           
           console.log(response)
-          console.log(jwt)
+          console.log("this is token:")
+          console.log(token)
 
           const result = response.data["role"];
           if (result === "admin") {

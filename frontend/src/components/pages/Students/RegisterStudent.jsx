@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,22 +7,78 @@ import SideBar from "../../SideBar/SideBar";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 import * as XLSX from 'xlsx';
+import axios from 'axios'
 
 const RegisterStudent = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedOption1, setSelectedOption1] = useState(null);
-  const [selectedOption2, setSelectedOption2] = useState(null);
-  const [selectedOption3, setSelectedOption3] = useState(null);
-  const [selectedOption4, setSelectedOption4] = useState(null);
-  const [selectedOption5, setSelectedOption5] = useState(null);
-  // onchange states
+  
+
+  const [studentId, setStudentId] = useState(null);
+  const [studentFName, setStudentFName] = useState(null);
+  const [studentLName, setStudentLName] = useState(null);
+  const [studentGender, setGender] = useState(null);
+  const [DateOfBirth, setDateOfBirth] = useState(() => {
+    const today = new Date();
+    const dob = new Date(today);
+    dob.setFullYear(today.getFullYear() - 18);
+    return dob;
+  });
+  const [studentEmail, setStudentEmail] = useState(null);
+  const [studentMajor, setStudentMajor] = useState(null);
+  const [studentMobileNumber, setStudentMobileNumber] = useState(null);
   const [excelFile, setExcelFile] = useState(null);
   const [typeError, setTypeError] = useState(null);
-
-  // submit state
   const [excelData, setExcelData] = useState(null);
 
-  // onchange event
+
+  const gender = [
+    { value: 1, label: "Select Gender" },
+    { value: 2, label: "Male" },
+    { value: 3, label: "Female" }
+  ];
+
+
+  const MajorOptions = [
+    { value: 1, label: "Please Select Class" },
+    { value: 2, label: "Computer Science" },
+    { value: 3, label: "Software Engineer" },
+    { value: 4, label: "Computer Graphics" },
+  ];
+
+
+  const URL = 'http://localhost:3000/signup'
+
+  const submitOneStudent = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+    
+    const data = {
+      0 : {
+      username: studentId,
+      name: `${studentFName} ${studentLName}`,
+      role: 'student',
+      gender: studentGender['label'].toLowerCase(),
+      // DoB: DateOfBirth,
+      email: studentEmail,
+      major: studentMajor['label'].toLowerCase(),
+      // mobilenumber: studentMobileNumber
+      }
+    }
+
+    console.log("this is the data:")
+    console.log(data)
+
+      try{
+      axios.post(URL, data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    } catch(err){
+      console.log(err)
+    }
+  };
+
+  // Excel Files
+  
+  const requiredKeys = ["name","username", "major", "DoB", "mobilenumber", "gender"];
   const handleFile=(e)=>{
     let fileTypes = ['application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','text/csv'];
     let selectedFile = e.target.files[0];
@@ -45,15 +101,19 @@ const RegisterStudent = () => {
     }
   }
   
-  const requiredKeys = ["StudentId", "Name","UserName", "Password", "Major", "YearOfBirth", "MobileNumber", "Gender", "Img"];
-  // submit event
+
   const handleFileSubmit=(e)=>{
+    console.log("this is e:")
+    console.log(e);
     e.preventDefault();
     if(excelFile!==null){
       const workbook = XLSX.read(excelFile,{type: 'buffer'});
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
+      data.forEach(student => {
+        student.role = "student";
+    });
       // setExcelData(data.slice(0,10));
       console.log(data)
       console.log(data[0]);
@@ -66,63 +126,20 @@ const RegisterStudent = () => {
         }
       }
       console.log("all good hehe");
-      
+      // end point we need to send variable {data}
+      try{
+        axios.post(URL, data)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+      } catch(err){
+        console.log(err)
+      }
     }
   }
+  
 
-  const options1 = [
-    { value: 1, label: "Select Gender" },
-    { value: 2, label: "Male" },
-    { value: 3, label: "Female" }
-  ];
+  
 
-  const options2 = [
-    { value: 1, label: "Please Select Group" },
-    { value: 2, label: "B+" },
-    { value: 3, label: "A+" },
-    { value: 4, label: "O+" },
-  ];
-
-  const options3 = [
-    { value: 1, label: "Please Select Religion" },
-    { value: 2, label: "Hindu" },
-    { value: 3, label: "Christian" },
-    { value: 4, label: "Others" },
-  ];
-
-  const options4 = [
-    { value: 1, label: "Please Select Class" },
-    { value: 2, label: "Computer Science" },
-    { value: 3, label: "Software Engineer" },
-    { value: 4, label: "Computer Graphics" },
-  ];
-
-  const options5 = [
-    { value: 1, label: "Please Select Section" },
-    { value: 2, label: "A" },
-    { value: 3, label: "B" },
-    { value: 4, label: "C" },
-  ];
-
-  const handleOption1Change = (selectedOption) => {
-    setSelectedOption1(selectedOption);
-  };
-
-  const handleOption2Change = (selectedOption) => {
-    setSelectedOption2(selectedOption);
-  };
-
-  const handleOption3Change = (selectedOption) => {
-    setSelectedOption3(selectedOption);
-  };
-
-  const handleOption4Change = (selectedOption) => {
-    setSelectedOption4(selectedOption);
-  };
-
-  const handleOption5Change = (selectedOption) => {
-    setSelectedOption5(selectedOption);
-  };
   return (
     <>
       <div className="main-wrapper">
@@ -154,7 +171,7 @@ const RegisterStudent = () => {
               <div className="col-sm-12">
                 <div className="card comman-shadow">
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={submitOneStudent}>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title student-info">
@@ -170,6 +187,8 @@ const RegisterStudent = () => {
                               className="form-control"
                               type="text"
                               placeholder="STD-XXXXX"
+                              value={studentId}
+                              onChange={(e) => setStudentId(e.target.value)}
                             />
                           </div>
                         </div>
@@ -181,7 +200,9 @@ const RegisterStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="John Doe"
+                              placeholder="John Doe"
+                              value={studentFName}
+                              onChange={(e) => setStudentFName(e.target.value)}
                             />
                           </div>
                         </div>
@@ -194,6 +215,8 @@ const RegisterStudent = () => {
                               className="form-control"
                               type="text"
                               defaultValue="Stephen"
+                              value={studentLName}
+                              onChange={(e) => setStudentLName(e.target.value)}
                             />
                           </div>
                         </div>
@@ -202,17 +225,12 @@ const RegisterStudent = () => {
                             <label>
                               Gender <span className="login-danger">*</span>
                             </label>
-                            {/* <select className="form-control select">
-                                                            <option>Select Gender</option>
-                                                            <option>Female</option>
-                                                            <option>Male</option>
-                                                            <option>Others</option>
-                                                        </select> */}
+                            
                             <Select
                               className="w-100 local-forms select"
-                              value={selectedOption1}
-                              onChange={handleOption1Change}
-                              options={options1}
+                              value={studentGender}
+                              onChange={(selectedOption) => setGender(selectedOption)}
+                              options={gender}
                               placeholder="Select Gender"
                             />
                           </div>
@@ -225,8 +243,8 @@ const RegisterStudent = () => {
                             </label>
                             <DatePicker
                               className="form-control datetimepicker"
-                              selected={startDate}
-                              onChange={(date) => setStartDate(date)}
+                              selected={DateOfBirth}
+                              onChange={(date) => setDateOfBirth(date)}
                             />
                           </div>
                         </div>
@@ -239,6 +257,8 @@ const RegisterStudent = () => {
                               className="form-control"
                               type="text"
                               defaultValue="example@gmail.com"
+                              value={studentEmail}
+                              onChange={(e) => setStudentEmail(e.target.value)}
                             />
                           </div>
                         </div>
@@ -249,9 +269,9 @@ const RegisterStudent = () => {
                             </label>
                             <Select
                               className="w-100 select"
-                              value={selectedOption4}
-                              onChange={handleOption4Change}
-                              options={options4}
+                              value={studentMajor}
+                              onChange={(selectedOption) => setStudentMajor(selectedOption)}
+                              options={MajorOptions}
                               placeholder="Please Select Class"
                             />
                           </div>
@@ -263,6 +283,8 @@ const RegisterStudent = () => {
                               className="form-control"
                               type="text"
                               defaultValue="+1 888 888 8888"
+                              value={studentMobileNumber}
+                              onChange={(e) => setStudentMobileNumber(e.target.value)}
                             />
                           </div>
                         </div>
