@@ -9,27 +9,33 @@ import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import {onShowSizeChange,itemRender} from "../../Pagination"
 import { useState, useEffect} from 'react'
 import Swal from "sweetalert2";
+import {useHistory} from "react-router-dom";
 
-import studentsData from "../../../data/studentsData.json";
+
 import axios from 'axios'
     
 
 const Students = () => {
+    const history = useHistory()
+    const[loading, setLoading] = useState(true)
     const URL = 'http://localhost:3000/students'
     const [datasource, setDatasource] = useState([]);
     const [deleteStatus, setDeleteStatus] = useState(null);
     const [deletedStudentName, setDeletedStudentName] = useState(null);
 
+
     useEffect( () => { 
         async function fetchData() {
             try {
                 const res = await axios.get(URL, {withCredentials:true}); 
-                setDatasource(res.data);
+                setDatasource(res.data)
             } catch (err) {
-                console.log(err);
+                if(err.response.status ===401)
+                history.push('/error404')
             }
         }
         fetchData().then(() =>{
+            setLoading(false)
             console.log("data fetched")
         } ).catch((err)=>{
             console.log("an error occurred " + err)
@@ -151,6 +157,10 @@ const Students = () => {
 
     ]
     return (
+        <div>
+            {loading?(
+                <p></p>
+            ):(
         <>
             <div className="main-wrapper">
                 {/* Header */}
@@ -291,7 +301,8 @@ const Students = () => {
             </div>
             {/* /Main Wrapper */}
 
-        </>
+        </>)}
+        </div>
     )
 }
 
