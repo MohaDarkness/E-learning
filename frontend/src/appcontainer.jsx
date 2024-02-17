@@ -1,5 +1,5 @@
-import React from "react";
-import {Route, Routes } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Redirect, Route, Routes} from "react-router-dom";
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 
@@ -164,9 +164,45 @@ import Clipboard from "./components/pages/Elements/ClipBoard";
 import Dropdown from "./components/pages/Base UI/DropDown";
 import EditEvent from "./components/pages/Events/EditEvent";
 import courseInfo from "./components/pages/Course/CourseInfo";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Admindashboard from "./dashboard/Admindashboard";
 
 
 const appcontainer = (props) => {
+  const [role, setRole] = useState(null)
+  const student= ['/studentdashboard','/Error404']
+  const teacher= ['/teacherdashboard', '/Error404']
+  const history = useHistory();
+  const validate = (endpoint, component) => {
+    console.log("wrerwr")
+      async function fetchData() {
+        try {
+          const res =  await axios.get("http://localhost:3000/validate", {withCredentials: true})
+          setRole(res.data)
+        } catch (err) {
+          console.log("Fefef")
+          setRole('')
+        }
+      }
+      fetchData()
+
+    if(role === 'student' && student.indexOf(endpoint) === -1){
+      //return StudentsDashboard
+      return <Redirect to={'/studentdashboard'}/>
+    }
+
+    if(role === 'teacher' && teacher.indexOf(endpoint) === -1){
+      return <Redirect to={'/teacherdashboard'}/>
+    }
+    if(role === ''){
+      return <Redirect to={'/error404'}/>
+    }
+    if(role) {
+      return component
+    }
+
+  }
   return (
     <Router basename={`${config.publicPath}`}>
       <Switch>
@@ -174,10 +210,9 @@ const appcontainer = (props) => {
         <Route path="/register" component={Register} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/error404" component={Error404} />
-
-        <Route path="/admindashboard" component={AdminDashboard} />
-        <Route path="/teacherdashboard" component={TeacherDashboard} />
-        <Route path="/studentdashboard" component={StudentsDashboard} />
+        <Route path="/admindashboard" render={() => validate('/admindashboard', <Admindashboard />)}/>
+        <Route path="/teacherdashboard" render={() => validate('/teacherdashboard', <TeacherDashboard />)} />
+        <Route path="/studentdashboard" render={() => validate('/studentdashboard', <TeacherDashboard />)} />
 
         <Route path="/blog" component={BlogView} />
         <Route path="/pendingblog" component={PendingBlog} />
