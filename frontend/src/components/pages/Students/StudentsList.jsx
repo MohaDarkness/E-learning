@@ -16,6 +16,7 @@ import axios from 'axios'
 const Students = () => {
     const URL = 'http://localhost:3000/students'
     const [datasource, setDatasource] = useState([]);
+    const [deleteStatus, setDeleteStatus] = useState(null);
 
     useEffect( () => { 
         async function fetchData() {
@@ -26,7 +27,11 @@ const Students = () => {
                 console.log(err);
             }
         }
-        fetchData();
+        fetchData().then(() =>{
+            console.log("data fetched")
+        } ).catch((err)=>{
+            console.log("an error occurred " + err)
+        })
     }, []);
     
 
@@ -35,7 +40,7 @@ const Students = () => {
                 console.log(userId)
                 await axios.delete(`${URL}/${userId}`, {withCredentials:true}); 
                 setDatasource(
-                    datasource.filter((student)=> student.userId != userId)
+                    datasource.filter((student)=> student.userId !== userId)
                 )
             } catch (err) {
                 console.log(err);
@@ -97,13 +102,45 @@ const Students = () => {
                             </i>
                         </Link>
                         <Link to="#" className="btn btn-sm bg-success-light me-2 trash" onClick={(e)=>{
-                            handleDeleteStudent(record.userId)
+                            handleDeleteStudent(record.userId).then(() =>{
+                                // Successfully deleted
+                                console.log("wow")
+                                setDeleteStatus('success');
+                            } ).catch((err) =>{
+                                setDeleteStatus('error')
+                            })
                         }}>
                             <i className="feather-trash-2">
                                 <FeatherIcon icon="trash-2"/>
                             </i>
                         </Link>
                     </div>
+
+                    {deleteStatus === 'success' && (
+                        <div style={{
+                            margin: '10px 0',
+                            padding: '10px',
+                            backgroundColor: '#d4edda',
+                            border: '1px solid #c3e6cb',
+                            borderRadius: '5px',
+                            color: '#155724'
+                        }}>
+                            Student successfully deleted!
+                        </div>
+                    )}
+
+                    {deleteStatus === 'error' && (
+                        <div style={{
+                            margin: '10px 0',
+                            padding: '10px',
+                            backgroundColor: '#f8d7da',
+                            border: '1px solid #f5c6cb',
+                            borderRadius: '5px',
+                            color: '#721c24'
+                        }}>
+                            Error deleting student. Please try again.
+                        </div>
+                    )}
                 </>
             )
         },
@@ -113,23 +150,23 @@ const Students = () => {
         <>
             <div className="main-wrapper">
                 {/* Header */}
-                <Header />
+                <Header/>
                 {/* Sidebar */}
                 <SideBar />
                 {/* Page Wrapper */}
                 <div className="page-wrapper">
-                    <div class="content container-fluid">
+                    <div className="content container-fluid">
                      {/* Page Header  */}
-                        <div class="page-header">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="page-sub-header">
-                                        <h3 class="page-title">Students</h3>
-                                        <ul class="breadcrumb">
-                                            <li class="breadcrumb-item"><Link to="/students">Student</Link></li>
+                        <div className="page-header">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="page-sub-header">
+                                        <h3 className="page-title">Students</h3>
+                                        <ul className="breadcrumb">
+                                            <li className="breadcrumb-item"><Link to="/students">Student</Link></li>
                                             
-                                             {/* Auth This is only for admin other wise its gonna "tch: your students" or "std: your collegue" */}
-                                            <li class="breadcrumb-item active">All Students</li>
+                                             {/* Auth This is only for admin otherwise it's gonna "tch: your students" or "std: your colleague" */}
+                                            <li className="breadcrumb-item active">All Students</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -191,7 +228,7 @@ const Students = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="table-responsive" >
+                                        <div className="table-responsive" >
                                             <Table
                                                 pagination={{
                                                     total: datasource.length,
