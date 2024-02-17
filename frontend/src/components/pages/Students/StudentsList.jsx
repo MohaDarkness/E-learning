@@ -45,12 +45,12 @@ const Students = () => {
         {
             title: "Gender",
             dataIndex: "Gender",
-            sorter: (a, b) => a.Gender - b.Address.Gender
+            sorter: (a, b) => a.Gender > b.Gender? 1 : -1
         },
         {
             title: "Major",
             dataIndex: "Major",
-            sorter: (a, b) => a.Major < b.Major? 1 : -1,
+            sorter: (a, b) => a.Major > b.Major? 1 : -1,
         },
         {
             title: "Mobile Number",
@@ -63,7 +63,7 @@ const Students = () => {
             render: (text, record) => (
                 <>
                     <div className="actions">
-                        <Link to="/editsubject" className="btn btn-sm bg-danger-light">
+                        <Link to="/editstudent" className="btn btn-sm bg-danger-light">
                             <i className="feather-edit">
                                 <FeatherIcon icon="edit" className="list-edit"/>
                             </i>
