@@ -68,7 +68,7 @@ const RegisterStudent = () => {
     console.log(data)
 
       try{
-      axios.post(URL, data)
+      axios.post(URL, data, {withCredentials:true})
       .then(res => console.log(res))
       .catch(err => console.log(err));
     } catch(err){
@@ -128,7 +128,7 @@ const RegisterStudent = () => {
       console.log("all good hehe");
       // end point we need to send variable {data}
       try{
-        axios.post(URL, data)
+        axios.post(URL, data, {withCredentials:true})
         .then(res => console.log(res))
         .catch(err => console.log(err));
       } catch(err){
