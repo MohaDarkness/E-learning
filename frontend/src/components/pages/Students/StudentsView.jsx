@@ -17,7 +17,6 @@ const StudentsView = () => {
 
     return (
         <>
-            console.log(studentInfo.name);
             <div className="main-wrapper">
                 {/* Header */}
                 <Header />

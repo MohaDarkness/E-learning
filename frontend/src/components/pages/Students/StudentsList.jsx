@@ -8,6 +8,7 @@ import {img1, img10, img2, img3, img4, img5, img6, img7, img8, img9 } from "../.
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import {onShowSizeChange,itemRender} from "../../Pagination"
 import { useState, useEffect} from 'react'
+import Swal from "sweetalert2";
 
 import studentsData from "../../../data/studentsData.json";
 import axios from 'axios'
@@ -17,6 +18,7 @@ const Students = () => {
     const URL = 'http://localhost:3000/students'
     const [datasource, setDatasource] = useState([]);
     const [deleteStatus, setDeleteStatus] = useState(null);
+    const [deletedStudentName, setDeletedStudentName] = useState(null);
 
     useEffect( () => { 
         async function fetchData() {
@@ -46,6 +48,31 @@ const Students = () => {
                 console.log(err);
             }
     }
+
+    const autoCloseMessage = (message) => {
+        var t;
+        Swal.fire({
+          title: message.Title,
+          html: message.Body,
+          
+          confirmButtonClass: "btn btn-primary",
+          buttonsStyling: !1,
+          onBeforeOpen: function () {
+            Swal.showLoading(),
+              (t = setInterval(function () {
+                Swal.getContent().querySelector("strong").textContent =
+                  Swal.getTimerLeft();
+              }, 100));
+          },
+          onClose: function () {
+            clearInterval(t);
+          },
+        }).then(function (t) {
+          t.dismiss === Swal.DismissReason.timer &&
+            console.log("I was closed by the timer");
+            setDeleteStatus(null)
+        });
+      };
 
 
     const column = [
@@ -104,10 +131,11 @@ const Students = () => {
                         <Link to="#" className="btn btn-sm bg-success-light me-2 trash" onClick={(e)=>{
                             handleDeleteStudent(record.userId).then(() =>{
                                 // Successfully deleted
-                                console.log("wow")
                                 setDeleteStatus('success');
+                                setDeletedStudentName(record.name);
                             } ).catch((err) =>{
-                                setDeleteStatus('error: ' +err)
+                                setDeleteStatus('error')
+                                setDeletedStudentName(null);
                             })
                         }}>
                             <i className="feather-trash-2">
@@ -139,31 +167,9 @@ const Students = () => {
                                     <div className="page-sub-header">
                                         <h3 className="page-title">Students</h3>
                                         <ul className="breadcrumb">
-                                            {deleteStatus === 'success' && (
-                                                <div style={{
-                                                    margin: '10px 0',
-                                                    padding: '10px',
-                                                    backgroundColor: '#d4edda',
-                                                    border: '1px solid #c3e6cb',
-                                                    borderRadius: '5px',
-                                                    color: '#155724'
-                                                }}>
-                                                    Student successfully deleted!
-                                                </div>
-                                            )}
 
-                                            {deleteStatus === 'error' && (
-                                                <div style={{
-                                                    margin: '10px 0',
-                                                    padding: '10px',
-                                                    backgroundColor: '#f8d7da',
-                                                    border: '1px solid #f5c6cb',
-                                                    borderRadius: '5px',
-                                                    color: '#721c24'
-                                                }}>
-                                                    Error deleting student. Please try again.
-                                                </div>
-                                            )}
+                                        {/*Delete Stauts Message*/}
+
                                             <li className="breadcrumb-item"><Link to="/students">Student</Link></li>
                                             
                                              {/* Auth This is only for admin otherwise it's gonna "tch: your students" or "std: your colleague" */}
@@ -222,12 +228,38 @@ const Students = () => {
                                                 <div className="col">
                                                     <h3 className="page-title">Students</h3>
                                                 </div>
+
                                                 <div className="col-auto text-end float-end ms-auto download-grp">
                                                     <Link to="/registerstudent" className="btn btn-primary">
                                                         <i className="fas fa-plus" />
                                                     </Link>
                                                 </div>
                                             </div>
+                                            {deleteStatus === 'success' && (
+                                                
+                                                autoCloseMessage({
+                                                        Title:"Delete Successfully",
+                                                        Body: `Student ${deletedStudentName} been deleted successfully` 
+                                                    })
+                                            )}
+                                            {deleteStatus === 'error' && (    
+                                                <div className="row align-items-center" style={{
+                                                    marginTop: '20px',
+                                                }}>
+                                                    <div
+                                                        className="alert alert-danger alert-dismissible fade show"
+                                                        role="alert"
+                                                     >
+                                                    <strong>Something went wrong, Delete unsuccessfully</strong> 
+                                                    <button
+                                                        type="button"
+                                                        className="btn-close"
+                                                        data-bs-dismiss="alert"
+                                                        aria-label="Close"
+                                                    />
+                                                </div>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="table-responsive" >
                                             <Table
