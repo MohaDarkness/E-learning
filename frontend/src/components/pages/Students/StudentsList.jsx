@@ -116,31 +116,7 @@ const Students = () => {
                         </Link>
                     </div>
 
-                    {deleteStatus === 'success' && (
-                        <div style={{
-                            margin: '10px 0',
-                            padding: '10px',
-                            backgroundColor: '#d4edda',
-                            border: '1px solid #c3e6cb',
-                            borderRadius: '5px',
-                            color: '#155724'
-                        }}>
-                            Student successfully deleted!
-                        </div>
-                    )}
 
-                    {deleteStatus === 'error' && (
-                        <div style={{
-                            margin: '10px 0',
-                            padding: '10px',
-                            backgroundColor: '#f8d7da',
-                            border: '1px solid #f5c6cb',
-                            borderRadius: '5px',
-                            color: '#721c24'
-                        }}>
-                            Error deleting student. Please try again.
-                        </div>
-                    )}
                 </>
             )
         },
@@ -163,6 +139,31 @@ const Students = () => {
                                     <div className="page-sub-header">
                                         <h3 className="page-title">Students</h3>
                                         <ul className="breadcrumb">
+                                            {deleteStatus === 'success' && (
+                                                <div style={{
+                                                    margin: '10px 0',
+                                                    padding: '10px',
+                                                    backgroundColor: '#d4edda',
+                                                    border: '1px solid #c3e6cb',
+                                                    borderRadius: '5px',
+                                                    color: '#155724'
+                                                }}>
+                                                    Student successfully deleted!
+                                                </div>
+                                            )}
+
+                                            {deleteStatus === 'error' && (
+                                                <div style={{
+                                                    margin: '10px 0',
+                                                    padding: '10px',
+                                                    backgroundColor: '#f8d7da',
+                                                    border: '1px solid #f5c6cb',
+                                                    borderRadius: '5px',
+                                                    color: '#721c24'
+                                                }}>
+                                                    Error deleting student. Please try again.
+                                                </div>
+                                            )}
                                             <li className="breadcrumb-item"><Link to="/students">Student</Link></li>
                                             
                                              {/* Auth This is only for admin otherwise it's gonna "tch: your students" or "std: your colleague" */}
