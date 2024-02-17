@@ -1,14 +1,8 @@
 [
   {
     "StudentId": "std20240001",
-    "Name": "Ali Mohammed Ahmed",
-    "UserName": "Alistd20240001",
-    "Password": "randompassword1",
-    "Major": "Computer Science",
-    "YearOfBirth": 2001,
-    "MobileNumber": "0791234567",
-    "Gender": "Male",
-    "Img": "img10"
+    "Name": "Ali Mohammed Ahmed"
+   
   },
   {
     "StudentId": "std20240002",

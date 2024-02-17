@@ -31,17 +31,15 @@ const RegisterStudent = () => {
 
 
   const gender = [
-    { value: 1, label: "Select Gender" },
-    { value: 2, label: "Male" },
-    { value: 3, label: "Female" }
+    { value: 1, label: "Male" },
+    { value: 2, label: "Female" }
   ];
 
 
   const MajorOptions = [
-    { value: 1, label: "Please Select Class" },
-    { value: 2, label: "Computer Science" },
-    { value: 3, label: "Software Engineer" },
-    { value: 4, label: "Computer Graphics" },
+    { value: 1, label: "Computer Science" },
+    { value: 2, label: "Software Engineer" },
+    { value: 3, label: "Computer Graphics" },
   ];
 
 
@@ -53,7 +51,7 @@ const RegisterStudent = () => {
     
     const data = {
       0 : {
-      username: studentId,
+      userId: studentId,
       name: `${studentFName} ${studentLName}`,
       role: 'student',
       gender: studentGender['label'].toLowerCase(),
@@ -78,7 +76,7 @@ const RegisterStudent = () => {
 
   // Excel Files
   
-  const requiredKeys = ["name","username", "major", "DoB", "mobilenumber", "gender"];
+  const requiredKeys = ["name","userId", "major", "DoB", "mobilenumber", "gender"];
   const handleFile=(e)=>{
     let fileTypes = ['application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','text/csv'];
     let selectedFile = e.target.files[0];
@@ -184,9 +182,8 @@ const RegisterStudent = () => {
                               Student ID <span className="login-danger">*</span>
                             </label>
                             <input
-                              className="form-control"
+                              className="form-control" 
                               type="text"
-                              placeholder="STD-XXXXX"
                               value={studentId}
                               onChange={(e) => setStudentId(e.target.value)}
                             />
@@ -200,7 +197,6 @@ const RegisterStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              placeholder="John Doe"
                               value={studentFName}
                               onChange={(e) => setStudentFName(e.target.value)}
                             />
@@ -214,7 +210,6 @@ const RegisterStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="Stephen"
                               value={studentLName}
                               onChange={(e) => setStudentLName(e.target.value)}
                             />
@@ -256,7 +251,6 @@ const RegisterStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="example@gmail.com"
                               value={studentEmail}
                               onChange={(e) => setStudentEmail(e.target.value)}
                             />
@@ -282,7 +276,6 @@ const RegisterStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="+1 888 888 8888"
                               value={studentMobileNumber}
                               onChange={(e) => setStudentMobileNumber(e.target.value)}
                             />

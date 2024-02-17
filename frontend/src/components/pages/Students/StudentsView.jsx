@@ -78,8 +78,8 @@ const StudentsView = () => {
                                                             </div>
                                                         </div>
                                                         <div className="names-profiles">
-                                                            <h4>{student.Name}</h4>
-                                                            <h5>{student.Major}</h5>
+                                                            <h4>{student?.Name}</h4>
+                                                            <h5>{student?.Major}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,7 +111,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Name</h4>
-                                                            <h5>{student.Name}</h5>
+                                                            <h5>{student?.Name}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -120,7 +120,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Major </h4>
-                                                            <h5>{student.Major}</h5>
+                                                            <h5>{student?.Major}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -131,7 +131,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Mobile</h4>
-                                                            <h5>{student.MobileNumber}</h5>
+                                                            <h5>{student?.MobileNumber}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -142,7 +142,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Email</h4>
-                                                            <h5>{`${student.Name.split(' ')[0]}@gmail.com`}</h5>
+                                                            <h5>{`${student?.Name.split(' ')[0]}@gmail.com`}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -153,7 +153,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Gender</h4>
-                                                            <h5>{student.Gender}</h5>
+                                                            <h5>{student?.Gender}</h5>
                                                         </div>
                                                     </div>
                                                     <div className="personal-activity">
@@ -164,7 +164,7 @@ const StudentsView = () => {
                                                         </div>
                                                         <div className="views-personal">
                                                             <h4>Year Of Birth</h4>
-                                                            <h5>{student.YearOfBirth}</h5>
+                                                            <h5>{student?.YearOfBirth}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,7 +180,7 @@ const StudentsView = () => {
                                                         <h4>About Me</h4>
                                                     </div>
                                                     <div className="hello-park">
-                                                        <h5>Hello I am {student.Name}</h5>
+                                                        <h5>Hello I am {student?.Name}</h5>
                                                         <p>
                                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                                             sed do eiusmod tempor incididunt ut labore et dolore magna

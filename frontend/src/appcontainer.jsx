@@ -192,7 +192,8 @@ const appcontainer = (props) => {
 
         <Route path="/students" component={Students} />
         <Route path="/studentsview/:studentId" component={StudentsView} />
-        <Route path="/editstudent" component={EditStudent} />
+        <Route path="/editstudent/:studentId" component={EditStudent} />
+        {/* <Route path="/editstudent/" component={EditStudent} /> */}
         <Route path="/registerstudent" component={RegisterStudent} />
         <Route path="/studentgrid" component={StudentGrid} />
 

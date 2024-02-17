@@ -68,7 +68,7 @@ const Login = () => {
       
         try {
           console.log('heheheheheh');
-          const response = await axios.post('http://localhost:3000/login', { 'username':userName, 'password':password}, {withCredentials:true});
+          const response = await axios.post('http://localhost:3000/login', { 'userId':userName, 'password':password}, {withCredentials:true});
           const { id, role, token} = response.data;
           setToken(token)
           

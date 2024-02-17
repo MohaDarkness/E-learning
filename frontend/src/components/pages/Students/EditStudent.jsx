@@ -6,69 +6,73 @@ import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
+import { useParams } from "react-router-dom";
 
 const EditStudent = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedOption1, setSelectedOption1] = useState(null);
-  const [selectedOption2, setSelectedOption2] = useState(null);
-  const [selectedOption3, setSelectedOption3] = useState(null);
-  const [selectedOption4, setSelectedOption4] = useState(null);
-  const [selectedOption5, setSelectedOption5] = useState(null);
+  const {studentId} = useParams();
+  console.log(studentId);
 
-  const options1 = [
-    { value: 1, label: "Select Gender" },
-    { value: 2, label: "Female" },
-    { value: 3, label: "Male" },
-    { value: 4, label: "Others" },
+  const [studentFName, setStudentFName] = useState(null);
+  const [studentLName, setStudentLName] = useState(null);
+  const [studentGender, setGender] = useState(null);
+  const [DateOfBirth, setDateOfBirth] = useState(() => {
+    const today = new Date();
+    const dob = new Date(today);
+    dob.setFullYear(today.getFullYear() - 18);
+    return dob;
+  });
+  const [studentEmail, setStudentEmail] = useState(null);
+  const [studentMajor, setStudentMajor] = useState(null);
+  const [studentMobileNumber, setStudentMobileNumber] = useState(null);
+  const [excelFile, setExcelFile] = useState(null);
+  const [typeError, setTypeError] = useState(null);
+  const [excelData, setExcelData] = useState(null);
+
+
+  const gender = [
+    { value: 1, label: "Male" },
+    { value: 2, label: "Female" }
   ];
 
-  const options2 = [
-    { value: 1, label: "Please Select Group" },
-    { value: 2, label: "B+" },
-    { value: 3, label: "A+" },
-    { value: 4, label: "O+" },
+
+  const MajorOptions = [
+    { value: 1, label: "Computer Science" },
+    { value: 2, label: "Software Engineer" },
+    { value: 3, label: "Computer Graphics" },
   ];
 
-  const options3 = [
-    { value: 1, label: "Please Select Religion" },
-    { value: 2, label: "Hindu" },
-    { value: 3, label: "Christian" },
-    { value: 4, label: "Others" },
-  ];
 
-  const options4 = [
-    { value: 1, label: "Please Select Class" },
-    { value: 2, label: "12" },
-    { value: 3, label: "11" },
-    { value: 4, label: "10" },
-  ];
+  const URL = 'http://localhost:3000/signup'
 
-  const options5 = [
-    { value: 1, label: "Please Select Section" },
-    { value: 2, label: "A" },
-    { value: 3, label: "B" },
-    { value: 4, label: "C" },
-  ];
+  const submitOneStudent = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+    
+    const data = {
+      0 : {
+      userId: studentId,
+      name: `${studentFName} ${studentLName}`,
+      role: 'student',
+      gender: studentGender['label'].toLowerCase(),
+      // DoB: DateOfBirth,
+      email: studentEmail,
+      major: studentMajor['label'].toLowerCase(),
+      // mobilenumber: studentMobileNumber
+      }
+    }
 
-  const handleOption1Change = (selectedOption) => {
-    setSelectedOption1(selectedOption);
+    console.log("this is the data:")
+    console.log(data)
+
+      try{
+      axios.post(URL, data, {withCredentials:true})
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    } catch(err){
+      console.log(err)
+    }
   };
-
-  const handleOption2Change = (selectedOption) => {
-    setSelectedOption2(selectedOption);
-  };
-
-  const handleOption3Change = (selectedOption) => {
-    setSelectedOption3(selectedOption);
-  };
-
-  const handleOption4Change = (selectedOption) => {
-    setSelectedOption4(selectedOption);
-  };
-
-  const handleOption5Change = (selectedOption) => {
-    setSelectedOption5(selectedOption);
-  };
+  
   return (
     <>
       <div className="main-wrapper">
@@ -84,12 +88,12 @@ const EditStudent = () => {
               <div className="row align-items-center">
                 <div className="col-sm-12">
                   <div className="page-sub-header">
-                    <h3 className="page-title"> Edit Student</h3>
+                    <h3 className="page-title">Update Student</h3>
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
                         <Link to="/students">Student</Link>
                       </li>
-                      <li className="breadcrumb-item active">Edit Students</li>
+                      <li className="breadcrumb-item active">Update Students</li>
                     </ul>
                   </div>
                 </div>
@@ -100,18 +104,11 @@ const EditStudent = () => {
               <div className="col-sm-12">
                 <div className="card comman-shadow">
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={submitOneStudent}>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title student-info">
-                            Student Information{" "}
-                            <span>
-                              <Link to="#">
-                                <i className="feather-more-vertical">
-                                  <FeatherIcon icon="more-vertical" />
-                                </i>
-                              </Link>
-                            </span>
+                            Student {studentId}{" "}
                           </h5>
                         </div>
                         <div className="col-12 col-sm-4">
@@ -120,9 +117,11 @@ const EditStudent = () => {
                               Student ID <span className="login-danger">*</span>
                             </label>
                             <input
-                              className="form-control"
+                              className="form-control" 
                               type="text"
-                              placeholder="STD-XXXXX"
+                              value={studentId}
+                              disabled
+                              onChange={(e) => setStudentId(e.target.value)}
                             />
                           </div>
                         </div>
@@ -134,7 +133,8 @@ const EditStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="John Doe"
+                              value={studentFName}
+                              onChange={(e) => setStudentFName(e.target.value)}
                             />
                           </div>
                         </div>
@@ -146,7 +146,8 @@ const EditStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="Stephen"
+                              value={studentLName}
+                              onChange={(e) => setStudentLName(e.target.value)}
                             />
                           </div>
                         </div>
@@ -155,17 +156,12 @@ const EditStudent = () => {
                             <label>
                               Gender <span className="login-danger">*</span>
                             </label>
-                            {/* <select className="form-control select">
-                                                            <option>Select Gender</option>
-                                                            <option>Female</option>
-                                                            <option>Male</option>
-                                                            <option>Others</option>
-                                                        </select> */}
+                            
                             <Select
                               className="w-100 local-forms select"
-                              value={selectedOption1}
-                              onChange={handleOption1Change}
-                              options={options1}
+                              value={studentGender}
+                              onChange={(selectedOption) => setGender(selectedOption)}
+                              options={gender}
                               placeholder="Select Gender"
                             />
                           </div>
@@ -178,8 +174,8 @@ const EditStudent = () => {
                             </label>
                             <DatePicker
                               className="form-control datetimepicker"
-                              selected={startDate}
-                              onChange={(date) => setStartDate(date)}
+                              selected={DateOfBirth}
+                              onChange={(date) => setDateOfBirth(date)}
                             />
                           </div>
                         </div>
@@ -191,7 +187,8 @@ const EditStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="example@gmail.com"
+                              value={studentEmail}
+                              onChange={(e) => setStudentEmail(e.target.value)}
                             />
                           </div>
                         </div>
@@ -202,9 +199,9 @@ const EditStudent = () => {
                             </label>
                             <Select
                               className="w-100 select"
-                              value={selectedOption4}
-                              onChange={handleOption4Change}
-                              options={options4}
+                              value={studentMajor}
+                              onChange={(selectedOption) => setStudentMajor(selectedOption)}
+                              options={MajorOptions}
                               placeholder="Please Select Class"
                             />
                           </div>
@@ -215,7 +212,8 @@ const EditStudent = () => {
                             <input
                               className="form-control"
                               type="text"
-                              defaultValue="+1 888 888 8888"
+                              value={studentMobileNumber}
+                              onChange={(e) => setStudentMobileNumber(e.target.value)}
                             />
                           </div>
                         </div>
@@ -231,7 +229,7 @@ const EditStudent = () => {
                         </div>
                         <div className="col-12">
                           <div className="student-submit">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-primary" on>
                               Submit
                             </button>
                           </div>
@@ -245,7 +243,6 @@ const EditStudent = () => {
           </div>
         </div>
       </div>
-      {/* /Main Wrapper */}
     </>
   );
 };

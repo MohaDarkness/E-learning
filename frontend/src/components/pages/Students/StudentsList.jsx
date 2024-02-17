@@ -7,29 +7,57 @@ import { pagination, Table } from "antd"
 import {img1, img10, img2, img3, img4, img5, img6, img7, img8, img9 } from "../../imagepath";
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import {onShowSizeChange,itemRender} from "../../Pagination"
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 
 import studentsData from "../../../data/studentsData.json";
+import axios from 'axios'
     
 
 const Students = () => {
-    const datasource = studentsData; //This Must be taken from backend not locally!!!
+    const URL = 'http://localhost:3000/students'
+    const [datasource, setDatasource] = useState([]);
+
+    useEffect( () => { 
+        async function fetchData() {
+            try {
+                const res = await axios.get(URL, {withCredentials:true}); 
+                setDatasource(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+    
+
+    const handleDeleteStudent = async (userId)=>{
+        try {
+                console.log(userId)
+                await axios.delete(`${URL}/${userId}`, {withCredentials:true}); 
+                setDatasource(
+                    datasource.filter((student)=> student.userId != userId)
+                )
+            } catch (err) {
+                console.log(err);
+            }
+    }
+
 
     const column = [
         {
             title: "ID",
-            dataIndex: "StudentId",
-            sorter: (a, b) => a.StudentId.slice(3) - b.StudentId.slice(3)
+            dataIndex: "userId",
+            sorter: (a, b) => a.userId.slice(3) - b.userId.slice(3)
         },
         {
             title: "Name",
-            dataIndex: "Name",
-            sorter: (a, b) => a.Name > b.Name? 1 : -1,
+            dataIndex: "name",
+            sorter: (a, b) => a.name > b.name? 1 : -1,
             render: (text, record) => (
                 <>
                     <h2 className="table-avatar">
                         <Link to={{
-                            pathname: `/studentsview/${record.StudentId}`,
+                            pathname: `/studentsview/${record.userId}`,
                             }} className="avatar avatar-sm me-2 ">
                             <img
                                 className="avatar-img rounded-circle"
@@ -37,20 +65,20 @@ const Students = () => {
                                 alt="User Image"
                             />
                         </Link>
-                        <Link className='text-dark' to={`/studentsview/${record.StudentId}`}>{record.Name}</Link>
+                        <Link className='text-dark' to={`/studentsview/${record.userId}`}>{record.name}</Link>
                     </h2>
                 </>
             )
         },
         {
             title: "Gender",
-            dataIndex: "Gender",
-            sorter: (a, b) => a.Gender > b.Gender? 1 : -1
+            dataIndex: "gender",
+            sorter: (a, b) => a.gender > b.gender? 1 : -1
         },
         {
             title: "Major",
-            dataIndex: "Major",
-            sorter: (a, b) => a.Major > b.Major? 1 : -1,
+            dataIndex: "major",
+            sorter: (a, b) => a.major > b.major? 1 : -1,
         },
         {
             title: "Mobile Number",
@@ -63,12 +91,14 @@ const Students = () => {
             render: (text, record) => (
                 <>
                     <div className="actions">
-                        <Link to="/editstudent" className="btn btn-sm bg-danger-light">
+                        <Link to={`/editstudent/${record.userId}`} className="btn btn-sm bg-danger-light">
                             <i className="feather-edit">
                                 <FeatherIcon icon="edit" className="list-edit"/>
                             </i>
                         </Link>
-                        <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
+                        <Link to="#" className="btn btn-sm bg-success-light me-2 trash" onClick={(e)=>{
+                            handleDeleteStudent(record.userId)
+                        }}>
                             <i className="feather-trash-2">
                                 <FeatherIcon icon="trash-2"/>
                             </i>
