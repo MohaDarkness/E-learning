@@ -135,6 +135,11 @@ const SectionsList = () => { //courseID
             render: (text, record) => (
                 <>
                     <div className="actions">
+                        <Link to={`/assignstudent/${record.SectionNum}`} className="btn btn-sm bg-danger-light">
+                            <i className="feather-edit">
+                                <FeatherIcon icon="user-plus" className="list-edit"/>
+                            </i>
+                        </Link>
                         <Link to="/editSection" className="btn btn-sm bg-danger-light">
                             <i className="feather-edit">
                                 <FeatherIcon icon="edit" className="list-edit"/>

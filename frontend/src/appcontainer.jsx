@@ -55,6 +55,7 @@ import EditSubject from "./components/pages/Course/EditCourse";
 import AddSection from "./components/pages/CourseSection/AddSection";
 import SectionsList from "./components/pages/CourseSection/SectionsList";
 import EditSection from "./components/pages/CourseSection/EditSection";
+import AssignStudent from "./components/pages/CourseSection/AssignStudent";
 // Settings
 import GendralSettings from "./components/pages/Settings/GendralSettings";
 import Localization from "./components/pages/Settings/Localization";
@@ -169,6 +170,7 @@ import { useHistory } from "react-router-dom";
 import Admindashboard from "./dashboard/Admindashboard";
 
 
+
 const appcontainer = (props) => {
   const [role, setRole] = useState(null)
   const student= ['/studentdashboard','/Error404']
@@ -281,6 +283,7 @@ const appcontainer = (props) => {
         <Route path="/sections" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />
         <Route path="/editSection" component={EditSection} />
+        <Route path="/assignStudent/:SectionId" component={AssignStudent} />
 
         <Route path="/feescollection" component={FeesCollection} />
         <Route path="/addfeescollection" component={AddFeesCollection} />
