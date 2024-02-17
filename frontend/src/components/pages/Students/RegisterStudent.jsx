@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "../../Header/Header";
@@ -8,9 +8,25 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 import * as XLSX from 'xlsx';
 import axios from 'axios'
+import Cookies from "js-cookie";
 
 const RegisterStudent = () => {
-  
+
+  const history = useHistory()
+  const[loading, setLoading] = useState(true)
+  useEffect(()=>{
+    const userRole = Cookies.get('role')
+    const userToken = Cookies.get('jwt')
+    if(!userToken){
+      history.push('/login')
+    }
+    else if(userRole === 'student'){
+      history.push('/studentdashboard')
+    }else if(userRole === 'teacher'){
+      history.push('/teacherdashboard')
+    }
+    setLoading(false)
+  }, [history])
 
   const [studentId, setStudentId] = useState(null);
   const [studentFName, setStudentFName] = useState(null);
@@ -139,6 +155,10 @@ const RegisterStudent = () => {
   
 
   return (
+      <div>
+        {loading?(
+            <p></p>
+        ):(
     <>
       <div className="main-wrapper">
         {/* Header */}
@@ -338,7 +358,8 @@ const RegisterStudent = () => {
         </div>
       </div>
       {/* /Main Wrapper */}
-    </>
+    </>)}
+        </div>
   );
 };
 
