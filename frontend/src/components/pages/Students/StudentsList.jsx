@@ -107,7 +107,7 @@ const Students = () => {
                                 console.log("wow")
                                 setDeleteStatus('success');
                             } ).catch((err) =>{
-                                setDeleteStatus('error')
+                                setDeleteStatus('error: ' +err)
                             })
                         }}>
                             <i className="feather-trash-2">
