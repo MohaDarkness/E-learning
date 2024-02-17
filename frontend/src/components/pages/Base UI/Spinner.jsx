@@ -256,11 +256,18 @@ const Spinner = () => {
           {/* /Spinner */}
         </div>
       </div>
+      <span
+                    className="spinner-grow spinner-grow-loading-page"
+                    role="status"
+                    aria-hidden="true"
+                  />
       {/* Footer */}
       <Footer />
     </div>
     </div>
     {/* /Main Wrapper */}
+
+    
     
 </>
 

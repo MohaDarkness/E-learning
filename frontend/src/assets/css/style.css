@@ -10055,3 +10055,8 @@ span.toggle-password {
   .css-1nmdiq5-menu {
 	z-index: 999999 !important;
   }
+
+	.spinner-grow-loading-page{
+		height:9rem;
+		width:9rem;
+	}
