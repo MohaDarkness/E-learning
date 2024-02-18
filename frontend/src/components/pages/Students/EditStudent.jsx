@@ -7,9 +7,10 @@ import SideBar from "../../SideBar/SideBar";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const EditStudent = () => {
-  const {studentId} = useParams();
+  const { studentId } = useParams();
   console.log(studentId);
 
   const [studentFName, setStudentFName] = useState(null);
@@ -28,12 +29,10 @@ const EditStudent = () => {
   const [typeError, setTypeError] = useState(null);
   const [excelData, setExcelData] = useState(null);
 
-
   const gender = [
     { value: 1, label: "Male" },
-    { value: 2, label: "Female" }
+    { value: 2, label: "Female" },
   ];
-
 
   const MajorOptions = [
     { value: 1, label: "Computer Science" },
@@ -41,38 +40,50 @@ const EditStudent = () => {
     { value: 3, label: "Computer Graphics" },
   ];
 
-
-  const URL = 'http://localhost:3000/signup'
+  const URL = "http://localhost:3000/students";
 
   const submitOneStudent = (e) => {
     e.preventDefault();
     e.currentTarget.disabled = true;
-    
+
     const data = {
-      0 : {
-      userId: studentId,
       name: `${studentFName} ${studentLName}`,
-      role: 'student',
-      gender: studentGender['label'].toLowerCase(),
+      role: "student",
+      gender: studentGender["label"].toLowerCase(),
       // DoB: DateOfBirth,
       email: studentEmail,
-      major: studentMajor['label'].toLowerCase(),
+      major: studentMajor["label"].toLowerCase(),
       // mobilenumber: studentMobileNumber
-      }
-    }
+    };
 
-    console.log("this is the data:")
-    console.log(data)
+    console.log("this is the data:");
+    console.log(data);
 
-      try{
-      axios.post(URL, data, {withCredentials:true})
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    } catch(err){
-      console.log(err)
+    try {
+      axios
+        .put(`${URL}/${studentId}`, data, { withCredentials: true })
+        .then((res) => {
+          console.log(res);
+          setCreateOneStatus({
+            status: "success",
+            message: "Student been created successfully",
+          });
+        })
+        .catch((err) => {
+          // if 401 then unauthorized, let the use go to login page
+          console.log(err);
+
+          err.data.split(" ")[0] === "E11000" &&
+            setCreateManyStatus({
+              status: "error",
+              message: "User id already taken!",
+            });
+        });
+    } catch (err) {
+      console.log(err);
     }
   };
-  
+
   return (
     <>
       <div className="main-wrapper">
@@ -93,7 +104,9 @@ const EditStudent = () => {
                       <li className="breadcrumb-item">
                         <Link to="/students">Student</Link>
                       </li>
-                      <li className="breadcrumb-item active">Update Students</li>
+                      <li className="breadcrumb-item active">
+                        Update Students
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -117,7 +130,7 @@ const EditStudent = () => {
                               Student ID <span className="login-danger">*</span>
                             </label>
                             <input
-                              className="form-control" 
+                              className="form-control"
                               type="text"
                               value={studentId}
                               disabled
@@ -156,11 +169,13 @@ const EditStudent = () => {
                             <label>
                               Gender <span className="login-danger">*</span>
                             </label>
-                            
+
                             <Select
                               className="w-100 local-forms select"
                               value={studentGender}
-                              onChange={(selectedOption) => setGender(selectedOption)}
+                              onChange={(selectedOption) =>
+                                setGender(selectedOption)
+                              }
                               options={gender}
                               placeholder="Select Gender"
                             />
@@ -200,7 +215,9 @@ const EditStudent = () => {
                             <Select
                               className="w-100 select"
                               value={studentMajor}
-                              onChange={(selectedOption) => setStudentMajor(selectedOption)}
+                              onChange={(selectedOption) =>
+                                setStudentMajor(selectedOption)
+                              }
                               options={MajorOptions}
                               placeholder="Please Select Class"
                             />
@@ -213,7 +230,9 @@ const EditStudent = () => {
                               className="form-control"
                               type="text"
                               value={studentMobileNumber}
-                              onChange={(e) => setStudentMobileNumber(e.target.value)}
+                              onChange={(e) =>
+                                setStudentMobileNumber(e.target.value)
+                              }
                             />
                           </div>
                         </div>
@@ -229,7 +248,11 @@ const EditStudent = () => {
                         </div>
                         <div className="col-12">
                           <div className="student-submit">
-                            <button type="submit" className="btn btn-primary" on>
+                            <button
+                              type="submit"
+                              className="btn btn-primary"
+                              on
+                            >
                               Submit
                             </button>
                           </div>

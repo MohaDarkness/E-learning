@@ -41,7 +41,8 @@ const Students = () => {
         console.log(res.data);
       } catch (err) {
         console.log(err);
-        // if (err.response.status === 401) history.push("/error404");
+        if (err.response.status === 401 || err.response.status === 403)
+          history.push("/error404");
       }
     }
     fetchData()
