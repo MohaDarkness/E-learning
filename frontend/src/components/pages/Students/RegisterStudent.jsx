@@ -9,6 +9,7 @@ import Select from "react-select";
 import * as XLSX from 'xlsx';
 import axios from 'axios'
 import Cookies from "js-cookie";
+import LoadingPage from "../Authentication/LoadingPage";
 
 const RegisterStudent = () => {
 
@@ -157,7 +158,7 @@ const RegisterStudent = () => {
   return (
       <div>
         {loading?(
-            <p></p>
+            <LoadingPage/>
         ):(
     <>
       <div className="main-wrapper">

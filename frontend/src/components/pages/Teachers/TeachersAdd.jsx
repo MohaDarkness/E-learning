@@ -1,314 +1,265 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
+import * as XLSX from "xlsx";
+import axios from "axios";
+import Cookies from "js-cookie";
+import LoadingPage from "../Authentication/LoadingPage";
 
 const RegisterTeacher = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [startDate1, setStartDate1] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState(null);
+  const history = useHistory();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const userRole = Cookies.get("role");
+    const userToken = Cookies.get("jwt");
+    if (!userToken) {
+      history.push("/login");
+    } else if (userRole === "teacher") {
+      history.push("/teacherdashboard");
+    } else if (userRole === "teacher") {
+      history.push("/teacherdashboard");
+    }
+    setLoading(false);
+  }, [history]);
 
-  const options = [
+  const [teacherId, setTeacherId] = useState(null);
+  const [teacherFName, setTeacherFName] = useState(null);
+  const [teacherLName, setTeacherLName] = useState(null);
+  const [teacherGender, setGender] = useState(null);
+  const [DateOfBirth, setDateOfBirth] = useState(() => {
+    const today = new Date();
+    const dob = new Date(today);
+    dob.setFullYear(today.getFullYear() - 18);
+    return dob;
+  });
+  const [teacherEmail, setTeacherEmail] = useState(null);
+  const [teacherMobileNumber, setTeacherMobileNumber] = useState(null);
+  const [excelFile, setExcelFile] = useState(null);
+  const [typeError, setTypeError] = useState(null);
+  const [excelData, setExcelData] = useState(null);
+
+  const gender = [
     { value: 1, label: "Male" },
-    { value: 2, label: "Female" }
+    { value: 2, label: "Female" },
   ];
 
-  const handleOptionChange = (selectedOption) => {
-    setSelectedOption(selectedOption);
+  const URL = "http://localhost:3000/signup";
+
+  const submitOneTeacher = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+
+    const data = {
+      0: {
+        userId: teacherId,
+        name: `${teacherFName} ${teacherLName}`,
+        role: "teacher",
+        gender: teacherGender["label"].toLowerCase(),
+        // DoB: DateOfBirth,
+        email: teacherEmail,
+        // mobilenumber: teacherMobileNumber
+      },
+    };
+
+    console.log("this is the data:");
+    console.log(data);
+
+    try {
+      axios
+        .post(URL, data, { withCredentials: true })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
-    <>
-      <div className="main-wrapper">
-        {/* Header */}
-        <Header />
-
-        {/* Sidebar */}
-        <SideBar />
-
-        {/* Page Wrapper */}
-        <div className="page-wrapper">
-          <div className="content container-fluid">
-            {/* Page Header */}
-            <div className="page-header">
-              <div className="row align-items-center">
-                <div className="col">
-                  <h3 className="page-title">Register New Teacher</h3>
-                  <ul className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <Link to="/teacherslist">Teachers</Link>
-                    </li>
-                    <li className="breadcrumb-item active">Register New Teacher</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            {/* /Page Header */}
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="card">
-                  <div className="card-body">
-                    <form>
-                      <div className="row">
-                        <div className="col-12">
-                          <h5 className="form-title">
-                            <span>Basic Details</span>
-                          </h5>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Teacher ID <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Teacher ID"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Name <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Name"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Gender <span className="login-danger">*</span>
-                            </label>
-                            {/* <select className="form-control select">
-                                                            <option>Male</option>
-                                                            <option>Female</option>
-                                                            <option>Others</option>
-                                                        </select> */}
-                            <Select
-                              className="w-100 local-forms  select"
-                              value={selectedOption}
-                              onChange={handleOptionChange}
-                              options={options}
-                              placeholder="Male"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms calendar-icon">
-                            <label>
-                              Date Of Birth{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            {/* <input
-                                                            className="form-control datetimepicker"
-                                                            type="text"
-                                                            placeholder="DD-MM-YYYY"
-                                                        /> */}
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              selected={startDate}
-                              onChange={(date) => setStartDate(date)}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Mobile <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Phone"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms calendar-icon">
-                            <label>
-                              Joining Date{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            {/* <input
-                                                            className="form-control datetimepicker"
-                                                            type="text"                                                    
-                                                        /> */}
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              selected={startDate1}
-                              onChange={(date) => setStartDate1(date)}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4 local-forms">
-                          <div className="form-group">
-                            <label>
-                              Qualification{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder="Enter Joining Date"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Experience <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder="Enter Experience"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <h5 className="form-title">
-                            <span>Login Details</span>
-                          </h5>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Username <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Username"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Email ID <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="email"
-                              className="form-control"
-                              placeholder="Enter Mail Id"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Password <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Password"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Repeat Password{" "}
-                              <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Repeat Password"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <h5 className="form-title">
-                            <span>Address</span>
-                          </h5>
-                        </div>
-                        <div className="col-12">
-                          <div className="form-group local-forms">
-                            <label>
-                              Address <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter address"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              City <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter City"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              State <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter State"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Zip Code <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Zip"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                          <div className="form-group local-forms">
-                            <label>
-                              Country <span className="login-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Country"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="student-submit">
-                            <button type="submit" className="btn btn-primary">
-                              Submit
-                            </button>
-                          </div>
-                        </div>
+    <div>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <div className="main-wrapper">
+            {/* Header */}
+            <Header />
+            {/* Sidebar */}
+            <SideBar />
+            {/* Page Wrapper */}`{" "}
+            <div className="page-wrapper">
+              <div className="content container-fluid">
+                {/* Page Header */}
+                <div className="page-header">
+                  <div className="row align-items-center">
+                    <div className="col-sm-12">
+                      <div className="page-sub-header">
+                        <h3 className="page-title">Register New Teachers</h3>
+                        <ul className="breadcrumb">
+                          <li className="breadcrumb-item">
+                            <Link to="/teachers">Teacher</Link>
+                          </li>
+                          <li className="breadcrumb-item active">
+                            Register New Teachers
+                          </li>
+                        </ul>
                       </div>
-                    </form>
+                    </div>
+                  </div>
+                </div>
+                {/* /Page Header */}
+                <div className="row">
+                  <div className="col-sm-12">
+                    <div className="card comman-shadow">
+                      <div className="card-body">
+                        <form onSubmit={submitOneTeacher}>
+                          <div className="row">
+                            <div className="col-12">
+                              <h5 className="form-title teacher-info">
+                                Register One Teacher{" "}
+                              </h5>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  Teacher ID{" "}
+                                  <span className="login-danger">*</span>
+                                </label>
+                                <input
+                                  className="form-control"
+                                  type="text"
+                                  value={teacherId}
+                                  onChange={(e) => setTeacherId(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  First Name{" "}
+                                  <span className="login-danger">*</span>
+                                </label>
+                                <input
+                                  className="form-control"
+                                  type="text"
+                                  value={teacherFName}
+                                  onChange={(e) =>
+                                    setTeacherFName(e.target.value)
+                                  }
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  Last Name{" "}
+                                  <span className="login-danger">*</span>
+                                </label>
+                                <input
+                                  className="form-control"
+                                  type="text"
+                                  value={teacherLName}
+                                  onChange={(e) =>
+                                    setTeacherLName(e.target.value)
+                                  }
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  Gender <span className="login-danger">*</span>
+                                </label>
+
+                                <Select
+                                  className="w-100 local-forms select"
+                                  value={teacherGender}
+                                  onChange={(selectedOption) =>
+                                    setGender(selectedOption)
+                                  }
+                                  options={gender}
+                                  placeholder="Select Gender"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms calendar-icon">
+                                <label>
+                                  Date Of Birth{" "}
+                                  <span className="login-danger">*</span>
+                                </label>
+                                <DatePicker
+                                  className="form-control datetimepicker"
+                                  selected={DateOfBirth}
+                                  onChange={(date) => setDateOfBirth(date)}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  E-Mail <span className="login-danger">*</span>
+                                </label>
+                                <input
+                                  className="form-control"
+                                  type="text"
+                                  value={teacherEmail}
+                                  onChange={(e) =>
+                                    setTeacherEmail(e.target.value)
+                                  }
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>Phone </label>
+                                <input
+                                  className="form-control"
+                                  type="text"
+                                  value={teacherMobileNumber}
+                                  onChange={(e) =>
+                                    setTeacherMobileNumber(e.target.value)
+                                  }
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-8">
+                              <label>
+                                Upload Teacher Photo (150px X 150px)
+                              </label>
+                              <div className="uplod">
+                                <label className="file-upload image-upbtn mb-0">
+                                  Choose File <input type="file" />
+                                </label>
+                              </div>
+                            </div>
+                            <div className="col-12">
+                              <div className="teacher-submit">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary"
+                                  on
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/* /Main Wrapper */}
-    </>
+          {/* /Main Wrapper */}
+        </>
+      )}
+    </div>
   );
 };
 

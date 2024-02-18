@@ -1,357 +1,325 @@
-import React,{useState} from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import FeatherIcon from "feather-icons-react";
+import SideBar from "../../SideBar/SideBar";
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
 import { pagination, Table } from "antd";
-import { onShowSizeChange, itemRender } from "../../Pagination"
-import Header from '../../Header/Header'
-import SideBar from '../../SideBar/SideBar'
-import Footer from '../../Footer/Footer'
-import { avatar02, avatar03, avatar04, avatar05, avatar06, avatar07, avatar08, avatar09, avatar10, avatar11 } from '../../imagepath'
+import {
+  img1,
+  img10,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+} from "../../imagepath";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
+import { onShowSizeChange, itemRender } from "../../Pagination";
+import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const TeachersList = () => {
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const history = useHistory();
+  const [loading, setLoading] = useState(true);
+  const URL = "http://localhost:3000/teachers";
+  const [datasource, setDatasource] = useState([]);
+  const [deleteStatus, setDeleteStatus] = useState(null);
+  const [deletedTeacherName, setDeletedTeacherName] = useState(null);
 
-    const onSelectChange = (newSelectedRowKeys) => {
-        console.log("selectedRowKeys changed: ", selectedRowKeys);
-        setSelectedRowKeys(newSelectedRowKeys);
-    };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(URL, { withCredentials: true });
+        setDatasource(res.data);
+      } catch (err) {
+        if (err.response.status === 401) history.push("/error404");
+      }
+    }
+    fetchData()
+      .then(() => {
+        setLoading(false);
+        console.log("data fetched");
+      })
+      .catch((err) => {
+        console.log("an error occurred " + err);
+      });
+  }, []);
 
-    const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
-    };
-    const datasource = 
-    [
- {
-   ID : "1",
-   TeachersID: "PRE2209",
-   Img:avatar02,
-   Name: "Aaliyah",
-   Class: 10,
-   Gender: "Female",
-   Subject: "Mathematics",
-   Section: "A",
-   MobileNumber: "097 3584 5870",
-   Address: "911 Deer Ridge Drive,USA",
-   Action: ""
- },
- {
-   ID : "2",
-   TeachersID: "PRE2213",
-   Img:avatar03,
-   Name: "Malynne",
-   Class: 8,
-   Gender: "Female",
-   Subject: "Physics",
-   Section: "A",
-   MobileNumber: "242 362 3100",
-   Address: "Bacardi Rd P.O. Box N-4880, New Providence",
-   Action: ""
- },
- {
-   ID : "3",
-   TeachersID: "PRE2143",
-   Img:avatar04,
-   Name: "Levell Scott",
-   Class: 10,
-   Gender: "Male",
-   Subject: "Science",
-   Section: "B",
-   MobileNumber: "026 7318 4366",
-   Address: "P.O. Box: 41, Gaborone",
-   Action: ""
- },
- {
-   ID : "4",
-   TeachersID: "PRE2431",
-   Img:avatar05,
-   Name: "Minnie",
-   Class: 11,
-   Gender: "Male",
-   Subject: "History",
-   Section: "C",
-   MobileNumber: "952 512 4909",
-   Address: "4771  Oral Lake Road, Golden Valley",
-   Action: ""
- },
- {
-   ID : "5",
-   TeachersID: "PRE1534",
-   Img:avatar06,
-   Name: "Lois A",
-   Class: 10,
-   Gender: "Female",
-   Subject: "English",
-   Section: "B",
-   MobileNumber: "413 289 1314",
-   Address: "2844 Leverton Cove Road, Palmer",
-   Action: ""
- },
- {
-   ID : "6",
-   TeachersID: "PRE2153",
-   Img:avatar07,
-   Name: "Calvin",
-   Class: 9,
-   Gender: "Male",
-   Subject: "Mathematics",
-   Section: "C",
-   MobileNumber: "701 753 3810",
-   Address: "1900  Hidden Meadow Drive, Crete",
-   Action: ""
- },
- {
-   ID : "7",
-   TeachersID: "PRE1434",
-   Img:avatar08,
-   Name: "Vincent",
-   Class: 10,
-   Gender: "Male",
-   Subject: "Mathematics",
-   Section: "C",
-   MobileNumber: "402 221 7523",
-   Address: "3979  Ashwood Drive, Omaha",
-   Action: ""
- },
- {
-   ID : "8",
-   TeachersID: "PRE2345",
-   Img:avatar09,
-   Name: "Kozma  Tatari",
-   Class: 9,
-   Gender: "Female",
-   Subject: "Science",
-   Section: "A",
-   MobileNumber: "04 2239 968",
-   Address: "Rruga E Kavajes, Condor Center, Tirana",
-   Action: ""
- },
- {
-   ID : "9",
-   TeachersID: "PRE2365",
-   Img:avatar10,
-   Name: "John Chambers",
-   Class: 11,
-   Gender: "Male",
-   Subject: "Botony",
-   Section: "B",
-   MobileNumber: "870 663 2334",
-   Address: "4667 Sunset Drive, Pine Bluff",
-   Action: ""
- },
- {
-   ID : "10",
-   TeachersID: "PRE1234",
-   Img:avatar11,
-   Name: "Nathan Humphries",
-   Class: 10,
-   Gender: "Male",
-   Subject: "Biology",
-   Section: "A",
-   MobileNumber: "077 3499 9959",
-   Address: "86 Lamphey Road, Thelnetham",
-   Action: ""
- }
-]
-const column = [
-    {
-        title: "ID",
-        dataIndex: "TeachersID",
-        sorter: (a, b) => a.TeachersID.length - b.TeachersID.length,
-        // render: (text, record) => (
-        //     <>
-        //         <Link to="/viewinvoice">{record.TeachersID}</Link>
-        //     </>
-        // )
-    },
-    {
-        title: "Name",
-        dataIndex: "Name",
-        sorter: (a, b) => a.Name.length - b.Name.length,
-        render: (text, record) => (
-            <>
-                <h2 className="table-avatar">
-                    <Link to="/teachersprofile" className="avatar avatar-sm me-2">
-                        <img
-                            className="avatar-img rounded-circle"
-                            src={record.Img}
-                            alt="User Image"
-                        />
-                    </Link>
-                    <Link to="/teachersprofile">{record.Name}</Link>
-                </h2>
-            </>
-        )
-    },
-    {
-        title: "Class",
-        dataIndex: "Class",
-        sorter: (a, b) => a.Class.length - b.Class.length
-    },
-    {
-        title: "Gender",
-        dataIndex: "Gender",
-        sorter: (a, b) => a.Gender.length - b.Gender.length
-    },
-    
-    {
-        title: "Subject",
-        dataIndex: "Subject",
-        sorter: (a, b) => a.Subject.length - b.Subject.length
-    },
-    {
-        title: "Section",
-        dataIndex: "Section",
-        sorter: (a, b) => a.Section.length - b.Section.length
-    },
-    {
-        title: "Mobile Number",
-        dataIndex: "MobileNumber",
-        sorter: (a, b) => a.MobileNumber.length - b.MobileNumber.length
-    },
-    {
-        title: "Address",
-        dataIndex: "Address",
-        sorter: (a, b) => a.Address.length - b.Address.length
-    },
-    {
-        title: "Action",
-        dataIndex: "Action",
-        render: (text, record) => (
-            <>
-                <div className="actions">
-                    <Link to="/editteacher" className="btn btn-sm bg-danger-light">
-                        <i className="feather-edit">
-                            <FeatherIcon icon="edit" className="list-edit"/>
-                        </i>
-                    </Link>
-                    <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
-                        <i className="feather-trash-2">
-                            <FeatherIcon icon="trash-2"/>
-                        </i>
-                    </Link>
-                </div>
+  const handleDeleteTeacher = async (userId) => {
+    try {
+      console.log(userId);
+      await axios.delete(`${URL}/${userId}`, { withCredentials: true });
+      setDatasource(datasource.filter((teacher) => teacher.userId !== userId));
+      setDeleteStatus("success");
+    } catch (err) {
+      setDeleteStatus("error");
+      console.log(err);
+    }
+  };
 
+  const autoCloseMessage = (message) => {
+    var t;
+    Swal.fire({
+      title: message.Title,
+      html: message.Body,
 
-            </>
-        )
+      confirmButtonClass: "btn btn-primary",
+      buttonsStyling: !1,
+      onBeforeOpen: function () {
+        Swal.showLoading(),
+          (t = setInterval(function () {
+            Swal.getContent().querySelector("strong").textContent =
+              Swal.getTimerLeft();
+          }, 100));
+      },
+      onClose: function () {
+        clearInterval(t);
+      },
+    }).then(function (t) {
+      t.dismiss === Swal.DismissReason.timer &&
+        console.log("I was closed by the timer");
+      setDeleteStatus(null);
+    });
+  };
+
+  const column = [
+    {
+      title: "ID",
+      dataIndex: "userId",
+      sorter: (a, b) => a.userId.slice(3) - b.userId.slice(3),
     },
-
-]
-
-    return (
+    {
+      title: "Name",
+      dataIndex: "name",
+      sorter: (a, b) => (a.name > b.name ? 1 : -1),
+      render: (text, record) => (
         <>
-            <div className="main-wrapper">
-                {/* Header */}
-                <Header />
+          <h2 className="table-avatar">
+            <Link
+              to={{
+                pathname: `/teachersview/${record.userId}`,
+              }}
+              className="avatar avatar-sm me-2 "
+            >
+              <img
+                className="avatar-img rounded-circle"
+                src={img10}
+                alt="User Image"
+              />
+            </Link>
+            <Link className="text-dark" to={`/teachersview/${record.userId}`}>
+              {record.name}
+            </Link>
+          </h2>
+        </>
+      ),
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      sorter: (a, b) => (a.gender > b.gender ? 1 : -1),
+    },
+    {
+      title: "Major",
+      dataIndex: "major",
+      sorter: (a, b) => (a.major > b.major ? 1 : -1),
+    },
+    {
+      title: "Mobile Number",
+      dataIndex: "MobileNumber",
+      sorter: (a, b) => a.MobileNumber - b.MobileNumber,
+    },
+    {
+      title: "Action",
+      dataIndex: "Action",
+      render: (text, record) => (
+        <>
+          <div className="actions">
+            <Link
+              to={`/editteacher/${record.userId}`}
+              className="btn btn-sm bg-danger-light"
+            >
+              <i className="feather-edit">
+                <FeatherIcon icon="edit" className="list-edit" />
+              </i>
+            </Link>
+            <Link
+              to="#"
+              className="btn btn-sm bg-success-light me-2 trash"
+              onClick={(e) => {
+                setDeletedTeacherName(record.name);
+                handleDeleteTeacher(record.userId);
+              }}
+            >
+              <i className="feather-trash-2">
+                <FeatherIcon icon="trash-2" />
+              </i>
+            </Link>
+          </div>
+        </>
+      ),
+    },
+  ];
+  return (
+    <div>
+      {loading ? (
+        <p></p>
+      ) : (
+        <>
+          <div className="main-wrapper">
+            {/* Header */}
+            <Header />
+            {/* Sidebar */}
+            <SideBar />
+            {/* Page Wrapper */}
+            <div className="page-wrapper">
+              <div className="content container-fluid">
+                {/* Page Header  */}
+                <div className="page-header">
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="page-sub-header">
+                        <h3 className="page-title">Teachers</h3>
+                        <ul className="breadcrumb">
+                          {/*Delete Status Message*/}
 
-                {/* Sidebar */}
-                <SideBar />
+                          <li className="breadcrumb-item">
+                            <Link to="/teachers">Teacher</Link>
+                          </li>
 
-                {/* Page Wrapper */}
-                <div className="page-wrapper">
-                    <div className="content container-fluid">
+                          {/* Auth This is only for admin otherwise it's gonna "tch: your teachers" or "std: your colleague" */}
+                          <li className="breadcrumb-item active">
+                            All Teachers
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="teacher-group-form">
+                  <div className="row">
+                    <div className="col-lg-3 col-md-6">
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Search by ID ..."
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-3 col-md-6">
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Search by Name ..."
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-4 col-md-6">
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Search by Phone ..."
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-2">
+                      <div className="search-teacher-btn">
+                        <button type="btn" className="btn btn-primary">
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <div className="card card-table comman-shadow">
+                      <div className="card-body">
                         {/* Page Header */}
                         <div className="page-header">
-                            <div className="row align-items-center">
-                                <div className="col">
-                                    <h3 className="page-title">Teachers</h3>
-                                    <ul className="breadcrumb">
-                                        <li className="breadcrumb-item">
-                                            <Link to="/admindashboard">Dashboard</Link>
-                                        </li>
-                                        <li className="breadcrumb-item active">Teachers</li>
-                                    </ul>
-                                </div>
+                          <div className="row align-items-center">
+                            <div className="col">
+                              <h3 className="page-title">Teachers</h3>
                             </div>
-                        </div>
-                        {/* /Page Header */}
-                        <div className="student-group-form">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-6">
-                                    <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Search by ID ..."
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6">
-                                    <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Search by Name ..."
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6">
-                                    <div className="form-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Search by Phone ..."
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="search-student-btn">
-                                        <button type="btn" className="btn btn-primary">
-                                            Search
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card card-table">
-                                    <div className="card-body">
-                                        {/* Page Header */}
-                                        <div className="page-header">
-                                            <div className="row align-items-center">
-                                                <div className="col">
-                                                    <h3 className="page-title">Teachers</h3>
-                                                </div>
-                                                <div className="col-auto text-end float-end ms-auto">
-                                                    <Link to="/registerteacher" className="btn btn-primary">
-                                                        <i className="fas fa-plus" />
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* /Page Header */}
-                                        <div className="table-responsive">
-                                        <Table  className="table border-0 star-student table-hover table-center mb-0 datatable table-striped"
-                                                pagination={{
-                                                    total: datasource.length,
-                                                    showTotal: (total, range) =>
-                                                        `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                                                    showSizeChanger: true,
-                                                    onShowSizeChange: onShowSizeChange,
-                                                    itemRender: itemRender,
-                                                }}
-                                                columns={column}
-                                                dataSource={datasource}
 
-                                                rowSelection={rowSelection}
-                                                rowKey={(record) => record.ID}
-                                            /> 
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="col-auto text-end float-end ms-auto download-grp">
+                              <Link
+                                to="/registerteacher"
+                                className="btn btn-primary"
+                              >
+                                <i className="fas fa-plus" />
+                              </Link>
                             </div>
+                          </div>
+                          {deleteStatus === "success" &&
+                            autoCloseMessage({
+                              Title: "Delete Successfully",
+                              Body: `Teacher ${deletedTeacherName} been deleted successfully`,
+                            })}
+                          {deleteStatus === "error" && (
+                            <div
+                              className="row align-items-center"
+                              style={{
+                                marginTop: "20px",
+                              }}
+                            >
+                              <div
+                                className="alert alert-danger alert-dismissible fade show"
+                                role="alert"
+                              >
+                                <strong>
+                                  Something went wrong, Delete unsuccessfully
+                                </strong>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="alert"
+                                  aria-label="Close"
+                                  onClick={() => {
+                                    setDeleteStatus(null);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
                         </div>
+                        <div className="table-responsive">
+                          <Table
+                            pagination={{
+                              total: datasource.length,
+                              showTotal: (total, range) =>
+                                `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                              showSizeChanger: true,
+                              onShowSizeChange: onShowSizeChange,
+                              itemRender: itemRender,
+                            }}
+                            columns={column}
+                            dataSource={datasource}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    {/* Footer */}
-                    <Footer />
+                  </div>
                 </div>
-
+              </div>
             </div>
-            {/* /Main Wrapper */}
-        </>
-    )
-}
 
-export default TeachersList
+            <Footer />
+            {/* /Page Wrapper */}
+          </div>
+          {/* /Main Wrapper */}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default TeachersList;
