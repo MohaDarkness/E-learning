@@ -11,12 +11,13 @@ const MySideBar = () => {
 
   switch (role) {
     case "A":
-      // return <AdminSideBar />;
-      return <FullSideBar />;
+      return <AdminSideBar />;
     case "T":
       return <TeacherSideBar />;
     case "S":
       return <StudentSideBar />;
+    case "G":
+      return <FullSideBar />;
     default:
       // Handle other cases or show an error message
       console.error("Invalid role:", role);
