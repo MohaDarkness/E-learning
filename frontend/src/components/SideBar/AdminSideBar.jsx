@@ -23,55 +23,66 @@ const AdminSidebar = (props) => {
   useEffect(() => {
     function handleMouseOver(e) {
       e.stopPropagation();
-      if (document.body.classList.contains('mini-sidebar') && document.querySelector('#toggle_btn').offsetParent !== null) {
-        var targ = e.target.closest('.sidebar');
+      if (
+        document.body.classList.contains("mini-sidebar") &&
+        document.querySelector("#toggle_btn").offsetParent !== null
+      ) {
+        var targ = e.target.closest(".sidebar");
         if (targ) {
-          document.body.classList.add('expand-menu');
-          document.querySelectorAll('.subdrop + ul').forEach((ul) => ul.style.display = 'block');
+          document.body.classList.add("expand-menu");
+          document
+            .querySelectorAll(".subdrop + ul")
+            .forEach((ul) => (ul.style.display = "block"));
         } else {
-          document.body.classList.remove('expand-menu');
-          document.querySelectorAll('.subdrop + ul').forEach((ul) => ul.style.display = 'none');
+          document.body.classList.remove("expand-menu");
+          document
+            .querySelectorAll(".subdrop + ul")
+            .forEach((ul) => (ul.style.display = "none"));
         }
         return false;
       }
     }
-  
-    document.addEventListener('mouseover', handleMouseOver);
-  
+
+    document.addEventListener("mouseover", handleMouseOver);
+
     return () => {
-      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
 
   useEffect(() => {
-    $(document).on('change', '.sidebar-type-four input', function() {
-	    if($(this).is(':checked')) {
-	        $('.sidebar').addClass('sidebar-eight');
-	        $('.sidebar-menu').addClass('sidebar-menu-eight');
-	        $('.menu-title').addClass('menu-title-eight');
-	        $('.header').addClass('header-eight');
-	        $('.header-left-two').addClass('header-left-eight');
-	        $('.user-menu').addClass('user-menu-eight');
-	        $('.dropdown-toggle').addClass('dropdown-toggle-eight');
-	        $('.white-logo').addClass('show-logo');
-	        $('.header-one .header-left-one .logo:not(.logo-small), .header-five .header-left-five .logo:not(.logo-small)').addClass('hide-logo');
-	        $('.header-two .header-left-two .logo:not(.logo-small)').removeClass('hide-logo');
-	        $('.header-two .header-left-two .dark-logo').removeClass('show-logo');
-	    } else {
-	        $('.sidebar').removeClass('sidebar-eight');
-	        $('.sidebar-menu').removeClass('sidebar-menu-eight');
-	        $('.menu-title').removeClass('menu-title-eight');
-	        $('.header').removeClass('header-eight');
-	        $('.header-left-two').removeClass('header-left-eight');
-	        $('.user-menu').removeClass('user-menu-eight');
-	        $('.dropdown-toggle').removeClass('dropdown-toggle-eight');
-	        $('.white-logo').removeClass('show-logo');
-	        $('.header-one .header-left-one .logo:not(.logo-small), .header-five .header-left-five .logo:not(.logo-small)').removeClass('hide-logo');
-	    }
-	});
-  }, [])
-  
-  
+    $(document).on("change", ".sidebar-type-four input", function () {
+      if ($(this).is(":checked")) {
+        $(".sidebar").addClass("sidebar-eight");
+        $(".sidebar-menu").addClass("sidebar-menu-eight");
+        $(".menu-title").addClass("menu-title-eight");
+        $(".header").addClass("header-eight");
+        $(".header-left-two").addClass("header-left-eight");
+        $(".user-menu").addClass("user-menu-eight");
+        $(".dropdown-toggle").addClass("dropdown-toggle-eight");
+        $(".white-logo").addClass("show-logo");
+        $(
+          ".header-one .header-left-one .logo:not(.logo-small), .header-five .header-left-five .logo:not(.logo-small)"
+        ).addClass("hide-logo");
+        $(".header-two .header-left-two .logo:not(.logo-small)").removeClass(
+          "hide-logo"
+        );
+        $(".header-two .header-left-two .dark-logo").removeClass("show-logo");
+      } else {
+        $(".sidebar").removeClass("sidebar-eight");
+        $(".sidebar-menu").removeClass("sidebar-menu-eight");
+        $(".menu-title").removeClass("menu-title-eight");
+        $(".header").removeClass("header-eight");
+        $(".header-left-two").removeClass("header-left-eight");
+        $(".user-menu").removeClass("user-menu-eight");
+        $(".dropdown-toggle").removeClass("dropdown-toggle-eight");
+        $(".white-logo").removeClass("show-logo");
+        $(
+          ".header-one .header-left-one .logo:not(.logo-small), .header-five .header-left-five .logo:not(.logo-small)"
+        ).removeClass("hide-logo");
+      }
+    });
+  }, []);
 
   let pathName = props.location.pathname;
 
@@ -93,23 +104,22 @@ const AdminSidebar = (props) => {
             <div id="sidebar-menu" className="sidebar-menu">
               {/* Main Menu */}
               <ul>
-              <li>
-                        <Link
-                          to="/admindashboard"
-                          className={`${
-                            "/admindashboard" === pathName ? "active" : ""
-                          }`}
-                        >
-                          <FeatherIcon icon="grid" />
-                          <span>Admin Dashboard</span>
-                        </Link>
-                      </li>
+                <li>
+                  <Link
+                    to="/admindashboard"
+                    className={`${
+                      "/admindashboard" === pathName ? "active" : ""
+                    }`}
+                  >
+                    <FeatherIcon icon="grid" />
+                    <span>Admin Dashboard</span>
+                  </Link>
+                </li>
                 <li
                   className={`${
                     "/students" === pathName ||
                     "/studentsview" === pathName ||
-                    "/addstudent" === pathName ||
-                    "/editstudent" === pathName
+                    "/addstudent" === pathName
                       ? "active submenu"
                       : "submenu"
                   }`}
@@ -138,16 +148,6 @@ const AdminSidebar = (props) => {
                           }`}
                         >
                           Student List
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/editstudent"
-                          className={`${
-                            "/editstudent" === pathName ? "active" : ""
-                          }`}
-                        >
-                          Student Edit
                         </Link>
                       </li>
                       <li>
@@ -211,21 +211,22 @@ const AdminSidebar = (props) => {
                           Teacher Edit
                         </Link>
                         <li>
-                        <Link
-                          to="/registerteacher"
-                          className={`${
-                            "/registerteacher" === pathName ? "active" : ""
-                          }`}
-                        >
-                          Register New Teacher                        </Link>
-                      </li>
+                          <Link
+                            to="/registerteacher"
+                            className={`${
+                              "/registerteacher" === pathName ? "active" : ""
+                            }`}
+                          >
+                            Register New Teacher{" "}
+                          </Link>
+                        </li>
                       </li>
                     </ul>
                   ) : (
                     ""
                   )}
                 </li>
-                
+
                 <li
                   className={`${
                     "/subject" === pathName ||
@@ -286,12 +287,10 @@ const AdminSidebar = (props) => {
                     ""
                   )}
                 </li>
-                
               </ul>
               {/* /Main Menu*/}
               {/* Management */}
               <ul>
-                
                 <li
                   className={`${
                     "/exam" === pathName ||
@@ -306,9 +305,7 @@ const AdminSidebar = (props) => {
                     <span>Exam list</span>
                   </Link>
                 </li>
-                
               </ul>
-              
             </div>
           </div>
         </Scrollbars>
