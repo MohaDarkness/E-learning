@@ -30,7 +30,7 @@ import Inbox from "./components/Header/Inbox ";
 import Compose from "./components/Header/Compose";
 import StudentsDashboard from "./components/pages/Dashboard/StudentsDashboard";
 import TeacherDashboard from "./components/pages/Dashboard/TeacherDashboard";
-import StudentsView from "./components/pages/Students/StudentsView";
+import UserView from "./components/pages/Students/UserView";
 import RegisterStudent from "./components/pages/Students/RegisterStudent";
 import EditStudent from "./components/pages/Students/EditStudent";
 import StudentGrid from "./components/pages/Students/StudentGrid";
@@ -229,9 +229,8 @@ const appcontainer = (props) => {
         <Route path="/blankpage" component={BlankPage} />
         <Route path="/basictable" component={BasicTable} />
         <Route path="/datatable" component={DataTable} />
-
         <Route path="/students" component={Students} />
-        <Route path="/studentsview/:studentId" component={StudentsView} />
+        <Route path="/userview/:userId" component={UserView} />
         <Route path="/editstudent/:studentId" component={EditStudent} />
         {/* <Route path="/editstudent/" component={EditStudent} /> */}
         <Route path="/registerstudent" component={RegisterStudent} />

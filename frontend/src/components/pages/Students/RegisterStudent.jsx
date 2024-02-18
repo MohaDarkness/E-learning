@@ -39,7 +39,7 @@ const RegisterStudent = () => {
   });
   const [studentEmail, setStudentEmail] = useState(null);
   const [studentMajor, setStudentMajor] = useState(null);
-  const [studentMobileNumber, setStudentMobileNumber] = useState(null);
+  const [studentPhoneNumber, setStudentPhoneNumber] = useState(null);
   const [excelFile, setExcelFile] = useState(null);
   const [typeError, setTypeError] = useState(null);
   const [excelData, setExcelData] = useState(null);
@@ -75,10 +75,10 @@ const RegisterStudent = () => {
         name: `${studentFName} ${studentLName}`,
         role: "student",
         gender: studentGender["label"].toLowerCase(),
-        // DoB: DateOfBirth,
+        dob: DateOfBirth,
         email: studentEmail,
         major: studentMajor["label"].toLowerCase(),
-        // mobilenumber: studentMobileNumber
+        phonenumber: studentPhoneNumber,
       },
     };
 
@@ -124,8 +124,8 @@ const RegisterStudent = () => {
     "name",
     "userId",
     "major",
-    "DoB",
-    "mobilenumber",
+    "dob",
+    "phonenumber",
     "gender",
   ];
   const handleFile = (e) => {
@@ -366,9 +366,9 @@ const RegisterStudent = () => {
                                 <input
                                   className="form-control"
                                   type="text"
-                                  value={studentMobileNumber}
+                                  value={studentPhoneNumber}
                                   onChange={(e) =>
-                                    setStudentMobileNumber(e.target.value)
+                                    setStudentPhoneNumber(e.target.value)
                                   }
                                 />
                               </div>

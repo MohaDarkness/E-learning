@@ -23,6 +23,7 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import LoadingPage from "../Authentication/LoadingPage";
 
 const Students = () => {
   const history = useHistory();
@@ -107,7 +108,7 @@ const Students = () => {
           <h2 className="table-avatar">
             <Link
               to={{
-                pathname: `/studentsview/${record.userId}`,
+                pathname: `/userview/${record.userId}`,
               }}
               className="avatar avatar-sm me-2 "
             >
@@ -117,7 +118,7 @@ const Students = () => {
                 alt="User Image"
               />
             </Link>
-            <Link className="text-dark" to={`/studentsview/${record.userId}`}>
+            <Link className="text-dark" to={`/userview/${record.userId}`}>
               {record.name}
             </Link>
           </h2>
@@ -146,7 +147,7 @@ const Students = () => {
         <>
           <div className="actions">
             <Link
-              to={`/studentsview/${record.userId}`}
+              to={`/userview/${record.userId}`}
               className="btn btn-sm bg-danger-light"
             >
               <i className="feather-edit">
@@ -187,157 +188,153 @@ const Students = () => {
 
   return (
     <div>
-      {loading ? (
-        <p></p>
-      ) : (
-        <>
-          <div className="main-wrapper">
-            {/* Header */}
-            <Header />
-            {/* Sidebar */}
-            <SideBar />
-            {/* Page Wrapper */}
-            <div className="page-wrapper">
-              <div className="content container-fluid">
-                {/* Page Header  */}
-                <div className="page-header">
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="page-sub-header">
-                        <h3 className="page-title">Students</h3>
-                        <ul className="breadcrumb">
-                          {/*Delete Status Message*/}
-
-                          <li className="breadcrumb-item">
-                            <Link to="/students">Student</Link>
-                          </li>
-
-                          {/* Auth This is only for admin otherwise it's gonna "tch: your students" or "std: your colleague" */}
-                          <li className="breadcrumb-item active">
-                            All Students
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="student-group-form">
-                  <div className="row">
-                    <div className="col-lg-3 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by ID ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-3 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by Name ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-4 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by Phone ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-2">
-                      <div className="search-student-btn">
-                        <button type="btn" className="btn btn-primary">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      {loading && <LoadingPage />} (
+      <>
+        <div className="main-wrapper">
+          {/* Header */}
+          <Header />
+          {/* Sidebar */}
+          <SideBar />
+          {/* Page Wrapper */}
+          <div className="page-wrapper">
+            <div className="content container-fluid">
+              {/* Page Header  */}
+              <div className="page-header">
                 <div className="row">
                   <div className="col-sm-12">
-                    <div className="card card-table comman-shadow">
-                      <div className="card-body">
-                        {/* Page Header */}
-                        <div className="page-header">
-                          <div className="row align-items-center">
-                            <div className="col">
-                              <h3 className="page-title">Students</h3>
-                            </div>
+                    <div className="page-sub-header">
+                      <h3 className="page-title">Students</h3>
+                      <ul className="breadcrumb">
+                        {/*Delete Status Message*/}
 
-                            <div className="col-auto text-end float-end ms-auto download-grp">
-                              <Link
-                                to="/registerstudent"
-                                className="btn btn-primary"
-                              >
-                                <i className="fas fa-plus" />
-                              </Link>
+                        <li className="breadcrumb-item">
+                          <Link to="/students">Student</Link>
+                        </li>
+
+                        {/* Auth This is only for admin otherwise it's gonna "tch: your students" or "std: your colleague" */}
+                        <li className="breadcrumb-item active">All Students</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="student-group-form">
+                <div className="row">
+                  <div className="col-lg-3 col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search by ID ..."
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search by Name ..."
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Search by Phone ..."
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-2">
+                    <div className="search-student-btn">
+                      <button type="btn" className="btn btn-primary">
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12">
+                  <div className="card card-table comman-shadow">
+                    <div className="card-body">
+                      {/* Page Header */}
+                      <div className="page-header">
+                        <div className="row align-items-center">
+                          <div className="col">
+                            <h3 className="page-title">Students</h3>
+                          </div>
+
+                          <div className="col-auto text-end float-end ms-auto download-grp">
+                            <Link
+                              to="/registerstudent"
+                              className="btn btn-primary"
+                            >
+                              <i className="fas fa-plus" />
+                            </Link>
+                          </div>
+                        </div>
+                        {deleteStatus === "success" &&
+                          autoCloseMessage({
+                            Title: "Delete Successfully",
+                            Body: `Student ${deletedStudentName} been deleted successfully`,
+                          })}
+                        {deleteStatus === "error" && (
+                          <div
+                            className="row align-items-center"
+                            style={{
+                              marginTop: "20px",
+                            }}
+                          >
+                            <div
+                              className="alert alert-danger alert-dismissible fade show"
+                              role="alert"
+                            >
+                              <strong>
+                                Something went wrong, Delete unsuccessfully
+                              </strong>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                                onClick={() => {
+                                  setDeleteStatus(null);
+                                }}
+                              />
                             </div>
                           </div>
-                          {deleteStatus === "success" &&
-                            autoCloseMessage({
-                              Title: "Delete Successfully",
-                              Body: `Student ${deletedStudentName} been deleted successfully`,
-                            })}
-                          {deleteStatus === "error" && (
-                            <div
-                              className="row align-items-center"
-                              style={{
-                                marginTop: "20px",
-                              }}
-                            >
-                              <div
-                                className="alert alert-danger alert-dismissible fade show"
-                                role="alert"
-                              >
-                                <strong>
-                                  Something went wrong, Delete unsuccessfully
-                                </strong>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="alert"
-                                  aria-label="Close"
-                                  onClick={() => {
-                                    setDeleteStatus(null);
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="table-responsive">
-                          <Table
-                            pagination={{
-                              total: datasource.length,
-                              showTotal: (total, range) =>
-                                `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                              showSizeChanger: true,
-                              onShowSizeChange: onShowSizeChange,
-                              itemRender: itemRender,
-                            }}
-                            columns={column}
-                            dataSource={datasource}
-                          />
-                        </div>
+                        )}
+                      </div>
+                      <div className="table-responsive">
+                        <Table
+                          pagination={{
+                            total: datasource.length,
+                            showTotal: (total, range) =>
+                              `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                            showSizeChanger: true,
+                            onShowSizeChange: onShowSizeChange,
+                            itemRender: itemRender,
+                          }}
+                          columns={column}
+                          dataSource={datasource}
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <Footer />
-            {/* /Page Wrapper */}
           </div>
-          {/* /Main Wrapper */}
-        </>
-      )}
+
+          <Footer />
+          {/* /Page Wrapper */}
+        </div>
+        {/* /Main Wrapper */}
+      </>
+      )
     </div>
   );
 };

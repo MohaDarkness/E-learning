@@ -118,7 +118,7 @@ const AdminSidebar = (props) => {
                 <li
                   className={`${
                     "/students" === pathName ||
-                    "/studentsview" === pathName ||
+                    "/userview" === pathName ||
                     "/addstudent" === pathName
                       ? "active submenu"
                       : "submenu"

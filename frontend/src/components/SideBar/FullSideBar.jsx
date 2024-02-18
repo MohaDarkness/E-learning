@@ -168,7 +168,7 @@ const Sidebar = (props) => {
                 <li
                   className={`${
                     "/students" === pathName ||
-                    "/studentsview" === pathName ||
+                    "/userview" === pathName ||
                     "/addstudent" === pathName ||
                     "/editstudent" === pathName
                       ? "active submenu"
@@ -203,9 +203,9 @@ const Sidebar = (props) => {
                       </li>
                       <li>
                         <Link
-                          to="/studentsview"
+                          to="/userview"
                           className={`${
-                            "/studentsview" === pathName ? "active" : ""
+                            "/userview" === pathName ? "active" : ""
                           }`}
                         >
                           Student View
