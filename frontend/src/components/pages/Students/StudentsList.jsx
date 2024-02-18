@@ -50,7 +50,9 @@ const Students = () => {
                 setDatasource(
                     datasource.filter((student)=> student.userId !== userId)
                 )
+            setDeleteStatus('success')
             } catch (err) {
+            setDeleteStatus('error')
                 console.log(err);
             }
     }
@@ -135,14 +137,8 @@ const Students = () => {
                             </i>
                         </Link>
                         <Link to="#" className="btn btn-sm bg-success-light me-2 trash" onClick={(e)=>{
-                            handleDeleteStudent(record.userId).then(() =>{
-                                // Successfully deleted
-                                setDeleteStatus('success');
-                                setDeletedStudentName(record.name);
-                            } ).catch((err) =>{
-                                setDeleteStatus('error')
-                                setDeletedStudentName(null);
-                            })
+                            setDeletedStudentName(record.name);
+                            handleDeleteStudent(record.userId)
                         }}>
                             <i className="feather-trash-2">
                                 <FeatherIcon icon="trash-2"/>
@@ -178,7 +174,7 @@ const Students = () => {
                                         <h3 className="page-title">Students</h3>
                                         <ul className="breadcrumb">
 
-                                        {/*Delete Stauts Message*/}
+                                        {/*Delete Status Message*/}
 
                                             <li className="breadcrumb-item"><Link to="/students">Student</Link></li>
                                             
@@ -266,6 +262,7 @@ const Students = () => {
                                                         className="btn-close"
                                                         data-bs-dismiss="alert"
                                                         aria-label="Close"
+                                                        onClick={()=>{setDeleteStatus(null)}}
                                                     />
                                                 </div>
                                                 </div>
