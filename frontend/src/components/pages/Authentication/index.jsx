@@ -13,92 +13,55 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [token, setToken] = useState("");
-  
+  const [isDangerInput, setIsDangerInput] = useState(false);
+  const [isDangerMessage, setIsDangerMessage] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  /* Authintication */
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await fetch("http://localhost:8080/authenticate", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ userName, password }),
-  //     });
-
-  //     if (response.ok) {
-  //       const result = await response.text();
-  //       // Assuming the backend returns "A", "T", or "S"
-  //       if (result === "A") {
-  //         localStorage.setItem('role', JSON.stringify('A'));
-  //         // Redirect to admin dashboard
-  //         window.location.href = "/admindashboard";
-  //       } else if (result === "T") {
-  //         localStorage.setItem('role', JSON.stringify('T'));
-  //         // Redirect to teacher dashboard
-  //         window.location.href = "/teacherdashboard";
-  //       } else if (result === "S") {
-  //         localStorage.setItem('role', JSON.stringify('S'));
-  //         // Redirect to student dashboard
-  //         window.location.href = "/studentdashboard";
-  //       } else {
-  //         // Handle other cases or show an error message
-  //         console.error("Invalid response from server");
-  //       }
-  //     } else {
-  //       // Handle errors from the server
-  //       console.error("Server error:", response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during fetch:", error);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(userName)
-      console.log(password)
-      
-        try {
-          console.log('heheheheheh');
-          const response = await axios.post('http://localhost:3000/login', { 'userId':userName, 'password':password}, {withCredentials:true});
-          const { id, role, token} = response.data;
-          setToken(token)
-          
-          console.log(response)
-          console.log("this is token:")
-          console.log(token)
+    e.preventDefault();
+    console.log(userName);
+    console.log(password);
 
-          const result = response.data["role"];
-          if (result === "admin") {
-            localStorage.setItem('role', JSON.stringify('A'));
-            // Redirect to admin dashboard
-            window.location.href = "/admindashboard";
-          } else if (result === "teacher") {
-            localStorage.setItem('role', JSON.stringify('T'));
-            // Redirect to teacher dashboard
-            window.location.href = "/teacherdashboard";
-            window.locadmindashboard
-          } else if (result === "student") {
-            localStorage.setItem('role', JSON.stringify('S'));
-            // Redirect to student dashboard
-            window.location.href = "/studentdashboard";
-          } else {
-            // Handle other cases or show an error message
-            console.error("Invalid response from server");
-          }
-        } 
-        catch (error) {
-            console.log(error);
+    try {
+      console.log("heheheheheh");
+      const response = await axios.post(
+        "http://localhost:3000/login",
+        { userId: userName, password: password },
+        { withCredentials: true }
+      );
+      const { id, role, token } = response.data;
+      setToken(token);
+
+      console.log(response);
+      console.log("this is token:");
+      console.log(token);
+
+      const result = response.data["role"];
+      if (result === "admin") {
+        localStorage.setItem("role", JSON.stringify("A"));
+        // Redirect to admin dashboard
+        window.location.href = "/admindashboard";
+      } else if (result === "teacher") {
+        localStorage.setItem("role", JSON.stringify("T"));
+        // Redirect to teacher dashboard
+        window.location.href = "/teacherdashboard";
+        window.locadmindashboard;
+      } else if (result === "student") {
+        localStorage.setItem("role", JSON.stringify("S"));
+        // Redirect to student dashboard
+        window.location.href = "/studentdashboard";
+      } else {
+        // Handle other cases or show an error message
+        console.error("Invalid response from server");
       }
-  }
+    } catch (error) {
+      setIsDangerInput(true);
+      setIsDangerMessage(true);
+    }
+  };
 
   /* End Authintication */
 
@@ -113,7 +76,9 @@ const Login = () => {
               </div>
               <div className="login-right">
                 <div className="login-right-wrap">
-                  <h1 style={{marginBottom:'40px', textAlign: 'center'}}>Welcome to EduCare</h1>
+                  <h1 style={{ marginBottom: "40px", textAlign: "center" }}>
+                    Welcome to EduCare
+                  </h1>
                   {/* Form */}
                   {/* <form action="./admindashboard"> */}
                   <form onSubmit={handleSubmit}>
@@ -121,8 +86,18 @@ const Login = () => {
                       <label>
                         Username <span className="login-danger">*</span>
                       </label>
-                      <input className="form-control" type="text" value={userName}
-                        onChange={(e) => setUserName(e.target.value)} />
+                      <input
+                        className={`form-control ${
+                          isDangerInput && " badge-outline-danger table"
+                        }`}
+                        type="text"
+                        value={userName}
+                        onChange={(e) => {
+                          setUserName(e.target.value);
+                          setIsDangerInput(false);
+                        }}
+                        required
+                      />
                       <span className="profile-views">
                         <i className="fas fa-user-circle" />
                       </span>
@@ -134,9 +109,15 @@ const Login = () => {
 
                       <input
                         type={passwordVisible ? "" : "password"}
-                        className="form-control pass-input"
+                        className={`form-control ${
+                          isDangerInput && " badge-outline-danger table"
+                        }`}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          setIsDangerInput(false);
+                        }}
+                        required
                       />
                       <span
                         className="toggle-password"
@@ -149,6 +130,7 @@ const Login = () => {
                         )}
                       </span>
                     </div>
+
                     <div className="forgotpass">
                       <div className="remember-me">
                         <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
@@ -169,6 +151,17 @@ const Login = () => {
                       </button>
                     </div>
                   </form>
+                  {isDangerMessage && (
+                    <div
+                      className="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                      onClick={() => {
+                        setIsDangerMessage(false);
+                      }}
+                    >
+                      <strong>Invalid username or password</strong>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
