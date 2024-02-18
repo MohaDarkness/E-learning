@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {Redirect, Route, Routes} from "react-router-dom";
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import { Redirect, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 import Login from "./components/pages/Authentication";
-import config from 'config';
+import config from "config";
 import BlogView from "./components/pages/Blog/BlogView";
 import PendingBlog from "./components/pages/Blog/PendingBlog";
 import AddBlog from "./components/pages/Blog/AddBlog";
@@ -168,43 +167,36 @@ import courseInfo from "./components/pages/Course/CourseInfo";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import AdminDashboard from "./components/pages/Dashboard/AdminDashboard";
-
-
+import LoadingPage from "./components/pages/Authentication/LoadingPage";
 
 const appcontainer = (props) => {
-  const [role, setRole] = useState(null)
-  const student= ['/studentdashboard','/Error404']
-  const teacher= ['/teacherdashboard', '/Error404']
+  const [role, setRole] = useState(null);
+  const student = ["/studentdashboard", "/Error404", "/students"];
+  const teacher = ["/teacherdashboard", "/Error404", "/students"];
   const history = useHistory();
   const validate = (endpoint, component) => {
-    console.log("wrerwr")
-      async function fetchData() {
-        try {
-          const res =  await axios.get("http://localhost:3000/validate", {withCredentials: true})
-          setRole(res.data)
-        } catch (err) {
-          console.log("Fefef")
-          setRole('')
-        }
+    async function fetchData() {
+      try {
+        const res = await axios.get("http://localhost:3000/validate", {
+          withCredentials: true,
+        });
+        setRole(res.data);
+      } catch (err) {
+        setRole("");
       }
-      fetchData()
+    }
+    fetchData();
 
-    if(role === 'student' && student.indexOf(endpoint) === -1){
-      //return StudentsDashboard
-      return <Redirect to={'/studentdashboard'}/>
+    if (role === "student" && student.indexOf(endpoint) === -1) {
+      return <Redirect to={"/studentdashboard"} />;
+    } else if (role === "teacher" && teacher.indexOf(endpoint) === -1) {
+      return <Redirect to={"/teacherdashboard"} />;
+    } else if (role === "") {
+      return <Redirect to={"/error404"} />;
+    } else if (role) {
+      return component;
     }
-
-    if(role === 'teacher' && teacher.indexOf(endpoint) === -1){
-      return <Redirect to={'/teacherdashboard'}/>
-    }
-    if(role === ''){
-      return <Redirect to={'/error404'}/>
-    }
-    if(role) {
-      return component
-    }
-
-  }
+  };
   return (
     <Router basename={`${config.publicPath}`}>
       <Switch>
@@ -212,10 +204,20 @@ const appcontainer = (props) => {
         <Route path="/register" component={Register} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/error404" component={Error404} />
-        <Route path="/admindashboard" render={() => validate('/admindashboard', <AdminDashboard />)}/>
+        <Route path="/loadingpage" component={LoadingPage} />
+        <Route
+          path="/admindashboard"
+          render={() => validate("/admindashboard", <AdminDashboard />)}
+        />
 
-        <Route path="/teacherdashboard" render={() => validate('/teacherdashboard', <TeacherDashboard />)} />
-        <Route path="/studentdashboard" render={() => validate('/studentdashboard', <StudentsDashboard />)} />
+        <Route
+          path="/teacherdashboard"
+          render={() => validate("/teacherdashboard", <TeacherDashboard />)}
+        />
+        <Route
+          path="/studentdashboard"
+          render={() => validate("/studentdashboard", <StudentsDashboard />)}
+        />
 
         <Route path="/blog" component={BlogView} />
         <Route path="/pendingblog" component={PendingBlog} />
@@ -293,7 +295,11 @@ const appcontainer = (props) => {
         <Route path="/salary" component={Salary} />
         <Route path="/addsalary" component={AddSalary} />
 
-        <Route path="/holiday" component={Holiday} />
+        {/* <Route path="/holiday" component={Holiday} /> */}
+        <Route
+          path="/holiday"
+          render={() => validate("/holiday", <Holiday />)}
+        />
         <Route path="/addholiday" component={AddHoliday} />
 
         <Route path="/fees" component={Fees} />
@@ -397,6 +403,6 @@ const appcontainer = (props) => {
       </Switch>
     </Router>
   );
-}
+};
 
-export default appcontainer
+export default appcontainer;
