@@ -22,7 +22,7 @@ import InvoiceSettings from "./components/pages/Invoice/InvoiceSettings";
 import InvoiceList from "./components/pages/Invoice/InvoiceList";
 import Register from "./components/pages/Authentication/Register";
 import ForgotPassword from "./components/pages/Authentication/ForgotPassword";
-import AdminDashboard from "./components/pages/Dashboard/AdminDashboard";
+// import AdminDashboard from "./components/pages/Dashboard/AdminDashboard";
 import Blogdetails from "./components/pages/Blog/Blogdetails";
 import Profile from "./components/pages/Blog/Profile";
 import TaxSetting from "./components/pages/Invoice/TaxSetting";
@@ -167,7 +167,7 @@ import EditEvent from "./components/pages/Events/EditEvent";
 import courseInfo from "./components/pages/Course/CourseInfo";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Admindashboard from "./dashboard/Admindashboard";
+import AdminDashboard from "./components/pages/Dashboard/AdminDashboard";
 
 
 
@@ -212,9 +212,10 @@ const appcontainer = (props) => {
         <Route path="/register" component={Register} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/error404" component={Error404} />
-        <Route path="/admindashboard" render={() => validate('/admindashboard', <Admindashboard />)}/>
+        <Route path="/admindashboard" render={() => validate('/admindashboard', <AdminDashboard />)}/>
+
         <Route path="/teacherdashboard" render={() => validate('/teacherdashboard', <TeacherDashboard />)} />
-        <Route path="/studentdashboard" render={() => validate('/studentdashboard', <TeacherDashboard />)} />
+        <Route path="/studentdashboard" render={() => validate('/studentdashboard', <StudentsDashboard />)} />
 
         <Route path="/blog" component={BlogView} />
         <Route path="/pendingblog" component={PendingBlog} />
