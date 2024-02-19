@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";import Header from "../../Header/Header";
+import { Link } from "react-router-dom";
+import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
-import { avatar02, avatar03, avatar04,} from "../../imagepath";
+import { avatar02, avatar03, avatar04 } from "../../imagepath";
 
 const Tableavatar = () => {
   return (
@@ -179,7 +180,7 @@ const Tableavatar = () => {
           </div>
           {/* Footer */}
           <footer>
-            <p>Copyright © 2022 Dreamguys.</p>
+            <p>Copyright © 2024 EduCare.</p>
           </footer>
           {/* /Footer */}
         </div>

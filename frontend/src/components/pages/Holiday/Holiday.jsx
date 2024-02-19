@@ -1,120 +1,130 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
-import { pagination, Table } from "antd"
-import {img1, img10, img2, img3, img4, img5, img6, img7, img8, img9 } from "../../imagepath";
-import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import {onShowSizeChange,itemRender} from "../../Pagination"
-import { useState } from 'react'
+import { pagination, Table } from "antd";
+import {
+  img1,
+  img10,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+} from "../../imagepath";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
+import { onShowSizeChange, itemRender } from "../../Pagination";
+import { useState } from "react";
 
 const Holiday = () => {
-    // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-    // const onSelectChange = (newSelectedRowKeys) => {
-    //   console.log("selectedRowKeys changed: ", selectedRowKeys);
-    //   setSelectedRowKeys(newSelectedRowKeys);
-    // };
-  
-    // const rowSelection = {
-    //   selectedRowKeys,
-    //   onChange: onSelectChange,
-    // };
+  // const onSelectChange = (newSelectedRowKeys) => {
+  //   console.log("selectedRowKeys changed: ", selectedRowKeys);
+  //   setSelectedRowKeys(newSelectedRowKeys);
+  // };
 
-    const datasource = [
-        {
-            id:1,
-          ID: "PRE2209",
-          HolidayName: "Sports Day",
-          Type: "College Holiday",
-          StartDate: "17 Aug 2020",
-          EndDate: "19 Aug 2020"
-        },
-        {
-            id:2,
-          ID: "PRE2213",
-          HolidayName: "Memorial Day",
-          Type: "Public Holiday",
-          StartDate: "05 Aug 2020",
-          EndDate: "06 Aug 2020"
-        },
-        {
-            id:3,
-          ID: "PRE2143",
-          HolidayName: "Annual Day",
-          Type: "College Holiday",
-          StartDate: "04 Sept 2020",
-          EndDate: "07 Sept 2020"
-        },
-        {
-            id:4,
-          ID: "PRE2431",
-          HolidayName: "Exam Holiday",
-          Type: "Semester leave",
-          StartDate: "17 Sept 2020",
-          EndDate: "30 Sept 2020"
-        },
-        {
-            id:5,
-          ID: "PRE2209",
-          HolidayName: "Sports Day",
-          Type: "College Holiday",
-          StartDate: "17 Aug 2020",
-          EndDate: "19 Aug 2020"
-        },
-        {
-            id:6,
-          ID: "PRE2213",
-          HolidayName: "Memorial Day",
-          Type: "Public Holiday",
-          StartDate: "05 Aug 2020",
-          EndDate: "06 Aug 2020"
-        },
-        {
-            id:7,
-          ID: "PRE2143",
-          HolidayName: "Annual Day",
-          Type: "College Holiday",
-          StartDate: "04 Sept 2020",
-          EndDate: "07 Sept 2020"
-        },
-        {
-            id:8,
-          ID: "PRE2431",
-          HolidayName: "Exam Holiday",
-          Type: "Semester leave",
-          StartDate: "17 Sept 2020",
-          EndDate: "30 Sept 2020"
-        }
-       ]
-       const column = [
-        {
-            title: "ID",
-            dataIndex: "ID",
-            sorter: (a, b) => a.ID.length - b.ID.length
-        },
-        {
-            title: "Holiday Name",
-            dataIndex: "HolidayName",
-            sorter: (a, b) => a.HolidayName.length - b.HolidayName.length,
-        },
-        {
-            title: "Type",
-            dataIndex: "Type",
-            sorter: (a, b) => a.Type.length - b.Type.length
-        },
-        {
-            title: "Start Date",
-            dataIndex: "StartDate",
-            sorter: (a, b) => a.StartDate.length - b.StartDate.length
-        },
-        {
-            title: "End Date",
-            dataIndex: "EndDate",
-            sorter: (a, b) => a.EndDate.length - b.EndDate.length
-        },
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange,
+  // };
 
-    ]     
+  const datasource = [
+    {
+      id: 1,
+      ID: "PRE2209",
+      HolidayName: "Sports Day",
+      Type: "College Holiday",
+      StartDate: "17 Aug 2020",
+      EndDate: "19 Aug 2020",
+    },
+    {
+      id: 2,
+      ID: "PRE2213",
+      HolidayName: "Memorial Day",
+      Type: "Public Holiday",
+      StartDate: "05 Aug 2020",
+      EndDate: "06 Aug 2020",
+    },
+    {
+      id: 3,
+      ID: "PRE2143",
+      HolidayName: "Annual Day",
+      Type: "College Holiday",
+      StartDate: "04 Sept 2020",
+      EndDate: "07 Sept 2020",
+    },
+    {
+      id: 4,
+      ID: "PRE2431",
+      HolidayName: "Exam Holiday",
+      Type: "Semester leave",
+      StartDate: "17 Sept 2020",
+      EndDate: "30 Sept 2020",
+    },
+    {
+      id: 5,
+      ID: "PRE2209",
+      HolidayName: "Sports Day",
+      Type: "College Holiday",
+      StartDate: "17 Aug 2020",
+      EndDate: "19 Aug 2020",
+    },
+    {
+      id: 6,
+      ID: "PRE2213",
+      HolidayName: "Memorial Day",
+      Type: "Public Holiday",
+      StartDate: "05 Aug 2020",
+      EndDate: "06 Aug 2020",
+    },
+    {
+      id: 7,
+      ID: "PRE2143",
+      HolidayName: "Annual Day",
+      Type: "College Holiday",
+      StartDate: "04 Sept 2020",
+      EndDate: "07 Sept 2020",
+    },
+    {
+      id: 8,
+      ID: "PRE2431",
+      HolidayName: "Exam Holiday",
+      Type: "Semester leave",
+      StartDate: "17 Sept 2020",
+      EndDate: "30 Sept 2020",
+    },
+  ];
+  const column = [
+    {
+      title: "ID",
+      dataIndex: "ID",
+      sorter: (a, b) => a.ID.length - b.ID.length,
+    },
+    {
+      title: "Holiday Name",
+      dataIndex: "HolidayName",
+      sorter: (a, b) => a.HolidayName.length - b.HolidayName.length,
+    },
+    {
+      title: "Type",
+      dataIndex: "Type",
+      sorter: (a, b) => a.Type.length - b.Type.length,
+    },
+    {
+      title: "Start Date",
+      dataIndex: "StartDate",
+      sorter: (a, b) => a.StartDate.length - b.StartDate.length,
+    },
+    {
+      title: "End Date",
+      dataIndex: "EndDate",
+      sorter: (a, b) => a.EndDate.length - b.EndDate.length,
+    },
+  ];
   return (
     <>
       <div className="main-wrapper">
@@ -156,10 +166,7 @@ const Holiday = () => {
                           <Link to="#" className="btn btn-outline-primary me-2">
                             <i className="fas fa-download" /> Download
                           </Link>
-                          <Link
-                            to="/addholiday"
-                            className="btn btn-primary"
-                          >
+                          <Link to="/addholiday" className="btn btn-primary">
                             <i className="fas fa-plus" />
                           </Link>
                         </div>
@@ -168,7 +175,7 @@ const Holiday = () => {
                     {/* /Page Header */}
                     <div className="table-responsive">
                       <Table
-                      className="table border-0 star-student table-hover table-center mb-0 datatable table-striped dataTable no-footer"
+                        className="table border-0 star-student table-hover table-center mb-0 datatable table-striped dataTable no-footer"
                         pagination={{
                           total: datasource.length,
                           showTotal: (total, range) =>
@@ -190,7 +197,7 @@ const Holiday = () => {
           </div>
           {/* Footer */}
           <footer>
-            <p>Copyright © 2022 Dreamguys.</p>
+            <p>Copyright © 2024 EduCare.</p>
           </footer>
           {/* /Footer */}
         </div>

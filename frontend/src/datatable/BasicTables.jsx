@@ -354,7 +354,7 @@ const BasicTables = () => {
 		
 			{/* <!-- Footer --> */}
 			<footer>
-				<p>Copyright © 2020 Dreamguys.</p>					
+				<p>Copyright © 2024 EduCare.</p>					
 			</footer>
 			{/* <!-- /Footer --> */}
 			
