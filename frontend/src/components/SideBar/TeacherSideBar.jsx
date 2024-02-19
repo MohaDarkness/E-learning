@@ -118,11 +118,11 @@ const TeacherSidebar = (props) => {
 
                 <li
                   className={`${
-                    "/subject" === pathName ? "active submenu" : "submenu"
+                    "/courses" === pathName ? "active submenu" : "submenu"
                   }`}
                 >
                   <Link
-                    to="/subject"
+                    to="/courses"
                     className={isSideMenu == "Subjects" ? "subdrop" : ""}
                     onClick={() =>
                       toggleSidebar(isSideMenu == "Subjects" ? "" : "Subjects")

@@ -229,7 +229,7 @@ const AdminSidebar = (props) => {
 
                 <li
                   className={`${
-                    "/subject" === pathName ||
+                    "/courses" === pathName ||
                     "/addcourse" === pathName ||
                     "/editsubject" === pathName
                       ? "active submenu"
@@ -254,9 +254,9 @@ const AdminSidebar = (props) => {
                     >
                       <li>
                         <Link
-                          to="/subject"
+                          to="/courses"
                           className={`${
-                            "/subject" === pathName ? "active" : ""
+                            "/courses" === pathName ? "active" : ""
                           }`}
                         >
                           List

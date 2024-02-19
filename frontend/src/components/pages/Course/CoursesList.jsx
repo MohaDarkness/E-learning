@@ -7,9 +7,12 @@ import { onShowSizeChange, itemRender } from "../../Pagination";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import Footer from "../../Footer/Footer";
+import { useEffect } from "react";
+import axios from "axios";
 
-const SubjectList = () => {
+const CourseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [datasource, setDatasource] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -24,75 +27,94 @@ const SubjectList = () => {
     console.log(id);
   };
 
-  const datasource = [
-    {
-      id: "1",
-      SubjectID: "PRE2209",
-      Name: "Mathematics",
-      NumOfSections: 2,
-      Action: "",
-    },
-    {
-      id: "2",
-      SubjectID: "PRE2213",
-      Name: "History",
-      NumOfSections: 1,
-      Action: "",
-    },
-    {
-      id: "3",
-      SubjectID: "PRE2143",
-      Name: "Science",
-      NumOfSections: 3,
-      Action: "",
-    },
-    {
-      id: "4",
-      SubjectID: "PRE2431",
-      Name: "Geography",
-      NumOfSections: 3,
-      Action: "",
-    },
-    {
-      id: "5",
-      SubjectID: "PRE1534",
-      Name: "Botony",
-      NumOfSections: 4,
-      Action: "",
-    },
-    {
-      id: "6",
-      SubjectID: "PRE2153",
-      Name: "English",
-      NumOfSections: 1,
-      Action: "",
-    },
-  ];
+  // const datasource = [
+  //   {
+  //     id: "1",
+  //     SubjectID: "PRE2209",
+  //     Name: "Mathematics",
+  //     NumOfSections: 2,
+  //     Action: "",
+  //   },
+  // ];
+  const URL = "http://localhost:3000/courses";
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(URL, { withCredentials: true });
+        console.log(res.data);
+        setDatasource(res.data);
+        console.log(datasource);
+      } catch (err) {
+        console.log(err);
+        if (err.response.status === 401 || err.response.status === 403)
+          history.push("/error404");
+      }
+    }
+    fetchData()
+      .then(() => {
+        setLoading(false);
+        console.log("data fetched");
+      })
+      .catch((err) => {
+        console.log("an error occurred " + err);
+      });
+  }, []);
+
   const column = [
     {
       title: "ID",
-      dataIndex: "SubjectID",
+      dataIndex: "courseId",
       sorter: (a, b) => a.DepartmentID.length - b.DepartmentID.length,
     },
     {
-      title: "Name",
-      dataIndex: "Name",
-      sorter: (a, b) => a.Name.length - b.Name.length,
+      title: "Course Name",
+      dataIndex: "name",
+      sorter: (a, b) => a.name.length - b.name.length,
+      render: (text, record) => (
+        <>
+          <p className="table-avatar">
+            {record.name
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </p>
+        </>
+      ),
     },
     {
-      title: "# Sections",
-      dataIndex: "NumOfSections",
+      title: "Department",
+      dataIndex: "department",
+      sorter: (a, b) => a.Name.length - b.Name.length,
+      render: (text, record) => (
+        <>
+          <p className="table-avatar">
+            {record.department
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Number of Sections",
+      dataIndex: "",
       sorter: (a, b) => a.NumOfSections - b.NumOfSections,
       render: (text, record) => (
         <>
           <h2 className="table-avatar">
             <Link to="/sections" className="avatar avatar-sm me-2 ">
-              {record.NumOfSections}
+              {record.sections.length}
             </Link>
             {/* <Link className='text-dark' to="/userview">{record.Name}</Link> */}
           </h2>
         </>
       ),
+    },
+    {
+      title: "Credit Hours",
+      dataIndex: "hours",
+      sorter: (a, b) => a.Name.length - b.Name.length,
     },
     {
       title: "Action",
@@ -125,6 +147,7 @@ const SubjectList = () => {
       ),
     },
   ];
+
   return (
     <>
       <div className="main-wrapper">
@@ -239,4 +262,4 @@ const SubjectList = () => {
   );
 };
 
-export default SubjectList;
+export default CourseList;

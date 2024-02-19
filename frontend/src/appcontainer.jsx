@@ -48,7 +48,7 @@ import TeachersGrid from "./components/pages/Teachers/TeachersGrid";
 import DepartmentList from "./components/pages/Department/DepartmentList";
 import AddDepartment from "./components/pages/Department/AddDepartment";
 import EditDepartment from "./components/pages/Department/EditDepartment";
-import SubjectList from "./components/pages/Course/CoursesList";
+import CourseList from "./components/pages/Course/CoursesList";
 import AddCourse from "./components/pages/Course/AddCourse";
 import EditSubject from "./components/pages/Course/EditCourse";
 import AddSection from "./components/pages/CourseSection/AddSection";
@@ -277,7 +277,7 @@ const appcontainer = (props) => {
         <Route path="/adddepartment" component={AddDepartment} />
         <Route path="/editdepartment" component={EditDepartment} />
 
-        <Route path="/subject" component={SubjectList} />
+        <Route path="/courses" component={CourseList} />
         <Route path="/addcourse" component={AddCourse} />
         <Route path="/editsubject" component={EditSubject} />
         <Route path="/courseInfo" component={courseInfo} />

@@ -157,7 +157,7 @@ const Sidebar = () => {
                   </a>
                   <ul>
                     <li>
-                      <Link to="/Subject">Subject List</Link>
+                      <Link to="/courses">Subject List</Link>
                     </li>
                     <li>
                       <Link to="/addcourse">Subject Add</Link>

@@ -8,7 +8,7 @@ import Header from "../../Header/Header";
 import SideBar from "../../SideBar/MySideBar";
 import Footer from "../../Footer/Footer";
 
-const SubjectList = () => {
+const CourseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -216,4 +216,4 @@ const SubjectList = () => {
   );
 };
 
-export default SubjectList;
+export default CourseList;
