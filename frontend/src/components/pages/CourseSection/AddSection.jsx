@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import Select from "react-select";
+import axios from "axios";
 
 const AddSection = () => {
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedClassroom, setSelectedClassroom] = useState(null);
+  const [courseId, setCourseId] = useState(null);
+  const [teacherId, setTeacherId] = useState(null);
+  const [time, setTime] = useState(null);
+  const [classroom, setClassroom] = useState(null);
+  const [days, setDays] = useState([]);
 
   const times = [
     { value: "8am", label: "8:00am - 9:00am" },
@@ -37,11 +41,62 @@ const AddSection = () => {
     { value: "305", label: "305" },
   ];
 
-  const handleTimeChange = (selectedTime) => {
-    setSelectedTime(selectedTime);
+  const handleTimeChange = (time) => {
+    setTime(time);
   };
-  const handleClassroomChange = (selectedClassroom) => {
-    setSelectedClassroom(selectedClassroom);
+  const handleClassroomChange = (classroom) => {
+    setClassroom(classroom);
+  };
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      // If checkbox is checked, add the value to the days array
+      setDays((prevDays) => [...prevDays, value]);
+    } else {
+      // If checkbox is unchecked, remove the value from the days array
+      setDays((prevDays) => prevDays.filter((day) => day !== value));
+    }
+  };
+
+  const URL = "http://localhost:3000/section";
+  const submitSection = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+
+    const data = {
+      course: courseId,
+      teacher: teacherId,
+      room: classroom.label,
+      time: time.label,
+      days: days.join("-"),
+    };
+
+    console.log("this is the data:");
+    console.log(data);
+
+    try {
+      axios
+        .post(URL, data, { withCredentials: true })
+        .then((res) => {
+          console.log(res);
+          setCreationStatus({
+            status: "success",
+            message: "Course been created successfully",
+          });
+        })
+        .catch((err) => {
+          console.log("Check the error:");
+          console.log(err.response.data);
+          console.log(err);
+          setCreationStatus({
+            status: "error",
+            message: "GENERAL ERROR: something went wrong!",
+          });
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
@@ -63,19 +118,20 @@ const AddSection = () => {
                   <h3 className="page-title">Add Section</h3>
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="/addcourse">Add Section</Link>
+                      <Link to="/sections">Sections</Link>
                     </li>
-                    <li className="breadcrumb-item active">Sections</li>
+                    <li className="breadcrumb-item active">Add Section</li>
                   </ul>
                 </div>
               </div>
             </div>
+            <p>{days.join("-")}</p>
             {/* /Page Header */}
             <div className="row">
               <div className="col-sm-12">
                 <div className="card">
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={submitSection}>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title">
@@ -91,6 +147,10 @@ const AddSection = () => {
                               type="text"
                               className="form-control"
                               required
+                              value={courseId}
+                              onChange={(e) => {
+                                setCourseId(e.target.value);
+                              }}
                             />
                           </div>
                         </div>
@@ -102,6 +162,10 @@ const AddSection = () => {
                             <input
                               type="text"
                               className="form-control"
+                              value={teacherId}
+                              onChange={(e) => {
+                                setTeacherId(e.target.value);
+                              }}
                               required
                             />
                           </div>
@@ -113,7 +177,7 @@ const AddSection = () => {
                             </label>
                             <Select
                               className="w-100 local-forms  select"
-                              value={selectedTime}
+                              value={time}
                               onChange={handleTimeChange}
                               options={times}
                               placeholder="Chose Time"
@@ -128,7 +192,7 @@ const AddSection = () => {
                             </label>
                             <Select
                               className="w-100 local-forms  select"
-                              value={selectedClassroom}
+                              value={classroom}
                               onChange={handleClassroomChange}
                               options={classrooms}
                               placeholder="Chose Classroom"
@@ -142,35 +206,67 @@ const AddSection = () => {
                           <div className="col-md-10">
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" /> Sunday
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Sun"}
+                                />{" "}
+                                Sunday
                               </label>
                             </div>
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" /> Monday
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Mon"}
+                                />{" "}
+                                Monday
                               </label>
                             </div>
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" />{" "}
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Tue"}
+                                />{" "}
                                 Tuesday
                               </label>
                             </div>
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" />{" "}
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Wed"}
+                                />{" "}
                                 Wednesday
                               </label>
                             </div>
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" />{" "}
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Thu"}
+                                />{" "}
                                 Thursday
                               </label>
                             </div>
                             <div className="checkbox">
                               <label>
-                                <input type="checkbox" name="checkbox" />{" "}
+                                <input
+                                  type="checkbox"
+                                  name="checkbox"
+                                  onChange={handleCheckboxChange}
+                                  value={"Sat"}
+                                />{" "}
                                 Satarday
                               </label>
                             </div>
