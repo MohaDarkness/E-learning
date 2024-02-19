@@ -1,101 +1,101 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../../Header/Header'
-import SideBar from '../../SideBar/SideBar'
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "../../Header/Header";
+import SideBar from "../../SideBar/SideBar";
 
-const AddSubject = () => {
-    return (
-        <>
-            <div className="main-wrapper">
-                {/* Header */}
-                <Header />
+const AddCourse = () => {
+  return (
+    <>
+      <div className="main-wrapper">
+        {/* Header */}
+        <Header />
 
-                {/* Sidebar */}
-                <SideBar />
+        {/* Sidebar */}
+        <SideBar />
 
-                {/* Page Wrapper */}
+        {/* Page Wrapper */}
 
-                <div className="page-wrapper">
-                    <div className="content container-fluid">
-                        {/* Page Header */}
-                        <div className="page-header">
-                            <div className="row align-items-center">
-                                <div className="col">
-                                    <h3 className="page-title">Add Course</h3>
-                                    <ul className="breadcrumb">
-                                        <li className="breadcrumb-item">
-                                            <Link to="/addsubject">Add Course</Link>
-                                        </li>
-                                        <li className="breadcrumb-item active">Courses</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        {/* /Page Header */}
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <form>
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <h5 className="form-title">
-                                                        <span>Course Information</span>
-                                                    </h5>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            Course ID <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input type="text" className="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            Course Name <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input type="text" className="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            Department<span className="login-danger">*</span>
-                                                        </label>
-                                                        <input type="text" className="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            Creidt Hours<span className="login-danger">*</span>
-                                                        </label>
-                                                        <input type="text" className="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="student-submit">
-                                                        <button type="submit" className="btn btn-primary">
-                                                            Submit
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="page-wrapper">
+          <div className="content container-fluid">
+            {/* Page Header */}
+            <div className="page-header">
+              <div className="row align-items-center">
+                <div className="col">
+                  <h3 className="page-title">Add Course</h3>
+                  <ul className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/addsubject">Add Course</Link>
+                    </li>
+                    <li className="breadcrumb-item active">Courses</li>
+                  </ul>
                 </div>
-
+              </div>
             </div>
-            {/* /Main Wrapper */}
+            {/* /Page Header */}
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="card">
+                  <div className="card-body">
+                    <form>
+                      <div className="row">
+                        <div className="col-12">
+                          <h5 className="form-title">
+                            <span>Course Information</span>
+                          </h5>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Course ID <span className="login-danger">*</span>
+                            </label>
+                            <input type="text" className="form-control" />
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Course Name{" "}
+                              <span className="login-danger">*</span>
+                            </label>
+                            <input type="text" className="form-control" />
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Department<span className="login-danger">*</span>
+                            </label>
+                            <input type="text" className="form-control" />
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="form-group local-forms">
+                            <label>
+                              Creidt Hours
+                              <span className="login-danger">*</span>
+                            </label>
+                            <input type="text" className="form-control" />
+                          </div>
+                        </div>
+                        <div className="col-12">
+                          <div className="student-submit">
+                            <button type="submit" className="btn btn-primary">
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* /Main Wrapper */}
+    </>
+  );
+};
 
-        </>
-    )
-}
-
-export default AddSubject
+export default AddCourse;

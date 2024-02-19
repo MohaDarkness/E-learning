@@ -49,7 +49,7 @@ import DepartmentList from "./components/pages/Department/DepartmentList";
 import AddDepartment from "./components/pages/Department/AddDepartment";
 import EditDepartment from "./components/pages/Department/EditDepartment";
 import SubjectList from "./components/pages/Course/CoursesList";
-import AddSubject from "./components/pages/Course/AddCourse";
+import AddCourse from "./components/pages/Course/AddCourse";
 import EditSubject from "./components/pages/Course/EditCourse";
 import AddSection from "./components/pages/CourseSection/AddSection";
 import SectionsList from "./components/pages/CourseSection/SectionsList";
@@ -278,7 +278,7 @@ const appcontainer = (props) => {
         <Route path="/editdepartment" component={EditDepartment} />
 
         <Route path="/subject" component={SubjectList} />
-        <Route path="/addsubject" component={AddSubject} />
+        <Route path="/addcourse" component={AddCourse} />
         <Route path="/editsubject" component={EditSubject} />
         <Route path="/courseInfo" component={courseInfo} />
 

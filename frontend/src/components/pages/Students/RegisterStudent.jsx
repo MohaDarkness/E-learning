@@ -204,9 +204,8 @@ const RegisterStudent = () => {
 
   return (
     <div>
-      {loading ? (
-        <LoadingPage />
-      ) : (
+      {loading && <LoadingPage />} (
+      {!loading && (
         <>
           <div className="main-wrapper">
             {/* Header */}
