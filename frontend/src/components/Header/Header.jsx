@@ -1,39 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-    logo, logosmall, headericon01, headericon05, avatar02, avatar11, avatar17,avatar13, 
-    headericon04, avatar01, lr, bl, cn
+  logo,
+  logosmall,
+  headericon01,
+  headericon05,
+  avatar02,
+  avatar11,
+  avatar17,
+  avatar13,
+  headericon04,
+  avatar01,
+  lr,
+  bl,
+  cn,
 } from "../imagepath";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
+  const history = useHistory();
+  const handlesidebar = () => {
+    document.body.classList.toggle("mini-sidebar");
+  };
 
-    const handlesidebar = () => {
-        document.body.classList.toggle("mini-sidebar");
-      };
+  const handlesidebarmobilemenu = () => {
+    document.body.classList.toggle("slide-nav");
+  };
 
-      const handlesidebarmobilemenu=()=>{
-        document.body.classList.toggle('slide-nav');
-      }
-
-    useEffect(() => {
-        const handleClick = () => {
-          if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-          } else {
-            if (document.exitFullscreen) {
-              document.exitFullscreen();
-            }
-          }
+  useEffect(() => {
+    const handleClick = () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
         }
-    
-        const maximizeBtn = document.querySelector('.win-maximize');
-        maximizeBtn.addEventListener('click', handleClick);
-    
-        return () => {
-          maximizeBtn.removeEventListener('click', handleClick);
-        };
-        
-      }, []);
+      }
+    };
+
+    const maximizeBtn = document.querySelector(".win-maximize");
+    maximizeBtn.addEventListener("click", handleClick);
+
+    return () => {
+      maximizeBtn.removeEventListener("click", handleClick);
+    };
+  }, []);
   return (
     <>
       {/* Header */}
@@ -54,7 +67,12 @@ const Header = () => {
           </Link>
         </div>
         {/* Mobile Menu Toggle */}
-        <Link to="#" className="mobile_btn" id="mobile_btn" onClick={() => handlesidebarmobilemenu()}>
+        <Link
+          to="#"
+          className="mobile_btn"
+          id="mobile_btn"
+          onClick={() => handlesidebarmobilemenu()}
+        >
           <i className="fas fa-bars" />
         </Link>
         {/* /Mobile Menu Toggle */}
@@ -268,9 +286,15 @@ const Header = () => {
               <Link className="dropdown-item" to="/inbox">
                 Inbox
               </Link>
-              <Link className="dropdown-item" to="/login">
+              <button
+                className="dropdown-item"
+                onClick={async (e) => {
+                  Cookies.remove("jwt");
+                  history.push("/login");
+                }}
+              >
                 Logout
-              </Link>
+              </button>
             </div>
           </li>
           {/* /User Menu */}
@@ -280,6 +304,6 @@ const Header = () => {
       {/* /Header */}
     </>
   );
-}
+};
 
-export default Header
+export default Header;
