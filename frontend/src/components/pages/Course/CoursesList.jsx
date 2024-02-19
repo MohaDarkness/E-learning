@@ -202,7 +202,7 @@ const SubjectList = () => {
                           <h3 className="page-title">Courses</h3>
                         </div>
                         <div className="col-auto text-end float-end ms-auto">
-                          <Link to="/addsubject" className="btn btn-primary">
+                          <Link to="/addcourse" className="btn btn-primary">
                             <i className="fas fa-plus" />
                           </Link>
                         </div>

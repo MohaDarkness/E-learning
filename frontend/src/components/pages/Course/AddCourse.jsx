@@ -2,8 +2,74 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
+import { useState } from "react";
+import Select from "react-select";
+import axios from "axios";
 
 const AddCourse = () => {
+  const [courseId, setCourseId] = useState(null);
+  const [courseName, setCourseName] = useState(null);
+  const [department, setDepartment] = useState(null);
+  const [creditHours, setCreditHours] = useState("");
+  const [description, setDescription] = useState(null);
+  const [creationStatus, setCreationStatus] = useState({
+    status: "",
+    message: "",
+  });
+  const URL = "http://localhost:3000/courses";
+
+  const departments = [
+    { value: 1, label: "Information Technology" },
+    { value: 2, label: "Business" },
+    { value: 3, label: "Engineering" },
+  ];
+
+  const handleCreditHours = (e) => {
+    const input = e.target.value;
+    if (/^\d?$/.test(input)) {
+      setCreditHours(input);
+    } else setCreditHours("");
+  };
+
+  const submitCourse = (e) => {
+    e.preventDefault();
+    e.currentTarget.disabled = true;
+
+    const data = {
+      courseId: courseId,
+      name: courseName,
+      department: department.label,
+      hours: creditHours,
+      description: description,
+    };
+
+    console.log("this is the data:");
+    console.log(data);
+
+    try {
+      axios
+        .post(URL, data, { withCredentials: true })
+        .then((res) => {
+          console.log(res);
+          setCreationStatus({
+            status: "success",
+            message: "Course been created successfully",
+          });
+        })
+        .catch((err) => {
+          console.log("Check the error:");
+          console.log(err.response.data);
+          console.log(err);
+          setCreationStatus({
+            status: "error",
+            message: "GENERAL ERROR: something went wrong!",
+          });
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="main-wrapper">
@@ -24,7 +90,7 @@ const AddCourse = () => {
                   <h3 className="page-title">Add Course</h3>
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="/addsubject">Add Course</Link>
+                      <Link to="/addcourse">Add Course</Link>
                     </li>
                     <li className="breadcrumb-item active">Courses</li>
                   </ul>
@@ -36,7 +102,7 @@ const AddCourse = () => {
               <div className="col-sm-12">
                 <div className="card">
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={submitCourse}>
                       <div className="row">
                         <div className="col-12">
                           <h5 className="form-title">
@@ -48,7 +114,14 @@ const AddCourse = () => {
                             <label>
                               Course ID <span className="login-danger">*</span>
                             </label>
-                            <input type="text" className="form-control" />
+                            <input
+                              required
+                              type="text"
+                              className="form-control"
+                              onChange={(e) => {
+                                setCourseId(e.target.value);
+                              }}
+                            />
                           </div>
                         </div>
                         <div className="col-12 col-sm-4">
@@ -57,15 +130,32 @@ const AddCourse = () => {
                               Course Name{" "}
                               <span className="login-danger">*</span>
                             </label>
-                            <input type="text" className="form-control" />
+                            <input
+                              required
+                              type="text"
+                              className="form-control"
+                              onChange={(e) => {
+                                setCourseName(e.target.value);
+                              }}
+                            />
                           </div>
                         </div>
                         <div className="col-12 col-sm-4">
                           <div className="form-group local-forms">
                             <label>
-                              Department<span className="login-danger">*</span>
+                              Department
+                              <span className="login-danger">*</span>
                             </label>
-                            <input type="text" className="form-control" />
+                            <Select
+                              required
+                              className="w-100 local-forms select"
+                              value={department}
+                              onChange={(selectedOption) => {
+                                setDepartment(selectedOption);
+                              }}
+                              options={departments}
+                              placeholder="Select Department"
+                            />
                           </div>
                         </div>
                         <div className="col-12 col-sm-4">
@@ -74,7 +164,30 @@ const AddCourse = () => {
                               Creidt Hours
                               <span className="login-danger">*</span>
                             </label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              maxLength={1}
+                              className="form-control"
+                              value={creditHours}
+                              onChange={handleCreditHours}
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-12">
+                          <div className="form-group local-forms">
+                            <label>
+                              Course Description
+                              <span className="login-danger">*</span>
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              className="form-control"
+                              onChange={(e) => {
+                                setDescription(e.target.value);
+                              }}
+                            />
                           </div>
                         </div>
                         <div className="col-12">

@@ -41,7 +41,7 @@ const Subject = () => {
 							</div>
 							<div className="col-auto text-end float-end me-auto">
 								<a href="#" className="btn btn-outline-primary ms-2"><i className="fas fa-download"></i> Download</a>
-								<Link to="/addsubject" className="btn btn-primary"><i className="fas fa-plus"></i></Link>
+								<Link to="/addcourse" className="btn btn-primary"><i className="fas fa-plus"></i></Link>
 							</div>
 						</div>
 					</div>

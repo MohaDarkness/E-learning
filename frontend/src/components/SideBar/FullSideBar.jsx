@@ -372,7 +372,7 @@ const Sidebar = (props) => {
                 <li
                   className={`${
                     "/subject" === pathName ||
-                    "/addsubject" === pathName ||
+                    "/addcourse" === pathName ||
                     "/editsubject" === pathName
                       ? "active submenu"
                       : "submenu"
@@ -406,9 +406,9 @@ const Sidebar = (props) => {
                       </li>
                       <li>
                         <Link
-                          to="/addsubject"
+                          to="/addcourse"
                           className={`${
-                            "/addsubject" === pathName ? "active" : ""
+                            "/addcourse" === pathName ? "active" : ""
                           }`}
                         >
                           Subject Add
