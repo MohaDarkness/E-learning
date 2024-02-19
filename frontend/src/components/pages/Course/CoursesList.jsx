@@ -27,15 +27,6 @@ const CourseList = () => {
     console.log(id);
   };
 
-  // const datasource = [
-  //   {
-  //     id: "1",
-  //     SubjectID: "PRE2209",
-  //     Name: "Mathematics",
-  //     NumOfSections: 2,
-  //     Action: "",
-  //   },
-  // ];
   const URL = "http://localhost:3000/courses";
   useEffect(() => {
     async function fetchData() {
@@ -103,7 +94,10 @@ const CourseList = () => {
       render: (text, record) => (
         <>
           <h2 className="table-avatar">
-            <Link to="/sections" className="avatar avatar-sm me-2 ">
+            <Link
+              to={`/sections/${record.courseId}`}
+              className="avatar avatar-sm me-2 "
+            >
               {record.sections.length}
             </Link>
             {/* <Link className='text-dark' to="/userview">{record.Name}</Link> */}

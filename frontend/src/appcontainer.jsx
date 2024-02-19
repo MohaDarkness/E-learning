@@ -282,7 +282,7 @@ const appcontainer = (props) => {
         <Route path="/editsubject" component={EditSubject} />
         <Route path="/courseInfo" component={courseInfo} />
 
-        <Route path="/sections" component={SectionsList} />
+        <Route path="/sections/:courseId" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />
         <Route path="/editSection" component={EditSection} />
         <Route path="/assignStudent/:SectionId" component={AssignStudent} />
