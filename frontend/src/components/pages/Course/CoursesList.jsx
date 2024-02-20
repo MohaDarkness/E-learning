@@ -23,10 +23,6 @@ const CourseList = () => {
     onChange: onSelectChange,
   };
 
-  const handleButtonClick = (id) => {
-    console.log(id);
-  };
-
   const URL = "http://localhost:3000/courses";
   useEffect(() => {
     async function fetchData() {

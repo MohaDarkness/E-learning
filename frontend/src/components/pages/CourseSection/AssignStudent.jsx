@@ -30,7 +30,7 @@ const AssignStudent = () => {
   // submit state
   const [excelData, setExcelData] = useState(null);
 
-  const URL = "http://localhost:3000/sectionAddStudent";
+  const URL = "http://localhost:3000/sectionStudent";
   const assignOneStudent = (e) => {
     e.preventDefault();
     e.currentTarget.disabled = true;

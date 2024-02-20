@@ -163,7 +163,7 @@ import DragDrop from "./components/pages/Elements/Drag&Drop";
 import Clipboard from "./components/pages/Elements/ClipBoard";
 import Dropdown from "./components/pages/Base UI/DropDown";
 import EditEvent from "./components/pages/Events/EditEvent";
-import courseInfo from "./components/pages/Course/CourseInfo";
+import SectionMaterial from "./components/pages/CourseSection/SectionMaterial";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import AdminDashboard from "./components/pages/Dashboard/AdminDashboard";
@@ -280,7 +280,7 @@ const appcontainer = (props) => {
         <Route path="/courses" component={CourseList} />
         <Route path="/addcourse" component={AddCourse} />
         <Route path="/editsubject" component={EditSubject} />
-        <Route path="/courseInfo" component={courseInfo} />
+        <Route path="/sectionMaterial" component={SectionMaterial} />
 
         <Route path="/sections/:courseId" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />

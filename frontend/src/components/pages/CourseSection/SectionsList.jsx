@@ -107,9 +107,8 @@ const SectionsList = () => {
         <>
           <div className="actions">
             <Link
-              to={`/courseInfo/${record.sectionId}`}
+              to={`/sectionMaterial/${record.sectionId}`}
               className="btn btn-sm bg-success-light me-2"
-              onClick={() => handleButtonClick(record.id)}
             >
               <i className="list">
                 <FeatherIcon icon="list" />
