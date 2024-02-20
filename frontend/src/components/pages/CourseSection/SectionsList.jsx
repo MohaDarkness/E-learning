@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import { useState } from "react";
 import FeatherIcon from "feather-icons-react";
 import { pagination, Table } from "antd";
@@ -13,8 +13,8 @@ import axios from "axios";
 
 const SectionsList = () => {
   //courseID
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [datasource, setDataSource] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [datasource, setDataSource] = useState([])
   const [teachers, setTeachers] = useState(null);
   const { courseId } = useParams();
   const onSelectChange = (newSelectedRowKeys) => {
@@ -25,9 +25,9 @@ const SectionsList = () => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-
-  const CourseId = 100245; // to request from the back-end
-  const CourseName = "Data Structures and Algorithms";
+  const path = useLocation().pathname.split('/')
+  const CourseId = path[2]; // to request from the back-end
+  const CourseName = datasource['course'];
 
   const URL = "http://localhost:3000/section";
   const myJson = [];
@@ -37,6 +37,7 @@ const SectionsList = () => {
         const res = await axios.get(`${URL}/${courseId}`, {
           withCredentials: true,
         });
+
         setDataSource(res.data);
         // console.log(res.data.sections[0]);
         setDataSource(
