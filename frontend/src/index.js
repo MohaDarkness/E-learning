@@ -19,9 +19,9 @@ import Approuter from "./approuter";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Approuter />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Approuter />
+  // </React.StrictMode>
 );
 
 // ReactDOM.render(

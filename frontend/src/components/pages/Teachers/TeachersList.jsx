@@ -102,7 +102,7 @@ const TeachersList = () => {
           <h2 className="table-avatar">
             <Link
               to={{
-                pathname: `/teachersview/${record.userId}`,
+                pathname: `/userview/${record.userId}`,
               }}
               className="avatar avatar-sm me-2 "
             >
@@ -112,7 +112,7 @@ const TeachersList = () => {
                 alt="User Image"
               />
             </Link>
-            <Link className="text-dark" to={`/teachersview/${record.userId}`}>
+            <Link className="text-dark" to={`/userview/${record.userId}`}>
               {record.name}
             </Link>
           </h2>
@@ -125,13 +125,13 @@ const TeachersList = () => {
       sorter: (a, b) => (a.gender > b.gender ? 1 : -1),
     },
     {
-      title: "Major",
-      dataIndex: "major",
+      title: "Department",
+      dataIndex: "department",
       sorter: (a, b) => (a.major > b.major ? 1 : -1),
     },
     {
       title: "Mobile Number",
-      dataIndex: "MobileNumber",
+      dataIndex: "phonenumber",
       sorter: (a, b) => a.MobileNumber - b.MobileNumber,
     },
     {
@@ -197,44 +197,6 @@ const TeachersList = () => {
                             All Teachers
                           </li>
                         </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="teacher-group-form">
-                  <div className="row">
-                    <div className="col-lg-3 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by ID ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-3 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by Name ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-4 col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search by Phone ..."
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-2">
-                      <div className="search-teacher-btn">
-                        <button type="btn" className="btn btn-primary">
-                          Search
-                        </button>
                       </div>
                     </div>
                   </div>

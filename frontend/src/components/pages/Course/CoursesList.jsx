@@ -112,7 +112,10 @@ const CourseList = () => {
       render: (text, record) => (
         <>
           <div className="actions">
-            <Link to="/editsubject" className="btn btn-sm bg-danger-light me-2">
+            <Link
+              to={`/editcourse/${record.courseId}`}
+              className="btn btn-sm bg-danger-light me-2"
+            >
               <i className="feather-edit">
                 <FeatherIcon icon="edit" className="list-edit" />
               </i>
@@ -156,44 +159,6 @@ const CourseList = () => {
               </div>
             </div>
             {/* /Page Header */}
-            <div className="student-group-form">
-              <div className="row">
-                <div className="col-lg-3 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by ID ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by Name ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by Class ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-2">
-                  <div className="search-student-btn">
-                    <button type="btn" className="btn btn-primary">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="row">
               <div className="col-sm-12">
                 <div className="card card-table">

@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import FeatherIcon from "feather-icons-react";
 import { pagination, Table } from "antd";
@@ -13,8 +13,8 @@ import axios from "axios";
 
 const SectionsList = () => {
   //courseID
-  const [selectedRowKeys, setSelectedRowKeys] = useState([])
-  const [datasource, setDataSource] = useState([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [datasource, setDataSource] = useState([]);
   const [teachers, setTeachers] = useState(null);
   const { courseId } = useParams();
   const onSelectChange = (newSelectedRowKeys) => {
@@ -25,9 +25,9 @@ const SectionsList = () => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  const path = useLocation().pathname.split('/')
+  const path = useLocation().pathname.split("/");
   const CourseId = path[2]; // to request from the back-end
-  const CourseName = datasource['course'];
+  const CourseName = datasource["course"];
 
   const URL = "http://localhost:3000/section";
   const myJson = [];
@@ -169,44 +169,6 @@ const SectionsList = () => {
               </div>
             </div>
             {/* /Page Header */}
-            <div className="student-group-form">
-              <div className="row">
-                <div className="col-lg-3 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by ID ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by Name ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search by Class ..."
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-2">
-                  <div className="search-student-btn">
-                    <button type="btn" className="btn btn-primary">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="row">
               <div className="col-sm-12">
                 <div className="card card-table">

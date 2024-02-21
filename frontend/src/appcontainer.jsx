@@ -50,7 +50,7 @@ import AddDepartment from "./components/pages/Department/AddDepartment";
 import EditDepartment from "./components/pages/Department/EditDepartment";
 import CourseList from "./components/pages/Course/CoursesList";
 import AddCourse from "./components/pages/Course/AddCourse";
-import EditSubject from "./components/pages/Course/EditCourse";
+import EditCourse from "./components/pages/Course/EditCourse";
 import AddSection from "./components/pages/CourseSection/AddSection";
 import SectionsList from "./components/pages/CourseSection/SectionsList";
 import EditSection from "./components/pages/CourseSection/EditSection";
@@ -269,7 +269,7 @@ const appcontainer = (props) => {
 
         <Route path="/teacherslist" component={TeachersList} />
         <Route path="/teachersprofile" component={TeachersProfile} />
-        <Route path="/editteacher" component={TeachersEdit} />
+        <Route path="/editteacher/:teacherId" component={TeachersEdit} />
         <Route path="/registerteacher" component={RegisterTeacher} />
         <Route path="/teachersgrid" component={TeachersGrid} />
 
@@ -279,8 +279,8 @@ const appcontainer = (props) => {
 
         <Route path="/courses" component={CourseList} />
         <Route path="/addcourse" component={AddCourse} />
-        <Route path="/editsubject" component={EditSubject} />
-        <Route path="/sectionMaterial" component={SectionMaterial} />
+        <Route path="/editcourse/:courseId" component={EditCourse} />
+        <Route path="/sectionMaterial/:sectionId" component={SectionMaterial} />
 
         <Route path="/sections/:courseId" component={SectionsList} />
         <Route path="/addsection" component={AddSection} />

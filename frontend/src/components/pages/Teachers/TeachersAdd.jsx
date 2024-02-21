@@ -39,6 +39,7 @@ const RegisterTeacher = () => {
   });
   const [teacherEmail, setTeacherEmail] = useState(null);
   const [teacherMobileNumber, setTeacherMobileNumber] = useState(null);
+  const [teacherDepartment, setDepartment] = useState(null);
   const [excelFile, setExcelFile] = useState(null);
   const [typeError, setTypeError] = useState(null);
   const [excelData, setExcelData] = useState(null);
@@ -48,6 +49,11 @@ const RegisterTeacher = () => {
     { value: 2, label: "Female" },
   ];
 
+  const departments = [
+    { value: 1, label: "Information Technology" },
+    { value: 2, label: "Business" },
+    { value: 3, label: "Engineering" },
+  ];
   const URL = "http://localhost:3000/signup";
 
   const submitOneTeacher = (e) => {
@@ -60,9 +66,10 @@ const RegisterTeacher = () => {
         name: `${teacherFName} ${teacherLName}`,
         role: "teacher",
         gender: teacherGender["label"].toLowerCase(),
-        // DoB: DateOfBirth,
+        dob: DateOfBirth,
         email: teacherEmail,
-        // mobilenumber: teacherMobileNumber
+        phonenumber: teacherMobileNumber,
+        department: teacherDepartment.label,
       },
     };
 
@@ -129,6 +136,7 @@ const RegisterTeacher = () => {
                                   <span className="login-danger">*</span>
                                 </label>
                                 <input
+                                  required
                                   className="form-control"
                                   type="text"
                                   value={teacherId}
@@ -143,6 +151,7 @@ const RegisterTeacher = () => {
                                   <span className="login-danger">*</span>
                                 </label>
                                 <input
+                                  required
                                   className="form-control"
                                   type="text"
                                   value={teacherFName}
@@ -159,12 +168,31 @@ const RegisterTeacher = () => {
                                   <span className="login-danger">*</span>
                                 </label>
                                 <input
+                                  required
                                   className="form-control"
                                   type="text"
                                   value={teacherLName}
                                   onChange={(e) =>
                                     setTeacherLName(e.target.value)
                                   }
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-4">
+                              <div className="form-group local-forms">
+                                <label>
+                                  Department{" "}
+                                  <span className="login-danger">*</span>
+                                </label>
+                                <Select
+                                  required
+                                  className="w-100 local-forms select"
+                                  value={teacherDepartment}
+                                  onChange={(selectedOption) =>
+                                    setDepartment(selectedOption)
+                                  }
+                                  options={departments}
+                                  placeholder="Select Department"
                                 />
                               </div>
                             </div>
@@ -204,6 +232,7 @@ const RegisterTeacher = () => {
                                   E-Mail <span className="login-danger">*</span>
                                 </label>
                                 <input
+                                  required
                                   className="form-control"
                                   type="text"
                                   value={teacherEmail}
