@@ -10,8 +10,11 @@ import Footer from "../../Footer/Footer";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 const SectionsList = () => {
+  const role = Cookies.get("role");
   //courseID
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [datasource, setDataSource] = useState([]);
@@ -20,6 +23,8 @@ const SectionsList = () => {
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
+  const [deletedSectionId, setDeletedSectionId] = useState("");
+  const [deleteStatus, setDeleteStatus] = useState("");
 
   const rowSelection = {
     selectedRowKeys,
@@ -60,6 +65,52 @@ const SectionsList = () => {
       });
   }, []);
   console.log(datasource);
+
+  const DELTET_URL = "http://localhost:3000/sections";
+  const handleDeleteSection = async (sectionId) => {
+    console.log("inside the handle delete");
+    try {
+      console.log(sectionId);
+      console.log("we are here!!!");
+      await axios.delete(`${DELTET_URL}/${sectionId}`, {
+        withCredentials: true,
+      });
+      setDataSource(
+        datasource.filter((section) => section.sectionId !== sectionId)
+      );
+      setDeleteStatus("success");
+    } catch (err) {
+      console.log("we are here");
+      setDeleteStatus("error");
+      console.log(err);
+    }
+  };
+
+  const autoCloseMessage = (message) => {
+    var t;
+    Swal.fire({
+      title: message.Title,
+      html: message.Body,
+
+      confirmButtonClass: "btn btn-primary",
+      buttonsStyling: !1,
+      onBeforeOpen: function () {
+        Swal.showLoading(),
+          (t = setInterval(function () {
+            Swal.getContent().querySelector("strong").textContent =
+              Swal.getTimerLeft();
+          }, 100));
+      },
+      onClose: function () {
+        clearInterval(t);
+      },
+    }).then(function (t) {
+      t.dismiss === Swal.DismissReason.timer &&
+        console.log("I was closed by the timer");
+      setDeleteStatus(null);
+    });
+  };
+
   const column = [
     {
       title: "Section ID",
@@ -115,24 +166,38 @@ const SectionsList = () => {
                 <FeatherIcon icon="list" />
               </i>
             </Link>
-            <Link
-              to={`/assignstudent/${record.sectionId}`}
-              className="btn btn-sm bg-danger-light"
-            >
-              <i className="feather-edit">
-                <FeatherIcon icon="user-plus" className="list-edit" />
-              </i>
-            </Link>
-            <Link to="/editSection" className="btn btn-sm bg-danger-light">
-              <i className="feather-edit">
-                <FeatherIcon icon="edit" className="list-edit" />
-              </i>
-            </Link>
-            <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
-              <i className="feather-trash-2">
-                <FeatherIcon icon="trash-2" />
-              </i>
-            </Link>
+            {role === "admin" && (
+              <div>
+                <Link
+                  to={`/assignstudent/${record.sectionId}`}
+                  className="btn btn-sm bg-danger-light"
+                >
+                  <i className="feather-edit">
+                    <FeatherIcon icon="user-plus" className="list-edit" />
+                  </i>
+                </Link>
+                <Link
+                  to={`/editSection/${record.sectionId}`}
+                  className="btn btn-sm bg-danger-light"
+                >
+                  <i className="feather-edit">
+                    <FeatherIcon icon="edit" className="list-edit" />
+                  </i>
+                </Link>
+                <Link
+                  to="#"
+                  className="btn btn-sm bg-success-light me-2 trash"
+                  onClick={(e) => {
+                    setDeletedSectionId(record.name);
+                    handleDeleteSection(record.sectionId);
+                  }}
+                >
+                  <i className="feather-trash-2">
+                    <FeatherIcon icon="trash-2" />
+                  </i>
+                </Link>
+              </div>
+            )}
           </div>
         </>
       ),
@@ -179,12 +244,48 @@ const SectionsList = () => {
                         <div className="col">
                           <h3 className="page-title">{CourseName} Sections</h3>
                         </div>
-                        <div className="col-auto text-end float-end ms-auto">
-                          <Link to="/addSection" className="btn btn-primary">
-                            <i className="fas fa-plus" />
-                          </Link>
-                        </div>
+                        {role === "admin" && (
+                          <div className="col-auto text-end float-end ms-auto">
+                            <Link
+                              to={`/addSection/${courseId}`}
+                              className="btn btn-primary"
+                            >
+                              <i className="fas fa-plus" />
+                            </Link>
+                          </div>
+                        )}
                       </div>
+                      {deleteStatus === "success" &&
+                        autoCloseMessage({
+                          Title: "Delete Successfully",
+                          Body: `Student ${deletedSectionId} been deleted successfully`,
+                        })}
+                      {deleteStatus === "error" && (
+                        <div
+                          className="row align-items-center"
+                          style={{
+                            marginTop: "20px",
+                          }}
+                        >
+                          <div
+                            className="alert alert-danger alert-dismissible fade show"
+                            role="alert"
+                          >
+                            <strong>
+                              Something went wrong, Delete unsuccessfully
+                            </strong>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="alert"
+                              aria-label="Close"
+                              onClick={() => {
+                                setDeleteStatus(null);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                     {/* /Page Header */}
                     <div className="table-responsive">

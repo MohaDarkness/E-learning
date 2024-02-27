@@ -90,6 +90,7 @@ const RegisterStudent = () => {
         .post(URL, data, { withCredentials: true })
         .then((res) => {
           console.log(res);
+          alert("Created Student Successfully");
           setCreateOneStatus({
             status: "success",
             message: "Student been created successfully",

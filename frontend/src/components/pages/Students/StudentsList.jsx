@@ -184,8 +184,6 @@ const Students = () => {
     },
   ];
 
-  // if (userRole !== "admin") setColumn(column.slice(0, column.length - 1));
-
   return (
     <div>
       {loading && <LoadingPage />} (
@@ -232,14 +230,16 @@ const Students = () => {
                               <h3 className="page-title">Students</h3>
                             </div>
 
-                            <div className="col-auto text-end float-end ms-auto download-grp">
-                              <Link
-                                to="/registerstudent"
-                                className="btn btn-primary"
-                              >
-                                <i className="fas fa-plus" />
-                              </Link>
-                            </div>
+                            {userRole === "admin" && (
+                              <div className="col-auto text-end float-end ms-auto download-grp">
+                                <Link
+                                  to="/registerstudent"
+                                  className="btn btn-primary"
+                                >
+                                  <i className="fas fa-plus" />
+                                </Link>
+                              </div>
+                            )}
                           </div>
                           {deleteStatus === "success" &&
                             autoCloseMessage({

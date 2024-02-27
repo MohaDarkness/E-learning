@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { storage } from "./firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import axios from "axios";
 
 import FeatherIcon from "feather-icons-react";
 import Header from "../../Header/Header";
@@ -19,6 +20,31 @@ const SectionMaterial = () => {
   const syllabusListRef = ref(storage, `${sectionId}/Syllabus/`);
   const slidesListRef = ref(storage, `${sectionId}/Slides/`);
   const othersListRef = ref(storage, `${sectionId}/Others/`);
+  const [userData, setUserData] = useState(null);
+  const [editAuth, setEditAuth] = useState(false);
+
+  const URL = "http://localhost:3000/material";
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${URL}/${sectionId}`, {
+          withCredentials: true,
+        });
+        setUserData(res.data);
+        console.log(res.data);
+        setEditAuth(true);
+      } catch (err) {
+        console.log(err);
+        setEditAuth(false);
+      }
+    }
+    fetchData()
+      .then(() => {})
+      .catch((err) => {
+        console.log("an error occurred " + err);
+      });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -170,19 +196,21 @@ const SectionMaterial = () => {
       <SideBar />
 
       <div className="container mt-5 page-wrapper">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="page-header">
-              <div className="row align-items-center">
-                <div className="col text-end float-start ms-auto">
-                  <button className="btn btn-primary" onClick={toggleModal}>
-                    <i className="fas fa-plus" />
-                  </button>
+        {editAuth && (
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="page-header">
+                <div className="row align-items-center">
+                  <div className="col text-end float-start ms-auto">
+                    <button className="btn btn-primary" onClick={toggleModal}>
+                      <i className="fas fa-plus" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="row">
           <div className="col-lg-12">

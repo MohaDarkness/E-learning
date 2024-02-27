@@ -32,6 +32,7 @@ const AssignStudent = () => {
 
   const URL = "http://localhost:3000/sectionStudent";
   const assignOneStudent = (e) => {
+    console.log("are we in the one section???");
     e.preventDefault();
     e.currentTarget.disabled = true;
 
@@ -99,6 +100,7 @@ const AssignStudent = () => {
   // submit event
   const handleFileSubmit = (e) => {
     e.preventDefault();
+    console.log("whateever");
     if (excelFile !== null) {
       const workbook = XLSX.read(excelFile, { type: "buffer" });
       const worksheetName = workbook.SheetNames[0];
@@ -190,10 +192,6 @@ const AssignStudent = () => {
                   <div className="card-body">
                     <form onSubmit={assignOneStudent}>
                       <div className="row">
-                        <a href="https://d-nb.info/1207626031/34">
-                          Material Slides
-                        </a>
-
                         <div className="col-12">
                           <h5 className="form-title student-info">
                             Assign One Student{" "}

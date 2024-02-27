@@ -22,6 +22,7 @@ const ForgotPassword = () => {
       axios.post(URL, data, {
         withCredentials: true,
       });
+      alert("password changes successfully");
     } catch (err) {
       console.log(err);
       if (err.response.status === 401 || err.response.status === 403)

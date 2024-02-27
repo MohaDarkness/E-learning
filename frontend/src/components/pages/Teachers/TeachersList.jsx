@@ -22,8 +22,10 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const TeachersList = () => {
+  const userRole = Cookies.get("role");
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const URL = "http://localhost:3000/teachers";
@@ -139,28 +141,38 @@ const TeachersList = () => {
       dataIndex: "Action",
       render: (text, record) => (
         <>
-          <div className="actions">
-            <Link
-              to={`/editteacher/${record.userId}`}
-              className="btn btn-sm bg-danger-light"
-            >
-              <i className="feather-edit">
-                <FeatherIcon icon="edit" className="list-edit" />
-              </i>
-            </Link>
-            <Link
-              to="#"
-              className="btn btn-sm bg-success-light me-2 trash"
-              onClick={(e) => {
-                setDeletedTeacherName(record.name);
-                handleDeleteTeacher(record.userId);
-              }}
-            >
-              <i className="feather-trash-2">
-                <FeatherIcon icon="trash-2" />
-              </i>
-            </Link>
-          </div>
+          <Link
+            to={`/userview/${record.userId}`}
+            className="btn btn-sm bg-danger-light"
+          >
+            <i className="feather-edit">
+              <FeatherIcon icon="user" className="user-edit" />
+            </i>
+          </Link>
+          {userRole === "admin" && (
+            <div className="actions">
+              <Link
+                to={`/editteacher/${record.userId}`}
+                className="btn btn-sm bg-danger-light"
+              >
+                <i className="feather-edit">
+                  <FeatherIcon icon="edit" className="list-edit" />
+                </i>
+              </Link>
+              <Link
+                to="#"
+                className="btn btn-sm bg-success-light me-2 trash"
+                onClick={(e) => {
+                  setDeletedTeacherName(record.name);
+                  handleDeleteTeacher(record.userId);
+                }}
+              >
+                <i className="feather-trash-2">
+                  <FeatherIcon icon="trash-2" />
+                </i>
+              </Link>
+            </div>
+          )}
         </>
       ),
     },
@@ -211,15 +223,16 @@ const TeachersList = () => {
                             <div className="col">
                               <h3 className="page-title">Teachers</h3>
                             </div>
-
-                            <div className="col-auto text-end float-end ms-auto download-grp">
-                              <Link
-                                to="/registerteacher"
-                                className="btn btn-primary"
-                              >
-                                <i className="fas fa-plus" />
-                              </Link>
-                            </div>
+                            {userRole === "admin" && (
+                              <div className="col-auto text-end float-end ms-auto download-grp">
+                                <Link
+                                  to="/registerteacher"
+                                  className="btn btn-primary"
+                                >
+                                  <i className="fas fa-plus" />
+                                </Link>
+                              </div>
+                            )}
                           </div>
                           {deleteStatus === "success" &&
                             autoCloseMessage({

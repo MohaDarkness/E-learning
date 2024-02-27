@@ -64,12 +64,18 @@ const EditTeacher = () => {
         .put(`${URL}/${teacherId}`, data, { withCredentials: true })
         .then((res) => {
           console.log(res);
+          alert("Teacher registerd successfully");
           setCreateOneStatus({
             status: "success",
             message: "Teacher been created successfully",
           });
         })
         .catch((err) => {
+          err.response.data.split(" ")[0] === "E11000" &&
+            alert("Teacher Id is already taken");
+          console.log(err.response.data.split(" ")[0]);
+          err.response.data.split(" ")[0] === "user" &&
+            alert("Please make sure its a valid email");
           // if 401 then unauthorized, let the use go to login page
           console.log(err);
 

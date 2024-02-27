@@ -131,7 +131,22 @@ const TeacherSidebar = (props) => {
                     <i className="fas fa-book-reader" /> <span> Courses</span>{" "}
                   </Link>
                 </li>
-
+                <li
+                  className={`${
+                    "/teacherslist" === pathName ? "active submenu" : "submenu"
+                  }`}
+                >
+                  <Link
+                    to="/teacherslist"
+                    className={isSideMenu == "Teachers" ? "subdrop" : ""}
+                    onClick={() =>
+                      toggleSidebar(isSideMenu == "Teachers" ? "" : "Teachers")
+                    }
+                  >
+                    <i className="fas fa-chalkboard-teacher" />{" "}
+                    <span> Teachers List</span>
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/students"
@@ -169,20 +184,6 @@ const TeacherSidebar = (props) => {
                   <Link to="/exam">
                     <i className="fas fa-clipboard-list" />{" "}
                     <span>Exam list</span>
-                  </Link>
-                </li>
-
-                <li
-                  className={`${
-                    "/timetable" === pathName ||
-                    "/addtimetable" === pathName ||
-                    "/edittimetable" === pathName
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  <Link to="/timetable">
-                    <i className="fas fa-table" /> <span>Time Table</span>
                   </Link>
                 </li>
               </ul>

@@ -2,162 +2,82 @@ import React from "react";
 import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import Footer from "../../Footer/Footer";
-import { Link } from 'react-router-dom'
-import { pagination, Table } from "antd"
-import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import {onShowSizeChange,itemRender} from "../../Pagination"
-import { useState } from 'react'
-
-
+import { Link } from "react-router-dom";
+import { pagination, Table } from "antd";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
+import { onShowSizeChange, itemRender } from "../../Pagination";
+import { useState } from "react";
 
 const Exam = () => {
-    // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const datasource = [
+    {
+      id: 1,
+      ExamName: "First Exam",
+      Section: 2,
+      Course: "Data Structures and Algorithms",
+      StartTime: "10:00 AM",
+      EndTime: "11:00 AM",
+      Date: "23 Apr 2024",
+      Action: "",
+    },
+    {
+      id: 2,
+      ExamName: "First Exam",
+      Section: 2,
+      Course: "Operating Systems",
+      StartTime: "12:00 PM",
+      EndTime: "1:00 PM",
+      Date: "25 Apr 2024",
+      Action: "",
+    },
+  ];
 
-    // const onSelectChange = (newSelectedRowKeys) => {
-    //   console.log("selectedRowKeys changed: ", selectedRowKeys);
-    //   setSelectedRowKeys(newSelectedRowKeys);
-    // };
-  
-    // const rowSelection = {
-    //   selectedRowKeys,
-    //   onChange: onSelectChange,
-    // };
+  const column = [
+    {
+      title: "Exam Name",
+      dataIndex: "ExamName",
+      sorter: (a, b) => a.ExamName.length - b.ExamName.length,
+    },
+    {
+      title: "Section",
+      dataIndex: "Section",
+      sorter: (a, b) => a.Section.length - b.Section.length,
+    },
+    {
+      title: "Course",
+      dataIndex: "Course",
+      sorter: (a, b) => a.Course.length - b.Course.length,
+    },
+    {
+      title: "Start Time",
+      dataIndex: "StartTime",
+      sorter: (a, b) => a.StartTime.length - b.StartTime.length,
+    },
+    {
+      title: "End Time",
+      dataIndex: "EndTime",
+      sorter: (a, b) => a.EndTime.length - b.EndTime.length,
+    },
 
-    const datasource = [
-        {
-            id:1,
-          ExamName: "Class Test",
-          Class: 10,
-          Subject: "English",
-          StartTime: "10:00 AM",
-          EndTime: "01:00 PM",
-          Date: "23 Apr 2020",
-          Action: ""
-        },
-        {
-            id:2,
-          ExamName: "Half Yearly",
-          Class: 1,
-          Subject: "Botony",
-          StartTime: "10:00 AM",
-          EndTime: "01:00 PM",
-          Date: "23 Apr 2020",
-          Action: ""
-        },
-        {
-            id:3,
-          ExamName: "Quaterly",
-          Class: 9,
-          Subject: "Biology",
-          StartTime: "01:00 PM",
-          EndTime: "04:00 PM",
-          Date: "26 Nov 2020",
-          Action: ""
-        },
-        {
-            id:4,
-          ExamName: "Class Test",
-          Class: 8,
-          Subject: "Science",
-          StartTime: "01:00 PM",
-          EndTime: "04:00 PM",
-          Date: "18 Sep 2020",
-          Action: ""
-        },
-        {
-            id:5,
-          ExamName: "Quaterly",
-          Class: 7,
-          Subject: "History",
-          StartTime: "01:00 PM",
-          EndTime: "04:00 PM",
-          Date: "23 Jul 2020",
-          Action: ""
-        },
-        {
-            id:6,
-          ExamName: "Class Test",
-          Class: 2,
-          Subject: "Biology",
-          StartTime: "10:00 AM",
-          EndTime: "01:00 PM",
-          Date: "15 Oct 2020",
-          Action: ""
-        },
-        {
-            id:7,
-          ExamName: "Half Yearly",
-          Class: 6,
-          Subject: "Botony",
-          StartTime: "10:00 AM",
-          EndTime: "01:00 PM",
-          Date: "02 Jun 2020",
-          Action: ""
-        },
-        {
-            id:8,
-          ExamName: "Class Test",
-          Class: 12,
-          Subject: "Mathematics",
-          StartTime: "10:00 AM",
-          EndTime: "01:00 PM",
-          Date: "23 Apr 2020",
-          Action: ""
-        }
-       ]
-
-       const column = [
-        {
-            title: "Exam Name",
-            dataIndex: "ExamName",
-            sorter: (a, b) => a.ExamName.length - b.ExamName.length
-        },
-        {
-            title: "Class",
-            dataIndex: "Class",
-            sorter: (a, b) => a.Class.length - b.Class.length,
-        },
-        {
-            title: "Subject",
-            dataIndex: "Subject",
-            sorter: (a, b) => a.Subject.length - b.Subject.length
-        },
-        {
-            title: "Start Time",
-            dataIndex: "StartTime",
-            sorter: (a, b) => a.StartTime.length - b.StartTime.length
-        },
-        {
-            title: "End Time",
-            dataIndex: "EndTime",
-            sorter: (a, b) => a.EndTime.length - b.EndTime.length
-        },
-        
-        {
-            title: "Date",
-            dataIndex: "Date",
-            sorter: (a, b) => a.Amount.length - b.Amount.length
-        },
-        {
-            title: "Action",
-            dataIndex: "Action",
-            render: (text, record) => (
-                <>
-                    <Link to="#" className="btn btn-sm bg-success-light me-2 ">
-                        <i className="departmenteye feather-eye">
-                            <FeatherIcon icon="eye" />
-                        </i>
-                    </Link>
-                    <Link to="/editexam" className="btn btn-sm bg-danger-light ">
-                        <i className="departmentedit feather-edit">
-                            <FeatherIcon icon="edit" />
-                        </i>
-                    </Link>
-                </>
-            )
-        },
-
-    ] 
+    {
+      title: "Date",
+      dataIndex: "Date",
+      sorter: (a, b) => a.Amount.length - b.Amount.length,
+    },
+    {
+      title: "Action",
+      dataIndex: "Action",
+      render: (text, record) => (
+        <>
+          <Link to="#" className="btn btn-sm bg-success-light me-2 ">
+            <i className="departmenteye feather-eye">
+              <FeatherIcon icon="eye" />
+            </i>
+          </Link>
+        </>
+      ),
+    },
+  ];
   return (
     <>
       <div className="main-wrapper">
@@ -196,9 +116,6 @@ const Exam = () => {
                           <h3 className="page-title">Exam</h3>
                         </div>
                         <div className="col-auto text-end float-end ms-auto download-grp">
-                          <Link to="#" className="btn btn-outline-primary me-2">
-                            <i className="fas fa-download" /> Download
-                          </Link>
                           <Link to="/addexam" className="btn btn-primary">
                             <i className="fas fa-plus" />
                           </Link>
@@ -207,8 +124,8 @@ const Exam = () => {
                     </div>
                     {/* /Page Header */}
                     <div className="table-responsive">
-                    <Table
-                    className="table border-0 star-student table-hover table-center mb-0 datatable table-striped dataTable no-footer"
+                      <Table
+                        className="table border-0 star-student table-hover table-center mb-0 datatable table-striped dataTable no-footer"
                         pagination={{
                           total: datasource.length,
                           showTotal: (total, range) =>
@@ -221,9 +138,7 @@ const Exam = () => {
                         dataSource={datasource}
                         // rowSelection={rowSelection}
                         // rowKey={(record) => record.id}
-                      />  
-
-
+                      />
                     </div>
                   </div>
                 </div>

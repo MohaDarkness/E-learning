@@ -9,18 +9,21 @@ import SideBar from "../../SideBar/SideBar";
 import Footer from "../../Footer/Footer";
 import { useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 const CourseList = () => {
+  const userRole = Cookies.get("role");
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [datasource, setDatasource] = useState([]);
+  const [datasource, setDatasource] = useState([
+    { courseId: "", name: "", department: "", sections: [], hours: "" },
+  ]);
+  const [deletedCourseName, setDeletedCourseName] = useState(null);
+  const [deleteStatus, setDeleteStatus] = useState(null);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
   };
 
   const URL = "http://localhost:3000/courses";
@@ -28,6 +31,7 @@ const CourseList = () => {
     async function fetchData() {
       try {
         const res = await axios.get(URL, { withCredentials: true });
+        console.log("are we here??");
         console.log(res.data);
         setDatasource(res.data);
         console.log(datasource);
@@ -47,6 +51,45 @@ const CourseList = () => {
       });
   }, []);
 
+  const handleDeleteCourse = async (courseId) => {
+    try {
+      console.log(courseId);
+      await axios.delete(`${URL}/${courseId}`, { withCredentials: true });
+      setDatasource(
+        datasource.filter((course) => course.courseId !== courseId)
+      );
+      setDeleteStatus("success");
+    } catch (err) {
+      setDeleteStatus("error");
+      console.log(err);
+    }
+  };
+
+  const autoCloseMessage = (message) => {
+    var t;
+    Swal.fire({
+      title: message.Title,
+      html: message.Body,
+
+      confirmButtonClass: "btn btn-primary",
+      buttonsStyling: !1,
+      onBeforeOpen: function () {
+        Swal.showLoading(),
+          (t = setInterval(function () {
+            Swal.getContent().querySelector("strong").textContent =
+              Swal.getTimerLeft();
+          }, 100));
+      },
+      onClose: function () {
+        clearInterval(t);
+      },
+    }).then(function (t) {
+      t.dismiss === Swal.DismissReason.timer &&
+        console.log("I was closed by the timer");
+      setDeleteStatus(null);
+    });
+  };
+
   const column = [
     {
       title: "ID",
@@ -60,10 +103,12 @@ const CourseList = () => {
       render: (text, record) => (
         <>
           <p className="table-avatar">
-            {record.name
-              .split(" ")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
+            {
+              record?.name
+              // .split(" ")
+              // .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              // .join(" ")
+            }
           </p>
         </>
       ),
@@ -75,10 +120,12 @@ const CourseList = () => {
       render: (text, record) => (
         <>
           <p className="table-avatar">
-            {record.department
-              .split(" ")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
+            {
+              record?.department
+              // .split(" ")
+              // .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              // .join(" ")
+            }
           </p>
         </>
       ),
@@ -91,12 +138,12 @@ const CourseList = () => {
         <>
           <h2 className="table-avatar">
             <Link
-              to={`/sections/${record.courseId}`}
+              to={`/sections/${record?.courseId}`}
               className="avatar avatar-sm me-2 "
             >
-              {record.sections.length}
+              {record?.sections.length}
             </Link>
-            {/* <Link className='text-dark' to="/userview">{record.Name}</Link> */}
+            {/* <Link className='text-dark' to="/userview">{record?.Name}</Link> */}
           </h2>
         </>
       ),
@@ -111,21 +158,30 @@ const CourseList = () => {
       dataIndex: "Action",
       render: (text, record) => (
         <>
-          <div className="actions">
-            <Link
-              to={`/editcourse/${record.courseId}`}
-              className="btn btn-sm bg-danger-light me-2"
-            >
-              <i className="feather-edit">
-                <FeatherIcon icon="edit" className="list-edit" />
-              </i>
-            </Link>
-            <Link to="#" className="btn btn-sm bg-success-light me-2 trash">
-              <i className="feather-trash-2">
-                <FeatherIcon icon="trash-2" />
-              </i>
-            </Link>
-          </div>
+          {userRole === "admin" && (
+            <div className="actions">
+              <Link
+                to={`/editcourse/${record?.courseId}`}
+                className="btn btn-sm bg-danger-light me-2"
+              >
+                <i className="feather-edit">
+                  <FeatherIcon icon="edit" className="list-edit" />
+                </i>
+              </Link>
+              <Link
+                to="#"
+                className="btn btn-sm bg-success-light me-2 trash"
+                onClick={(e) => {
+                  setDeletedCourseName(record?.name);
+                  handleDeleteCourse(record?.courseId);
+                }}
+              >
+                <i className="feather-trash-2">
+                  <FeatherIcon icon="trash-2" />
+                </i>
+              </Link>
+            </div>
+          )}
         </>
       ),
     },
@@ -170,11 +226,44 @@ const CourseList = () => {
                           <h3 className="page-title">Courses</h3>
                         </div>
                         <div className="col-auto text-end float-end ms-auto">
-                          <Link to="/addcourse" className="btn btn-primary">
-                            <i className="fas fa-plus" />
-                          </Link>
+                          {userRole === "admin" && (
+                            <Link to="/addcourse" className="btn btn-primary">
+                              <i className="fas fa-plus" />
+                            </Link>
+                          )}
                         </div>
                       </div>
+                      {deleteStatus === "success" &&
+                        autoCloseMessage({
+                          Title: "Delete Successfully",
+                          Body: `Course ${deletedCourseName} been deleted successfully`,
+                        })}
+                      {deleteStatus === "error" && (
+                        <div
+                          className="row align-items-center"
+                          style={{
+                            marginTop: "20px",
+                          }}
+                        >
+                          <div
+                            className="alert alert-danger alert-dismissible fade show"
+                            role="alert"
+                          >
+                            <strong>
+                              Something went wrong, Delete unsuccessfully
+                            </strong>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="alert"
+                              aria-label="Close"
+                              onClick={() => {
+                                setDeleteStatus(null);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                     {/* /Page Header */}
                     <div className="table-responsive">
@@ -190,7 +279,7 @@ const CourseList = () => {
                         }}
                         columns={column}
                         dataSource={datasource}
-                        rowKey={(record) => record.id}
+                        rowKey={(record) => record?.id}
                       />
                     </div>
                   </div>

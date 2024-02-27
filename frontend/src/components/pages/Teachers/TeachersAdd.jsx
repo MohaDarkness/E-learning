@@ -79,8 +79,19 @@ const RegisterTeacher = () => {
     try {
       axios
         .post(URL, data, { withCredentials: true })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+
+          alert("Teacher registerd successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+          err.response.data.split(" ")[0] === "E11000" &&
+            alert("Teacher Id is already taken");
+          console.log(err.response.data.split(" ")[0]);
+          err.response.data.split(" ")[0] === "user" &&
+            alert("Please make sure its a valid email");
+        });
     } catch (err) {
       console.log(err);
     }

@@ -4,9 +4,10 @@ import Header from "../../Header/Header";
 import SideBar from "../../SideBar/SideBar";
 import Select from "react-select";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const AddSection = () => {
-  const [courseId, setCourseId] = useState(null);
+  const { courseId } = useParams();
   const [teacherId, setTeacherId] = useState(null);
   const [time, setTime] = useState(null);
   const [classroom, setClassroom] = useState(null);
@@ -82,7 +83,7 @@ const AddSection = () => {
           console.log(res);
           setCreationStatus({
             status: "success",
-            message: "Course been created successfully",
+            message: "Section been created successfully",
           });
         })
         .catch((err) => {
@@ -144,13 +145,12 @@ const AddSection = () => {
                               Course ID <span className="login-danger">*</span>
                             </label>
                             <input
+                              disabled
                               type="text"
                               className="form-control"
                               required
                               value={courseId}
-                              onChange={(e) => {
-                                setCourseId(e.target.value);
-                              }}
+                              onChange={(e) => {}}
                             />
                           </div>
                         </div>

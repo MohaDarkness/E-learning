@@ -250,7 +250,7 @@ const AdminSidebar = (props) => {
                             "/courses" === pathName ? "active" : ""
                           }`}
                         >
-                          List
+                          Course List
                         </Link>
                       </li>
                       <li>
@@ -261,16 +261,6 @@ const AdminSidebar = (props) => {
                           }`}
                         >
                           Create Course
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/editsubject"
-                          className={`${
-                            "/editsubject" === pathName ? "active" : ""
-                          }`}
-                        >
-                          Edit Course
                         </Link>
                       </li>
                     </ul>

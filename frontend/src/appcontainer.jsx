@@ -67,17 +67,12 @@ import OtherSettings from "./components/pages/Settings/OtherSettings";
 //Library
 import LibraryList from "./components/pages/Library/LibraryList";
 import AddBook from "./components/pages/Library/AddBook";
-import FeesCollection from "./components/pages/Accounts/FeesCollection";
 import Expenses from "./components/pages/Accounts/Expenses";
 import Salary from "./components/pages/Accounts/Salary";
-import AddFeesCollection from "./components/pages/Accounts/AddFeesCollection";
 import AddExpenses from "./components/pages/Accounts/AddExpenses";
 import AddSalary from "./components/pages/Accounts/AddSalary";
 import Holiday from "./components/pages/Holiday/Holiday";
 import AddHoliday from "./components/pages/Holiday/AddHoliday";
-import Fees from "./components/pages/Fees/Fees";
-import AddFees from "./components/pages/Fees/AddFees";
-import EditFees from "./components/pages/Fees/EditFees";
 import Exam from "./components/pages/Exam List/Exam";
 import AddExam from "./components/pages/Exam List/AddExam";
 import EditExam from "./components/pages/Exam List/EditExam";
@@ -283,12 +278,10 @@ const appcontainer = (props) => {
         <Route path="/sectionMaterial/:sectionId" component={SectionMaterial} />
 
         <Route path="/sections/:courseId" component={SectionsList} />
-        <Route path="/addsection" component={AddSection} />
-        <Route path="/editSection" component={EditSection} />
+        <Route path="/addsection/:courseId" component={AddSection} />
+        <Route path="/editSection/:sectionId" component={EditSection} />
         <Route path="/assignStudent/:sectionId" component={AssignStudent} />
 
-        <Route path="/feescollection" component={FeesCollection} />
-        <Route path="/addfeescollection" component={AddFeesCollection} />
         <Route path="/expenses" component={Expenses} />
         <Route path="/addexpenses" component={AddExpenses} />
         <Route path="/salary" component={Salary} />
@@ -300,10 +293,6 @@ const appcontainer = (props) => {
           render={() => validate("/holiday", <Holiday />)}
         />
         <Route path="/addholiday" component={AddHoliday} />
-
-        <Route path="/fees" component={Fees} />
-        <Route path="/addfees" component={AddFees} />
-        <Route path="/editfees" component={EditFees} />
 
         <Route path="/exam" component={Exam} />
         <Route path="/addexam" component={AddExam} />

@@ -43,11 +43,12 @@ const Profile = () => {
   const URL_NewPassword = "http://localhost:3000/resetPassword";
 
   const handleSubmitNewPassword = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     e.currentTarget.disabled = true;
 
     if (newPassword !== confirmPassword) {
       console.log("passwords are not match");
+      alert("New password does not match!");
       return;
     }
     const data = {
@@ -57,11 +58,19 @@ const Profile = () => {
 
     try {
       console.log("done");
-      axios.post(URL_NewPassword, data, {
-        withCredentials: true,
-      });
+      axios
+        .post(URL_NewPassword, data, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          alert("password changed successfully");
+        })
+        .catch(() => {
+          alert("Wrong password!");
+        });
     } catch (err) {
       console.log(err);
+      alert("failed changin password!");
       if (err.response.status === 401 || err.response.status === 403)
         history.push("/error404");
       console.log("err");

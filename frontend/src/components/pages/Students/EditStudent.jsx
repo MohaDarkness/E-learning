@@ -8,8 +8,10 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+// import { useHistory } from "react-router-dom";
 
 const EditStudent = () => {
+  // history = useHistory();
   const { studentId } = useParams();
   console.log(studentId);
 
@@ -63,6 +65,7 @@ const EditStudent = () => {
       axios
         .put(`${URL}/${studentId}`, data, { withCredentials: true })
         .then((res) => {
+          alert("student updated successfully");
           console.log(res);
           setCreateOneStatus({
             status: "success",
@@ -71,6 +74,8 @@ const EditStudent = () => {
         })
         .catch((err) => {
           // if 401 then unauthorized, let the use go to login page
+          // if (err.response.status === 401 || err.response.status === 403)
+          //   history.push("/login");
           console.log(err);
 
           err.data.split(" ")[0] === "E11000" &&
@@ -78,6 +83,8 @@ const EditStudent = () => {
               status: "error",
               message: "User id already taken!",
             });
+
+          err.data.split(" ")[0] === "E11000" && alert("User Id alredy taken");
         });
     } catch (err) {
       console.log(err);
