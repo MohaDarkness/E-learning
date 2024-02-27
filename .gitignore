@@ -2,4 +2,7 @@
 /frontend/node_modules/
 /dist
 /template/node_modules/
-/EduCare-BackEnd/
+/EduCare-BackEnd/node_modules/
+/EduCare-BackEnd/.git
+/EduCare-BackEnd/.gitignore
+/EduCare-BackEnd/.gitattributes
